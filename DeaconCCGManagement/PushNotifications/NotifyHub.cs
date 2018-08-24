@@ -54,7 +54,7 @@ namespace DeaconCCGManagement.PushNotifications
                     }
                 }
             }
-        }
+        }     
 
         [HubMethodName("getNotificationsCount")]
         public void GetNotificationsCount()
@@ -70,6 +70,7 @@ namespace DeaconCCGManagement.PushNotifications
         [HubMethodName("removeNotification")]
         public void RemoveNotification(string notificationId)
         {
+            if (string.IsNullOrEmpty(notificationId)) return;
             var notifyRepo = new NotificationsRepository();
             if (!notifyRepo.Init()) return;
             var name = Context.User.Identity.Name;

@@ -1,7 +1,7 @@
-﻿
-@using DeaconCCGManagement.enums
+﻿@using DeaconCCGManagement.enums
 @using DeaconCCGManagement.Helpers
 @using DeaconCCGManagement.ViewModels
+@model IEnumerable<AnnouncementViewModel>
 @{
     ViewBag.Title = "Zion Missionary Baptist Church CCG Deacons Application";
 
@@ -19,38 +19,141 @@
 
 @section styles{
     @Styles.Render("~/Content/home-landing.css")
+    @Styles.Render("~/Content/carousel-announcements.css")
 }
 
 @Html.Partial("_Breadcrumbs", "Home")
 
 
-<div class="row hidden-xs">
-    <div class="landing-base" align="center">
-        <hr>
-        <h1>
-            Zion Missionary Baptist Church<br />
-            <strong>
-                <abbr title="Congregational Care Group">CCG</abbr>
-                Management Portal
-            </strong>
-        </h1>
-        <hr>
-        <img src="~/Content/Images/ZionLogoB.png" alt="Zion Missionary Baptist Church">
-        <p>The CCG Management Portal is a tool to assist deacons</p>
-        <p>in managing their Congregational Care Groups.</p>
-        <p>GREAT things are happening at Zion!</p>
-        <p> "...Where the people had a mind to work."</p>
-        <p>
-            <a class="btn btn-secondary zion-link" target="_blank" href="http://zionmbc.org">Check us out! <span class="fa fa-chevron-circle-right"></span></a>
-        </p>
-    </div>
+<!--add a little space at top for mobile-->
+<div class="visible-xs">
+    <br /><br />
 </div>
 
+<div class="landing-base" align="center">
+    <hr class="home-hr">
+    <h1 class="home-h1">
+        Zion Missionary Baptist Church<br />
+        <strong>
+            <abbr title="Congregational Care Group">CCG</abbr>
+            Management Portal
+        </strong>
+    </h1>
+    <hr class="home-hr">
+</div>
+
+@*if no announcements show logo and description*@
+@if (!Request.IsAuthenticated || Model == null || Model.Count() == 0)
+{
+    <div class="row hidden-xs">
+        <div class="landing-base" align="center">
+            <img src="~/Content/Images/ZionLogoB.png" alt="Zion Missionary Baptist Church">
+            <p class="home-p">The CCG Management Portal is a tool to assist deacons</p>
+            <p class="home-p">in managing their Congregational Care Groups.</p>
+            <p class="home-p">GREAT things are happening at Zion!</p>
+            <p class="home-p"> "...Where the people had a mind to work."</p>
+            <p class="home-p">
+                <a class="btn btn-secondary zion-link" target="_blank" href="http://zionmbc.org">Check us out! <span class="fa fa-chevron-circle-right"></span></a>
+            </p>
+        </div>
+    </div>
+}
+
+
+@*show announcements (if any) with Bootstrap carousel*@
+@if (Request.IsAuthenticated && Model != null && Model.Count() > 0)
+{
+
+    <div id="myCarousel" class="carousel slide"
+         data-ride="carousel"
+         data-interval="10000"
+         data-pause="hover"
+         wrap="true"
+         keyboard="true">
+
+        <!-- Carousel indicators -->
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                if (i == 0)
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+                }
+                else
+                {
+                    <li data-target="#myCarousel" data-slide-to="@i"></li>
+                }
+            }
+        </ol>
+
+        <!-- Wrapper for carousel items -->
+        <div class="carousel-inner">
+
+            @{
+                string announcementHtml;
+                MvcHtmlString htmlString;
+                for (int i = 0; i < Model.Count(); i++)
+                {
+                    announcementHtml =
+                        WebUtility.HtmlDecode(Model.ElementAt(i).AnnouncementHtml);
+                    htmlString = MvcHtmlString.Create(announcementHtml);
+
+
+                    if (i == 0)
+                    {
+                        <div class="item active">
+                            <div class="hidden-xs announcement-body">
+                                <div style="text-align: center;">
+                                    <p class="announcement-title">@Model.ElementAt(i).Title</p>
+                                </div>
+                                @htmlString
+                            </div>
+
+                            <div class="visible-xs announcement-body-xs">
+                                <div style="text-align: center;">
+                                    <p class="announcement-title-xs">@Model.ElementAt(i).Title</p>
+                                </div>
+                                @htmlString
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item">
+                            <div class="hidden-xs announcement-body">
+                                <div style="text-align: center;">
+                                    <p class="announcement-title">@Model.ElementAt(i).Title</p>
+                                </div>
+                                @htmlString
+                            </div>
+
+                            <div class="visible-xs announcement-body-xs">
+                                <div style="text-align: center;">
+                                    <p class="announcement-title-xs">@Model.ElementAt(i).Title</p>
+                                </div>
+                                @htmlString
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+
+        <!-- Carousel controls -->
+        <a class="carousel-control left" href="#myCarousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="carousel-control right" href="#myCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+
+
+}@* / deacon announcements carousel*@
 
 
 @*Declare panel objects*@
 @{
-
     string title = "CCG Members";
     string description = "See the current listing of your CCG members. From here you can also place calls, edit members un fr et dol";
     string href = Url.Action("Index", "CcgMembers", new { getAll = getAll });
@@ -71,7 +174,7 @@
     description = "Administrator console. Duis aute irure dolor in reprehenderit in voluptate velit esse";
     href = Url.Action("Index", "Admin");
     glyph = "";
-    imageSrc = "/Content/Images/Admin-Settings.svg";
+    imageSrc = "/Content/Images/ccg-admin.svg";
 
     var panelAdminConsole = new DescriptionWithLinkPanel
     {
@@ -164,9 +267,9 @@
     };
 
 
-    title = "Deacon  Announcements";
+    title = "Deacon Announcements";
     description = "View any announcements available for ZMBC Deacons on this page. Great for Deacon networking and other.";
-    href = Url.Action("Index", "DeaconAnnouncement");
+    href = Url.Action("Index", "Announcements");
     glyph = "";
     imageSrc = "/Content/Images/ccg-bullhorn.svg";
 
@@ -198,9 +301,9 @@
 
     title = "Prayer Requests";
     description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod";
-    href = Url.Action("Index", "PrayerRequest", new { getAll = true });
+    href = Url.Action("Index", "PrayerRequest");
     glyph = "";
-    imageSrc = "/Content/Images/ccg-pray.svg";
+    imageSrc = "/Content/Images/ccg-praying-hands.svg";
 
     var panelPrayerRequests = new DescriptionWithLinkPanel
     {
@@ -212,11 +315,22 @@
     };
 
 
+    title = "Bulk Notifications";
+    description = "Send a push notification to all deacons.";
+    href = Url.Action("Index", "BulkNotification");
+    glyph = "";
+    imageSrc = "/Content/Images/ccg-notification-bell.svg";
 
+    var panelBulkNotifications = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
 }
 @* / Declare panel objects*@
-
-
 
 @*Add panel objects to hashset*@
 @if (Request.IsAuthenticated)
@@ -236,8 +350,9 @@
         panels.Add(panelChangeRequests);
     }
 
-    @*Prayer requests are for all users*@
+    @*Visible for all users*@
     panels.Add(panelPrayerRequests);
+    panels.Add(panelContactsForReview);
 
     @*For admin or leadership only*@
     if (AuthHelper.HasAdminAccess(User.Identity.Name))
@@ -248,14 +363,14 @@
     @*For pastors and deacon leadership only*@
     if (AuthHelper.IsInRole(User.Identity.Name, AppUserRole.Pastor)
         || AuthHelper.IsInRole(User.Identity.Name, AppUserRole.DeaconLeadership))
-    {
-        panels.Add(panelContactsForReview);
+    {        
         panels.Add(panelCCGMembers);
         panels.Add(panelContactRecords);
         panels.Add(panelCalendar);
         panels.Add(panelDeaconsAnnouncements);
-    }
-    
+        panels.Add(panelBulkNotifications);
+    }   
+
 
     @*Available to all users*@
     panels.Add(panelChruchAnnouncements);
@@ -271,14 +386,13 @@
                 <div class="profile-block">
                     <img src="~/Content/Images/ZionLogoB.png" alt="CCG Management Portal" class="img-circle" width="80" height="80" />
                     <h4 class="profile-title" style="color: #000">CCG Management Portal</h4>
-
                 </div>
 
-                <p>
+                <p class="home-p">
                     <a class="btn btn-secondary zion-link" target="_blank" href="http://zionmbc.org">Check us out! »</a>
                 </p>
 
-                <hr />
+                <hr class="home-hr" />
                 <ul class="nav nav-pills nav-stacked" style="margin-left: 0px">
 
                     <!--Display link and icon for mobile views-->
@@ -304,14 +418,14 @@
 <!--Display description panels in the view-->
 <div class="container hidden-xs">
     @if (Request.IsAuthenticated)
-    {<hr />}
-    <div class="row">   
+    {<hr class="home-hr" />}
+    <div class="row">
         @{
             foreach (var panel in panels)
             {
                 @Html.Partial("_HomeDescriptionWithLinkPanel", panel)
             }
-         }      
+        }
     </div>
 </div>
 <!-- / Display description panels in the view-->

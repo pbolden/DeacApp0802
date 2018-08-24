@@ -16,8 +16,7 @@ namespace DeaconCCGManagement.Services
         }
 
         public IEnumerable<ContactRecord> GetPrayerRequests(int? memberId, 
-            int? pageIndex, int? pageSize, DateTime dateTimeOffset, 
-            int? ccgId, bool getAll, CCGAppUser user, string query)
+            DateTime dateTimeOffset, int? ccgId, bool getAll, CCGAppUser user, string query)
         {
             // Prevents having one query for search and one for no search.
             if (query == null) query = "";

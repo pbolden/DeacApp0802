@@ -1,5 +1,10 @@
-﻿using System;
+﻿using DeaconCCGManagement.DeaconAnnouncements;
+using Elmah;
+using System;
 using System.Web.Mvc;
+
+using DeaconCCGManagement.AzureFunctions;
+
 
 namespace DeaconCCGManagement.Controllers
 {
@@ -7,10 +12,9 @@ namespace DeaconCCGManagement.Controllers
     {
         public ActionResult Index()
         {
-            //var name = User.Identity.Name;
-            //SignalRHub.NotifyHub.AddDummyNotifications(name);            
+            var viewModel = AnnouncementHelper.GetAllAnnouncements();          
 
-            return View();
+            return View(viewModel);
         }
 
         public ActionResult About()
@@ -26,12 +30,6 @@ namespace DeaconCCGManagement.Controllers
 
             return View();
         }
-
-
-        // TEST
-        public ActionResult SideMenu()
-        {
-            return View();
-        }
+        
     }
 }

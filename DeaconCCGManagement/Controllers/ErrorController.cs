@@ -7,7 +7,6 @@ using System.Web.Mvc;
 
 namespace DeaconCCGManagement.Controllers
 {
-    [System.Web.Mvc.Authorize]
     public class ErrorController : Controller
     {
         // GET: Error

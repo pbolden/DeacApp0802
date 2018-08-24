@@ -709,7 +709,7 @@ namespace DeaconCCGManagement.DAL
         private int GetRandomMemberIdInCCG(UnitOfWork db, int ccgId)
         {
             var dbSet = _dbContext.Set<CCGMember>();
-            var members = dbSet.Include("CCG").Where(m => m.CcgId == ccgId);
+            var members = dbSet.Include("CCG").Where(m => m.CcgId == ccgId).ToList();
 
             if (members.Count() == 0) return 0;
 
@@ -722,13 +722,15 @@ namespace DeaconCCGManagement.DAL
             // get random ccgs that have users and members assigned
             var dbSet = _dbContext.Set<CCG>();
             var ccgs = dbSet.Where(g => g.AppUsers.Count > 0
-                                   && g.CCGMembers.Count > 0);
+                                   && g.CCGMembers.Count > 0).ToList();
 
 
 
             // get random ccg
-            var ccg = ccgs.ElementAt(_randomizer.Next(0, ccgs.Count()));
-            return ccg.Id;
+            CCG ccg = null;
+            if (ccgs.Count() > 0)
+                ccg = ccgs.ElementAt(_randomizer.Next(0, ccgs.Count()));
+            return ccg != null ? ccg.Id : 0;
         }
 
         private string GetRandomSubject()

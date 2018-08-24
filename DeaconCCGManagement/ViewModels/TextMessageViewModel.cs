@@ -23,5 +23,9 @@ namespace DeaconCCGManagement.ViewModels
 
         [Display(Name = "'To' Number for Testing Only")]
         public string TestToNumber { get; set; }
+
+        public NotificationViewModel StatusNotification { get; set; }
+
+        public bool HasStatusNotification { get; set; }
     }
 }

@@ -1,0 +1,64 @@
+﻿@using DeaconCCGManagement.ViewModels
+@model IEnumerable<AnnouncementViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Partial("_Breadcrumbs", "About")
+
+
+@*Data read by the script StatusNotificationHandler
+    to show a status notification to user.*@
+@{ 
+    string hasStatusNotificationStr = ViewBag.HasStatusNotification ? "True" : "False";
+}
+<input id="hasStatusNotification" hidden="hidden" value="@hasStatusNotificationStr" />
+
+@if (ViewBag.HasStatusNotification)
+{
+    int notifyTypeInt = ViewBag.NotifyInt;
+    <input id="statusNotificationTitle" hidden="hidden" value="@ViewBag.StatusTitle" />
+    <input id="statusNotificationMessage" hidden="hidden" value="@ViewBag.StatusMessage" />
+    <input id="notifyTypeInt" hidden="hidden" value="@notifyTypeInt" />
+}
+
+
+<h2>Deacons Announcements</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpirationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { partitionKey = item.PartitionKey, rowKey = item.RowKey }) |
+                @Html.ActionLink("Delete", "Delete", new { partitionKey = item.PartitionKey, rowKey = item.RowKey })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/App/StatusNotificationHandler.js")
+}

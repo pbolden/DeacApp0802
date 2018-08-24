@@ -16,5 +16,11 @@ namespace DeaconCCGManagement.ViewModels
         public string TestToEmail { get; set; }
 
         public bool IsTesting { get; set; }
+
+        public NotificationViewModel StatusNotification { get; set; }
+
+        public bool HasStatusNotification { get; set; }
+
+
     }
 }

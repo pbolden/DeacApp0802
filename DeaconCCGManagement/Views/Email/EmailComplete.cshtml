@@ -1,5 +1,5 @@
-﻿@using DeaconCCGManagement.Helpers
-@using DeaconCCGManagement.Models
+﻿@using DeaconCCGManagement.ViewModels
+@model EmailViewModel
 
 @{
     ViewBag.Title = "Email Complete";
@@ -8,7 +8,20 @@
 @Html.Partial("_Breadcrumbs", "Email Complete")
 
 
-  <h3 class="text-dark">Check your notifications for the status of your sent email(s).</h3>
+
+@*Data read by the script StatusNotificationHandler
+    to show a status notification to user.*@
+<input id="hasStatusNotification" hidden="hidden" value="@Model.HasStatusNotification.ToString()" />
+
+@if (Model.HasStatusNotification)
+{
+    int notifyTypeInt = (int)Model.StatusNotification.NotifyType;
+    <input id="statusNotificationTitle" hidden="hidden" value="@Model.StatusNotification.Title" />
+    <input id="statusNotificationMessage" hidden="hidden" value="@Model.StatusNotification.Message" />
+    <input id="notifyTypeInt" hidden="hidden" value="@notifyTypeInt" />
+}
+
+  <h3 class="text-dark">Email sent.</h3>
 
 
 
@@ -16,4 +29,5 @@
 
 @section scripts{
     @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/StatusNotificationHandler.js")
 }

@@ -1,0 +1,34 @@
+﻿.carousel {
+    background: #94c2ee;
+    margin: 10px;
+}
+
+    .carousel .item {
+        min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+    }
+
+        .carousel .item img {
+            margin: 0 auto; /* Align slide image horizontally center */
+        }
+
+.announcement-title {
+    font-size: xx-large;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.announcement-title-xs {
+    font-size: medium;
+    font-weight: 700;
+    margin-top: 15px;
+}
+
+.announcement-body {
+    margin-left: 175px;
+    margin-right: 175px;
+}
+
+.announcement-body-xs {
+    margin-left: 15px;
+    margin-right: 15px;
+}

@@ -11,10 +11,11 @@ using DeaconCCGManagement.Models;
 using DeaconCCGManagement.ViewModels;
 using DeaconCCGManagement.Services;
 using PagedList;
+using DeaconCCGManagement.Helpers;
 
 namespace DeaconCCGManagement.Controllers
 {
-    [CCGAuthorize("Pastor", "Deacon Leadership")]
+    [Authorize]
     public class PassAlongController : ControllerBase
     {
         private ContactRecordsService _service;
@@ -56,17 +57,31 @@ namespace DeaconCCGManagement.Controllers
             };
             #endregion
 
-                var contactRecords = unitOfWork.PassAlongContactRepository
+            // Get user object
+            var user = unitOfWork.AppUserRepository.FindUserByEmail(User.Identity.Name);
+
+            var contactRecords = unitOfWork.PassAlongContactRepository
                .FindContactRecords(archive);
+
+            // determine if user is leadership, pastor or admin
+            AppUserRole[] roles = new AppUserRole[] { AppUserRole.Admin,
+                                                      AppUserRole.DeaconLeadership,
+                                                      AppUserRole.Pastor };
+            // get all if user is admin, leadership, or pastor
+            bool getAll = AuthHelper.IsInRole(User.Identity.Name, roles);
+
+            // if not leadership remove all not in ccg
+            if (!getAll)
+            {
+                contactRecords = contactRecords
+                    .Where(c => c.CCGMember.CcgId == user.CcgId);
+            }
 
                 // Query contact records
                 contactRecords = _service.SearchContactRecords(query, contactRecords).ToList();
 
                 // Sort contact records
-                contactRecords = _service.SortContactRecords(contactsSort, contactRecords).ToList();
-
-                // Get user object
-                var user = unitOfWork.AppUserRepository.FindUserByEmail(User.Identity.Name);
+                contactRecords = _service.SortContactRecords(contactsSort, contactRecords).ToList();               
 
                 // Map contact records data model to view model
                 var contactRecordsVM = Mapper.Map<IList<ContactRecordViewModel>>(contactRecords);

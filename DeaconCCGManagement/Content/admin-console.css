@@ -1,15 +1,17 @@
-﻿body
-{
-    /*background-color: #2b303b;*/
-    background-image: url('Images/content.png');
+﻿body {
+    background-color: #f2efef;
+    /*background-image: url('Images/background-texture.png');*/
 }
 
-.panelTitle{
-    color: #8d8b8b;
+.panelTitle {
+    color: #8d8b8b;   
     font-size: 1.5em;
-    font-weight:bold;
-}
+    font-weight: bold;
+}  
 
+.panelTitle:hover {
+    color: maroon;
+}
 
 .profile-block img {
     width: 50px;
@@ -29,14 +31,15 @@
     vertical-align: middle;
 }
 
-.profile-title small {
-    display: block;
+    .profile-title small {
+        display: block;
     }
 
 .transition,
-.transition:hover,
+.transition:hover{
+    color: maroon;
+}
 .transition:focus {
-
     -webkit-transition: all 150ms ease-in-out;
     -moz-transition: all 150ms ease-in-out;
     -ms-transition: all 150ms ease-in-out;
@@ -45,27 +48,21 @@
 }
 
 .nav-pills li > a {
-    color: #777;
+    color: #777;    
     margin-left: -2.2em;
     font-size: .9em;
 }
 
-.nav-pills > li > a .badge { 
+.nav-pills > li > a .badge {
     font-size: .8em;
 }
 
-ul.nav a:hover,
-ul.nav a:focus {
-    color: #2b303b;
-    background-color: #d0cece;
-}
-
 ul.nav {
-    margin-top: .6em;
+    margin-top: 0em;
 }
 
 .nav-pills .nav-divider {
-background-color: #777;
+    background-color: #777;
     margin-left: -1em;
     margin-top: .1em;
 }
@@ -74,78 +71,84 @@ background-color: #777;
     color: #919090;
 }
 
-@media (min-width: 350px) {
-
-.profile-block img {
-    width: 70px;
-    margin-top: 2.6em;
-    margin-left: -1.5em;
+.adminGraphic{
+    margin-right:50px;
 }
 
-.profile-title {
-    margin-top: 2em;
-    color: #fff;
-    margin-left: 1rem;
-    font-size: 1.5em;
-    vertical-align: middle;
+.hr-admin {
+    border-color: black;  
 }
 
-.nav-pills li > a {
-    color: #777;
-    margin-left: -2em;
-    font-size: 1.2em;
-}
+/*@media (min-width: 350px) {
 
-.nav-pills > li > a .badge { 
-    font-size: .6em;
-}
+    .profile-block img {
+        width: 70px;
+        margin-top: 2.6em;
+        margin-left: -1.5em;
+    }   
 
-ul.nav {
-    margin-top: .6em;
-}
+    .profile-title {
+        margin-top: 2em;
+        color: #fff;
+        margin-left: 1rem;
+        font-size: 1.5em;
+        vertical-align: middle;
+    }
 
-.nav-pills .nav-divider {
-background-color: #777;
-    margin-left: -1em;
-    margin-top: .1em;
-}
+    .nav-pills li > a {
+        color: #777;              
+        margin-left: -2em;
+        font-size: 1.2em;
+    }
 
+    .nav-pills > li > a .badge {
+        font-size: .6em;
+    }
+
+    ul.nav {
+        margin-top: 0em;
+    }
+
+    .nav-pills .nav-divider {
+        background-color: #777;
+        margin-left: -1em;
+        margin-top: .1em;
+    }
 }
 
 @media (min-width: 550px) {
+  
 
-.profile-block img {
-    width: 80px;
-    margin-top: 2.6em;
-    margin-left: -1.5em;
-}
+    .profile-block img {
+        width: 80px;
+        margin-top: 2.6em;
+        margin-left: -1.5em;
+    }
 
-.profile-title {
-    margin-top: 2em;
-    color: #f2efef;
-    margin-left: 1rem;
-    font-size: 1.8em;
-    vertical-align: middle;
-}
+    .profile-title {
+        margin-top: 2em;
+        color: #f2efef;
+        margin-left: 1rem;
+        font-size: 1.8em;
+        vertical-align: middle;
+    }
 
-.nav-pills li > a {
-    color: #777;
-    margin-left: -2em;
-    font-size: 1.3em;
-}
+    .nav-pills li > a {
+        color: #777;
+        margin-left: -2em;
+        font-size: 1.3em;
+    }
 
-.nav-pills > li > a .badge {
-    margin-right: 8em;
-}
-
+    .nav-pills > li > a .badge {
+        margin-right: 8em;
+    }
 }
 
 @media (min-width: 650px) {
 
-.nav-pills > li > a .badge {
+    .nav-pills > li > a .badge {
         margin-right: 10em;
     }
-
 }
 
 .body-content hr {
@@ -154,19 +157,13 @@ background-color: #777;
 
 @media screen and (min-width: 768px) {
 
-.imgHome {
-    float: left;
-}
+    .imgHome {
+        float: left;
+    }
 
-.body-content hr {
-    border-color: #777
-}
-
-.glyphicon:hover,
-.glyphicon:focus {
-    color: #777;
-}
-
+    .body-content hr {
+        border-color: #777
+    }
 }
 
 .bigHome h1 {
@@ -177,7 +174,7 @@ background-color: #777;
     margin-right: -3.3em;
 }
 
-.bigHome p { 
+.bigHome p {
     color: #777;
     font-size: 1em;
 }
@@ -189,64 +186,45 @@ background-color: #777;
     margin-top: 5px;
 }
 
-.bigHome .glyphicon  {
+.bigHome .glyphicon {
     color: #777;
     font-size: 1.5em;
-  
-}
-
-.bigHome .glyphicon:hover,
-.bigHome .glyphicon:focus {
-    color: #777;
 }
 
 .card {
     margin-bottom: 3em;
 }
 
-@media (min-width: 992px){
+@media (min-width: 992px) {
     .bigHome h1 {
-    margin-top: 1em;
-    font-size: 2.3em;
-    margin-left: 1.5em;
+        margin-top: 1em;
+        font-size: 2.3em;
+        margin-left: 1.5em;
+    }
 }
 
-.glyphicon:hover,
-.glyphicon:focus {
-    color: #777;
-}
-
-}
-
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
     .bigHome h1 {
-    margin-top: 1em;
-    font-size: 2.5em;
-    margin-left: 2em;
-}
+        margin-top: 1em;
+        font-size: 2.5em;
+        margin-left: 2em;
+    }
 
-.imgHome {
-    margin-left: 8em;
-}
+    .imgHome {
+        margin-left: 8em;
+    }
 
-.bigHome .glyphicon  {
-    font-size: 2.5em;
-    margin-top: 1em;
-}
+    .bigHome .glyphicon {
+        font-size: 2.5em;
+        margin-top: 1em;
+    }
 
-.bigHome h2 {
-    font-size: 1.7em;
-    margin-top: 5px;
-}
+    .bigHome h2 {
+        font-size: 1.7em;
+        margin-top: 5px;
+    }
 
-.bigHome p {
-    font-size: 1.1em;
-}
-
-.glyphicon:hover,
-.glyphicon:focus {
-    color: #777;
-}
-
-}
-
+    .bigHome p {
+        font-size: 1.1em;
+    }
+}*/

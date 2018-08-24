@@ -11,6 +11,7 @@ using DeaconCCGManagement.Models;
 using DeaconCCGManagement.ViewModels;
 using DeaconCCGManagement.Services;
 using PagedList;
+using DeaconCCGManagement.PushNotifications;
 
 namespace DeaconCCGManagement.Controllers
 {
@@ -66,7 +67,18 @@ namespace DeaconCCGManagement.Controllers
 
             List<ContactRecord> prayerRequests;
 
-            prayerRequests = _service.GetPrayerRequests(memberId, page, itemsPerPage,
+
+            // determine if user is leadership, pastor or admin
+            AppUserRole[] roles = new AppUserRole[] { AppUserRole.Admin,
+                                                      AppUserRole.DeaconLeadership,
+                                                      AppUserRole.Pastor };
+            // get all if user is admin, leadership, or pastor
+            getAll = AuthHelper.IsInRole(User.Identity.Name, roles);
+
+            // not leadership so only get prayer requests within ccg
+            if (!getAll && ccgId == null) ccgId = user.CcgId;
+
+            prayerRequests = _service.GetPrayerRequests(memberId, 
                 dateTimeOffset, ccgId, getAll, user, query).ToList();
 
             // Sort prayer requests

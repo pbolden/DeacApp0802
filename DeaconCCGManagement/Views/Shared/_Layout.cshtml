@@ -12,6 +12,7 @@
     <link href="~/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/notify-metro.css" rel="stylesheet" />
 
+
     @Scripts.Render("~/bundles/modernizr")
 
     @RenderSection("styles", required: false)
@@ -33,11 +34,7 @@
                 </span>
                 <span class="hidden-md hidden-lg hidden-xl">
                     @Html.ActionLink("CCG Management Portal", "Index", "Home", null, new { @class = "navbar-brand" })
-                </span>
-                <span class="hidden-sm hidden-md hidden-lg hidden-xl">
-                    @Html.ActionLink("CCG Portal", "Index", "Home", null, new { @class = "navbar-brand" })
-                </span>
-
+                </span> 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav top-nav-link">

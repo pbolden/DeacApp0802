@@ -8,6 +8,7 @@ using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage.Auth;
 using System.IO;
 using System.Configuration;
+using Elmah;
 
 namespace DeaconCCGManagement.BlobStorage
 {
@@ -61,11 +62,17 @@ namespace DeaconCCGManagement.BlobStorage
                     // set to false and ignore
                     _hasContainerAccess = false;
                     _isInitialized = false;
+
+                    // log caught exception with Elmah
+                    ErrorSignal.FromCurrentContext().Raise(ex);
                 }
                 catch (Exception ex)
                 {
                     _hasContainerAccess = false;
                     _isInitialized = false;
+
+                    // log caught exception with Elmah
+                    ErrorSignal.FromCurrentContext().Raise(ex);
                 }
 
             }
@@ -93,14 +100,16 @@ namespace DeaconCCGManagement.BlobStorage
                     _hasContainerAccess = false;
                     _isInitialized = false;
 
-                    // TODO log exception
+                    // log caught exception with Elmah
+                    ErrorSignal.FromCurrentContext().Raise(ex);
                 }
                 catch (Exception ex)
                 {
                     _hasContainerAccess = false;
                     _isInitialized = false;
 
-                    // TODO log exception
+                    // log caught exception with Elmah
+                    ErrorSignal.FromCurrentContext().Raise(ex);
                 }
             }
 

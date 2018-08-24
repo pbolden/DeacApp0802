@@ -16,6 +16,19 @@ else
     <h2>Send a Text Message to @Model.TextMessageContact.MemberFullName</h2>
 }
 
+@*Data read by the script StatusNotificationHandler
+    to show a status notification to user.*@
+<input id="hasStatusNotification" hidden="hidden" value="@Model.HasStatusNotification.ToString()" />
+
+@if (Model.HasStatusNotification)
+{
+    int notifyTypeInt = (int)Model.StatusNotification.NotifyType;
+    <input id="statusNotificationTitle" hidden="hidden" value="@Model.StatusNotification.Title" />
+    <input id="statusNotificationMessage" hidden="hidden" value="@Model.StatusNotification.Message" />
+    <input id="notifyTypeInt" hidden="hidden" value="@notifyTypeInt" />
+}
+
+
 
 @if (Model.Bulk)
 {
@@ -80,7 +93,7 @@ else
             @*Show message if text has been sent*@
             @if (Model.TextMessageSent)
             {
-                <h3 class="text-dark">Check your notifications for the status of your text message(s).</h3>
+                <h3 class="text-dark">Text message sent.</h3>
             }
 
             @if (Model.TextMessageContact.MemberFullName != null)
@@ -162,4 +175,7 @@ else
     @Scripts.Render("~/Scripts/jquery.maskedinput.js")
     @Scripts.Render("~/Scripts/App/PhoneMask.js")
     @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/StatusNotificationHandler.js")
+
+
 }

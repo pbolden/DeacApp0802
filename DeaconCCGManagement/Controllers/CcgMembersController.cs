@@ -17,6 +17,7 @@ using DeaconCCGManagement.PushNotifications;
 using DeaconCCGManagement.SmsService;
 using System.Configuration;
 using System.Threading.Tasks;
+using Elmah;
 
 namespace DeaconCCGManagement.Controllers
 {
@@ -316,7 +317,8 @@ namespace DeaconCCGManagement.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // TODO log exception
+                    // log caught exception with Elmah
+                    ErrorSignal.FromCurrentContext().Raise(ex);
                 }
             }
 

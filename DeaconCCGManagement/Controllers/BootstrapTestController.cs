@@ -2,7 +2,6 @@
 
 namespace DeaconCCGManagement.Controllers
 {
-    [System.Web.Mvc.Authorize]
     public class BootstrapTestController : Controller
     {
         // GET: BootstrapTest

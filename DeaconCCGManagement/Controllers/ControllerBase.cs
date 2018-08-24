@@ -5,7 +5,6 @@ using DeaconCCGManagement.Helpers;
 
 namespace DeaconCCGManagement.Controllers
 {
-    [System.Web.Mvc.Authorize]
     public abstract class ControllerBase : Controller
     {
         protected UnitOfWork unitOfWork;

@@ -1,19 +1,71 @@
-﻿@if (Request.IsAuthenticated)
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.ViewModels
+
+
+@helper GetUserIcon(UserLoggedInInfoViewModel user)
 {
+    if (user != null && user.HasPhoto && !user.ImageSrc.Equals(ViewHelper.NoPhotoImgPath))
+    {
+        <img id="imgUserPhoto"
+             class="img img-circle"
+             style="background: whitesmoke"
+             width="25"
+             height="25"
+             alt="@user.FullName"
+             src="@user.ImageSrc" />
+    }
+    else
+    {
+        <span class="glyphicon glyphicon-user"></span>
+    }
+}
+
+
+@if (Request.IsAuthenticated && User != null && User.Identity != null)
+{
+
+    var user = AuthHelper.GetUserLoggedInInfo(User.Identity.Name);
+
+    //TODO store this bool flag in browser storage
+    //bool userHasPhoto = ViewHelper.DoesUserHavePhoto(user.Id);
+
     <text>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="navbar-text">
-                Hello, @User.Identity.Name!
+        <ul class="nav navbar-nav navbar-right top-nav-link">
+            <li>@Html.Partial("_NotificationBellPartial")</li>
+            <li class="navbar-link">
+                <a href="@Url.Action("Details", "CcgAppUsers", new {id = user.Id})">
+                    <div class="hidden-xs hidden-sm">
+                        @GetUserIcon(user)
+                        &nbsp;@user.FullName
+                    </div>
+                    <div class="hidden-md hidden-lg hidden-xl">
+                        @GetUserIcon(user)
+                        &nbsp;@user.FirstInitialLastName
+                    </div>
+
+                </a>
             </li>
+
+            @*TODO: Change 'Auth' to 'Account' for online version*@
+
             <li>
-                @Html.ActionLink("Sign out", "SignOut", "Account")
+                <a href="@Url.Action("SignOut", "Auth")" class="loginLink">
+                    <span class="fa fa-sign-out"></span>Sign-out
+                </a>
             </li>
         </ul>
     </text>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Sign in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    <ul class="nav navbar-nav navbar-right top-nav-link">
+
+        @*TODO: Change 'Auth' to 'Account' for online version*@
+   
+        <li>
+            <a href="@Url.Action("SignIn", "Auth")" class="loginLink">
+                <span class="fa fa-sign-in"></span>&nbsp;Sign-in
+            </a>
+        </li>
     </ul>
 }

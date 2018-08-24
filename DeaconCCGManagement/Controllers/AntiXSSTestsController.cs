@@ -13,7 +13,6 @@ using AntiXssEncoder = System.Web.Security.AntiXss.AntiXssEncoder;
 
 namespace DeaconCCGManagement.Controllers
 {
-    [System.Web.Mvc.Authorize]
     public class AntiXSSTestsController : Controller
     {
         private CcgDbContext db = new CcgDbContext();

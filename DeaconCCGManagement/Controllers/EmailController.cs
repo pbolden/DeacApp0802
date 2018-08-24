@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using DeaconCCGManagement.Models;
 using DeaconCCGManagement.ViewModels;
-using DeaconCCGManagement.Services;
 using Microsoft.AspNet.Identity;
 using System.Configuration;
 using System.Net;
@@ -12,7 +11,8 @@ using System.Collections.Generic;
 using SendGrid;
 using DeaconCCGManagement.Utilities;
 using DeaconCCGManagement.PushNotifications;
-using DeaconCCGManagement.Helpers;
+using System.Web.Security.AntiXss;
+using Elmah;
 
 namespace DeaconCCGManagement.Controllers
 {
@@ -53,21 +53,37 @@ namespace DeaconCCGManagement.Controllers
                 IsTesting = bool.Parse(ConfigurationManager.AppSettings["TestSendGrid"])
             };
 
+            emailViewModel.StatusNotification = new NotificationViewModel();
+
             return View(emailViewModel);
         }
 
         public ActionResult SendBulkEmail()
         {
             var emailViewModel = TempData["EmailViewModel"];
+
+            if (emailViewModel == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View("SendEmail", emailViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public async Task<ActionResult> SendEmail(EmailViewModel emailViewModel)
         {
-            if (!ModelState.IsValid)
-                return View(emailViewModel);
+            if (!ModelState.IsValid) return View(emailViewModel);
+
+            // sanitize the html from user
+            emailViewModel.EmailContact.HtmlBody =
+                AntiXssEncoder.HtmlEncode(emailViewModel.EmailContact.HtmlBody, false);
+            emailViewModel.EmailContact.HtmlBody = 
+                WebUtility.HtmlDecode(emailViewModel.EmailContact.HtmlBody);
+
+
 
             if (emailViewModel == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -84,12 +100,12 @@ namespace DeaconCCGManagement.Controllers
                 HtmlRemoval.ConvertHtmlToPlainText(emailViewModel.EmailContact.HtmlBody);
 
             if (emailViewModel.Bulk)
-                await SendBulkEmailsAsync(emailViewModel, client);
+                emailViewModel = await SendBulkEmailsAsync(emailViewModel, client);
 
             else // send email to one member 
-                await SendSingleEmailAsync(emailViewModel, client);
+                emailViewModel = await SendSingleEmailAsync(emailViewModel, client);
 
-            return View("EmailComplete");
+            return View("EmailComplete", emailViewModel);
         }
 
         private void StoreEmailContact(EmailContact emailContact)
@@ -124,16 +140,8 @@ namespace DeaconCCGManagement.Controllers
             }
         }
 
-        private async Task SendSingleEmailAsync(EmailViewModel emailViewModel, EmailWrapperClient client)
+        private async Task<EmailViewModel> SendSingleEmailAsync(EmailViewModel emailViewModel, EmailWrapperClient client)
         {
-
-            //
-            //TODO DEBUG
-            //
-#if DEBUG
-            //StoreEmailContact(emailViewModel.EmailContact);
-#endif
-
 
             Response response;
             try
@@ -142,55 +150,61 @@ namespace DeaconCCGManagement.Controllers
 
                 if (IsResponseOk(response))
                 {
-                    NotifyUserOfStatus(EmailStatus.EmailDelivered, emailViewModel.EmailContact.ReceiverName);
+                    emailViewModel.StatusNotification = GetStatusNotification(EmailStatus.EmailDelivered, emailViewModel.EmailContact.ReceiverName);
                     emailViewModel.EmailContact.DateSent = DateTime.Now;
                     StoreEmailContact(emailViewModel.EmailContact);
                 }
-                else                
-                    NotifyUserOfStatus(EmailStatus.EmailNotDelivered, emailViewModel.EmailContact.ReceiverName);
+                else
+                    emailViewModel.StatusNotification = GetStatusNotification(EmailStatus.EmailNotDelivered, emailViewModel.EmailContact.ReceiverName);
                 
             }
             catch (Exception ex)
             {
-                NotifyUserOfStatus(EmailStatus.EmailNotDelivered, emailViewModel.EmailContact.ReceiverName);
+                // log caught exception with Elmah
+                ErrorSignal.FromCurrentContext().Raise(ex);
+
+                emailViewModel.StatusNotification = GetStatusNotification(EmailStatus.EmailNotDelivered, emailViewModel.EmailContact.ReceiverName);
             }
+
+            if (emailViewModel.StatusNotification != null)
+                emailViewModel.HasStatusNotification = true;
+            return emailViewModel;
 
 
         }
 
-        private async Task SendBulkEmailsAsync(EmailViewModel emailViewModel, EmailWrapperClient client)
+        private async Task<EmailViewModel> SendBulkEmailsAsync(EmailViewModel emailViewModel, EmailWrapperClient client)
         {
             Response response;
             var bulkContacts = GetBulkEmailContacts(emailViewModel);
-
-            //
-            //TODO DEBUG
-            //
-#if DEBUG
-            //StoreBulkEmailContacts(bulkContacts);
-#endif
-
-
 
             try
             {
                 response = await client.SendMultipleEmailsAsync(bulkContacts, emailViewModel.EmailContact);
                 if (IsResponseOk(response))
                 {
-                    NotifyUserOfStatus(EmailStatus.BulkEmailsDelivered);
+                    //GetStatusNotification(EmailStatus.BulkEmailsDelivered);
+                    emailViewModel.StatusNotification = GetStatusNotification(EmailStatus.BulkEmailsDelivered);
                     emailViewModel.EmailContact.DateSent = DateTime.Now;
                     StoreBulkEmailContacts(bulkContacts);
                 }
                 else
                 {
-                    NotifyUserOfStatus(EmailStatus.BulkEmailsNotDelivered);
+                    //GetStatusNotification(EmailStatus.BulkEmailsNotDelivered);
+                    emailViewModel.StatusNotification = GetStatusNotification(EmailStatus.BulkEmailsNotDelivered);
                 }
-
             }
             catch (Exception ex)
             {
-                NotifyUserOfStatus(EmailStatus.BulkEmailsNotDelivered);
+                // log caught exception with Elmah
+                ErrorSignal.FromCurrentContext().Raise(ex);
+
+                emailViewModel.StatusNotification = GetStatusNotification(EmailStatus.BulkEmailsNotDelivered);
             }
+
+            if (emailViewModel.StatusNotification != null)
+                emailViewModel.HasStatusNotification = true;
+            return emailViewModel;
         }
 
         private bool IsResponseOk(Response response)
@@ -203,7 +217,7 @@ namespace DeaconCCGManagement.Controllers
             return false;
         }
 
-        private void NotifyUserOfStatus(EmailStatus status, string who = "")
+        private NotificationViewModel GetStatusNotification(EmailStatus status, string who = "")
         {
             string title = string.Empty;
             string msg = string.Empty;
@@ -212,28 +226,41 @@ namespace DeaconCCGManagement.Controllers
                 case EmailStatus.EmailDelivered:
                     title = "Email Sent";
                     msg = $"Your email to {who} has been delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Success);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Success
+                    };
                 case EmailStatus.EmailNotDelivered:
                     title = "Email Not Sent";
                     msg = $"Your email to {who} was not delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Failure);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Failure
+                    };
                 case EmailStatus.BulkEmailsDelivered:
                     title = "Bulk Emails Sent";
                     msg = $"Your bulk emails were delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Success);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Success
+                    };
                 case EmailStatus.BulkEmailsNotDelivered:
                     title = "Bulk Emails Not Sent";
                     msg = $"Your bulk emails were not delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Failure);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Failure
+                    };
             }
+            return null;
         }
 
         private List<EmailContact> GetBulkEmailContacts(EmailViewModel emailViewModel)

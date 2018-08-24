@@ -14,6 +14,9 @@ namespace DeaconCCGManagement.Models
         private const string ReguiredErrMsg = "Member's {0} is required.";
         private const string TooLongErrMsg = "{0} is too long.";
 
+        [StringLength(100, ErrorMessage = TooLongErrMsg)]
+        public string RealmID { get; set; }
+
         [Required(ErrorMessage = ReguiredErrMsg)]
         [Display(Name = "First Name")]
         [StringLength(160, ErrorMessage = TooLongErrMsg)]

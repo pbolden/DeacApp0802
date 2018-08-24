@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 using System.Web.Routing;
 using System.Collections.Generic;
 using DeaconCCGManagement.PushNotifications;
-using DeaconCCGManagement.Helpers;
-using Twilio.Http;
+using Elmah;
 
 namespace DeaconCCGManagement.Controllers
 {
@@ -47,7 +46,10 @@ namespace DeaconCCGManagement.Controllers
             {
                 viewModel.IsTest = testTwillio;
                 viewModel.TestFromNumber = ConfigurationManager.AppSettings["TwillioFromNumber"];
-            }                
+            }
+
+            viewModel.HasStatusNotification = false;
+            viewModel.StatusNotification = new NotificationViewModel();
 
             return View(viewModel);
         }
@@ -78,6 +80,12 @@ namespace DeaconCCGManagement.Controllers
         public ActionResult SendBulkTextMessage(RouteValueDictionary routeDictionary=null)
         {
             var viewModel = TempData["TextMessageViewModel"];
+
+            if (viewModel == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View("SendTextMessage", viewModel);
         }
 
@@ -101,22 +109,28 @@ namespace DeaconCCGManagement.Controllers
                 IResponse response = await smsClient.SendSmsAsync(smsMessage);
                 if (IsResponseOk(response))
                 {
-                    NotifyUserOfStatus(TextMessageStatus.SingleTextDelivered, viewModel.TextMessageContact.MemberFullName);
+                    viewModel.StatusNotification = GetStatusNotification(TextMessageStatus.SingleTextDelivered, viewModel.TextMessageContact.MemberFullName);
 
                     viewModel.TextMessageContact.DateSent = DateTime.Now;
 
                     // Store contact record
                     StoreTextMessage(viewModel.TextMessageContact);
                 }
-                else                
-                    NotifyUserOfStatus(TextMessageStatus.SingleTextNotDelivered, viewModel.TextMessageContact.MemberFullName);
+                else
+                    viewModel.StatusNotification = GetStatusNotification(TextMessageStatus.SingleTextNotDelivered, viewModel.TextMessageContact.MemberFullName);
                 
 
             }
             catch (Exception ex)
             {
-                NotifyUserOfStatus(TextMessageStatus.SingleTextNotDelivered, viewModel.TextMessageContact.MemberFullName);
-            }       
+                // log caught exception with Elmah
+                ErrorSignal.FromCurrentContext().Raise(ex);
+
+                viewModel.StatusNotification = GetStatusNotification(TextMessageStatus.SingleTextNotDelivered, viewModel.TextMessageContact.MemberFullName);
+            }
+
+            if (viewModel.StatusNotification != null)
+                viewModel.HasStatusNotification = true;
 
             return View(viewModel);
         }
@@ -164,17 +178,22 @@ namespace DeaconCCGManagement.Controllers
                 }
                 catch (Exception ex)
                 {
-                    // TODO log exception
+                    // log caught exception with Elmah
+                    ErrorSignal.FromCurrentContext().Raise(ex);
+
                     isGoodResponse = false;
                 }
-            } 
+            }
 
             // Send notification to user with bulk text message status.
-            // If any text fails user gets a not delivered message.
+            // If any text fails user gets a not delivered message.           
             if (isGoodResponse)
-                NotifyUserOfStatus(TextMessageStatus.SingleTextDelivered, viewModel.TextMessageContact.MemberFullName);
+                viewModel.StatusNotification = GetStatusNotification(TextMessageStatus.BulkTextsDelivered, viewModel.TextMessageContact.MemberFullName);
             else
-                NotifyUserOfStatus(TextMessageStatus.SingleTextNotDelivered, viewModel.TextMessageContact.MemberFullName);
+                viewModel.StatusNotification = GetStatusNotification(TextMessageStatus.BulkTextsNotDelivered, viewModel.TextMessageContact.MemberFullName);
+
+            if (viewModel.StatusNotification != null)
+                viewModel.HasStatusNotification = true;
 
             return View(viewModel);
         }
@@ -231,45 +250,71 @@ namespace DeaconCCGManagement.Controllers
             //
             // TODO test this
             //
-            if (response.Status.Equals(HttpStatusCode.Accepted)
-                   || response.Status.Equals(HttpStatusCode.OK))
+            if (response.Status.Equals("queued"))
             {
                 return true;
             }
             return false;
         }
 
-        private void NotifyUserOfStatus(TextMessageStatus status, string who = "")
+        private NotificationViewModel GetStatusNotification(TextMessageStatus status, string who = "")
         {
             string title = string.Empty;
             string msg = string.Empty;
+
             switch (status)
             {
                 case TextMessageStatus.SingleTextDelivered:
                     title = "Text Message Sent";
                     msg = $"Your text message to {who} has been delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Success);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Success
+                    };
+                    //NotifyHelper.SendUserNotification(User.Identity.Name,
+                    //    title, msg, type: NotificationType.Success);
+                   
                 case TextMessageStatus.SingleTextNotDelivered:
                     title = "Text Message Not Sent";
                     msg = $"Your text message to {who} was not delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Failure);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Failure
+                    };
+                    //NotifyHelper.SendUserNotification(User.Identity.Name,
+                    //    title, msg, type: NotificationType.Failure);
+                    //break;
                 case TextMessageStatus.BulkTextsDelivered:
                     title = "Bulk Text Messages Sent";
                     msg = $"Your bulk text messages were delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Success);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Success
+                    };
+                    //NotifyHelper.SendUserNotification(User.Identity.Name,
+                    //    title, msg, type: NotificationType.Success);
+                    //break;
                 case TextMessageStatus.BulkTextsNotDelivered:
                     title = "Bulk text Messages Not Sent";
                     msg = $"Your bulk text messages were not delivered.";
-                    NotifyHelper.SendUserNotification(User.Identity.Name,
-                        title, msg, type: NotificationType.Failure);
-                    break;
+                    return new NotificationViewModel
+                    {
+                        Title = title,
+                        Message = msg,
+                        NotifyType = NotificationType.Failure
+                    };
+                    //NotifyHelper.SendUserNotification(User.Identity.Name,
+                    //    title, msg, type: NotificationType.Failure);
+                    //break;
             }
+
+            return null;
         }
 
     }

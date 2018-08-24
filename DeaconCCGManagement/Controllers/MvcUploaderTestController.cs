@@ -6,7 +6,6 @@ using MvcFileUploader.Models;
 
 namespace DeaconCCGManagement.Controllers
 {
-	 [System.Web.Mvc.Authorize]
 	 public class MvcUploaderTestController : Controller
 	{
 		//

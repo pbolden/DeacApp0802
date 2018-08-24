@@ -10,7 +10,7 @@ using DeaconCCGManagement.Models;
 using DeaconCCGManagement.ViewModels;
 using DeaconCCGManagement.Services;
 using PagedList;
-
+using DeaconCCGManagement.PushNotifications;
 
 namespace DeaconCCGManagement.Controllers
 {

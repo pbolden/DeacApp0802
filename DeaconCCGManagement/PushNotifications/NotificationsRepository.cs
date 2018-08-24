@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure;
+﻿using Elmah;
+using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Auth;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -86,12 +87,16 @@ namespace DeaconCCGManagement.PushNotifications
             catch (StorageException ex)
             {
                 IsInitialized = false;
-                // TODO log exception
+
+                // log caught exception with Elmah
+                ErrorSignal.FromCurrentContext().Raise(ex);
             }
             catch (Exception ex)
             {
                 IsInitialized = false;
-                // TODO log exception
+
+                // log caught exception with Elmah
+                ErrorSignal.FromCurrentContext().Raise(ex);
             }
 
             return IsInitialized;

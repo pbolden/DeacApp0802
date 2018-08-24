@@ -1,0 +1,47 @@
+﻿@model DeaconCCGManagement.ViewModels.AnnouncementViewModel
+
+@{
+    ViewBag.Title = "Delete Announcement";
+}
+
+@Html.Partial("_Breadcrumbs", "About")
+
+<h2>Delete Announcement</h2>
+
+<h3>Are you sure you want to delete this announcement?</h3>
+<div>
+    <h4>Delete Deacon Announcement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+      
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+
+        @Html.HiddenFor(Model => Model.PartitionKey)
+        @Html.HiddenFor(Model => Model.RowKey)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

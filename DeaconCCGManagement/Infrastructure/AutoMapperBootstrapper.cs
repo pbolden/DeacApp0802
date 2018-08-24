@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DeaconCCGManagement.Models;
 using DeaconCCGManagement.ViewModels;
-using DeaconCCGManagement.ViewModels.TestAutoMapper;
 
 
 namespace DeaconCCGManagement.Infrastructure
@@ -17,9 +16,6 @@ namespace DeaconCCGManagement.Infrastructure
         {
             Mapper.Initialize(cfg =>
             {
-                // Test
-                cfg.AddProfile<PersonViewModelProfile>();
-
                 // CCGMember profiles
                 cfg.AddProfile<ListMembersViewModelProfile>();
                 cfg.AddProfile<CreateMemberViewModelProfile>();
@@ -64,14 +60,7 @@ namespace DeaconCCGManagement.Infrastructure
                 cfg.AddProfile<ChangeRequestToEditMemberViewModelProfile>();
             });
         }
-
-        public class PersonViewModelProfile : Profile
-        {
-            public PersonViewModelProfile()
-            {
-                CreateMap<Person, PersonViewModel>();
-            }
-        }
+     
         #region CCGMember profile classes
 
         // Maps CCGMember to ListMembersViewModel
