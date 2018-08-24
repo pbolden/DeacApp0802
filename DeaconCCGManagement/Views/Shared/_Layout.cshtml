@@ -1,0 +1,96 @@
+﻿@using DeaconCCGManagement.DAL
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Zion MBC Deacons CCG Management Portal</title>
+
+    @*@Styles.Render("~/Content/styles")*@
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/notify-metro.css" rel="stylesheet" />
+
+    @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("styles", required: false)
+
+</head>
+<body id="page-top">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+                <span class="hidden-xs hidden-sm">
+                    @Html.ActionLink("CCG Deacon Management Portal", "Index", "Home", null, new { @class = "navbar-brand" })
+                </span>
+                <span class="hidden-md hidden-lg hidden-xl">
+                    @Html.ActionLink("CCG Management Portal", "Index", "Home", null, new { @class = "navbar-brand" })
+                </span>
+                <span class="hidden-sm hidden-md hidden-lg hidden-xl">
+                    @Html.ActionLink("CCG Portal", "Index", "Home", null, new { @class = "navbar-brand" })
+                </span>
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav top-nav-link">
+
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <span class="glyphicon glyphicon-home"></span>&nbsp;Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("About", "Home")">
+                            <span class="glyphicon glyphicon-info-sign"></span>&nbsp;About
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Contact", "Home")">
+                            <span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact
+                        </a>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>
+                <span class="fa fa-copyright"></span> @DateTime.Now.Year - Zion MBC Deacons CCG Management Portal
+            </p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/plugins")
+    @Scripts.Render("~/Scripts/App/BreadcrumbTrail.js")
+
+    <script src="~/Scripts/notify.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.3.0.min.js"></script>
+
+    <script src="~/Scripts/notify-metro.js"></script>
+    <script src="~/Scripts/App/NotifyJSService.js"></script>
+
+    <!--Reference the auto-generated SignalR hub script. -->
+    <script src="~/signalr/hubs"></script>   
+
+    <script src="~/Scripts/App/SignalRNotifyService.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,395 @@
+﻿@using System.Web
+@using System.Web.Mvc.Html
+@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.enums
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@using PagedList.Mvc
+@using Styles = System.Web.Optimization.Styles
+
+@model PagedList.IPagedList<ListMembersViewModel>
+
+@*Sets variables in Razor code block*@
+@{
+    ViewBag.Title = "CCG Members";
+    int? ccgId = ViewBag.CCGId;
+    bool getAll = ViewBag.GetAll;
+    bool allAccess = ViewBag.AllAccess;
+    string query = ViewBag.Query;
+    int? itemsPerPage = ViewBag.ItemsPerPage;
+    int? memberFilter = (int)ViewBag.MemberFilter;
+    var controllerName = "CcgMembers";
+    string actionName = "Index";
+    var ccgs = ViewBag.CCGs;
+
+    // random number is appened to img src url to force browser to reload
+    //   int randomNumber = new Random().Next(100000);
+
+    // Flag for the 'Select All' feature.
+    // Value passed to/from controller
+    bool isSelectAll = @ViewBag.IsSelectAll;
+}
+
+    @section styles {
+    @Styles.Render("~/Content/PagedList.css")
+}
+
+@Html.Partial("_Breadcrumbs", "CCG Members")
+
+<div class="container">
+    <div class="row">
+        <!--Export data as xls file-->
+        @using (Html.BeginForm("CCGMembers", "ExportData", FormMethod.Get))
+        {
+            @Html.Hidden("ccgId", ccgId)
+            @Html.Hidden("getAll", ccgId)
+            @Html.Hidden("query", ccgId)
+            @Html.Hidden("allAccess", ccgId)
+            @Html.Hidden("dataDownloadFileType", (int) ExportDataFileType.Xls)
+
+            <div class="form-group">
+                <div class="col-md-6">
+                    <button type="submit" class="btn btn-primary">
+                        XLS <i class="fa fa-download"></i>
+                    </button>
+                </div>
+            </div>
+
+        }<!-- / Export data as xls file-->
+    </div>
+</div>
+
+
+<div style="margin-left: 15px">
+    <h2>@ViewBag.Title (@Model.TotalItemCount)</h2>
+</div>
+
+@*Display CCG name if filter by ccg*@
+@if (!string.IsNullOrEmpty(ViewBag.CCGName))
+{
+    <h3>@ViewBag.CCGName</h3>
+}
+
+@*these are accessed from jQuery scripts to get around quirky issues*@
+    <input id="getAllHidden" type="hidden" value="@getAll.ToString()" />
+    <input id="allAccessHidden" type="hidden" value="@allAccess.ToString()" />
+    <input id="selectAllHidden" type="hidden" value="@isSelectAll.ToString()" />
+
+    <!--Search form-->
+    @using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+    {
+
+        @Html.Hidden("page", (int?)@ViewBag.Page)
+        @Html.Hidden("itemsPerPage", (int?)@ViewBag.CurrentItemsPerPage)
+        @Html.Hidden("allAccess", allAccess)
+
+        @Html.Partial("_SearchFieldAndButton",
+                    new SearchViewModel
+                    {
+                        Placeholder = "type member's name",
+                        Value = (string)@ViewBag.Query
+                    })
+    }<!-- / Search form-->
+
+   
+
+
+    @*AJAX is used to send member's phone number and name to the
+        server and pass it to a view partial for the modal dialog.*@
+    @{ var ajaxOptions = new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "modalDialogContent"
+        };
+    }
+
+    <br /><br />
+
+    @*filter form*@
+    @using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+    {
+        @Html.Hidden("getAll", getAll)
+        @Html.Hidden("itemsPerPage", itemsPerPage)
+        @Html.Hidden("query", query)
+        @Html.Hidden("allAccess", allAccess)
+
+        var filterMembersGroup = new FilterMembersGroup
+        {
+            MemberFilter = ViewBag.MemberFilter,
+            FilterCCGs = getAll,
+            CCGs = ccgs
+        };
+
+        @Html.Partial("_FilterMembersGroup", filterMembersGroup);
+    }@* / filter form*@
+
+    <div class="container">
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr class="info">
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs"></th>
+                    <th class="hidden-xs">
+                        @Html.DisplayNameFor(model => model.First().FullName)
+                    </th>
+
+                    <th class="hidden-xs">
+                        @Html.DisplayNameFor(model => model.First().PhoneNumber)
+                    </th>
+                    <th class="hidden-xs hidden-sm">
+                        @Html.DisplayNameFor(model => model.First().CellPhoneNumber)
+                    </th>
+                    <th class="hidden-xs">
+                        @Html.DisplayNameFor(model => model.First().EmailAddress)
+                    </th>
+                    <th class="hidden-xs"></th>
+                </tr>
+
+                <tr>
+                    <th class="input-group" style="font-size: 14px; margin-left: 1.8em; padding: 0em; border-bottom: 0px; border-top: 0px">
+                        @Html.MyCheckBox("chkboxToggle", isSelectAll,
+                                labelTextId: "selectAllText",
+                                labelClass: "checkbox",
+                                labelText: "Select All")
+                    </th>
+                </tr>
+            </thead>
+
+
+            @foreach (var item in Model)
+            {
+                @*Set image source for member's photo.*@
+                if (!item.HasPhoto)
+                {
+                    item.ImageSrc = ViewHelper.NoPhotoImgPath;
+                }
+
+
+
+            <tr>
+                <td>
+                    @*Check box for member selection*@
+                    @Html.CheckBox("checkBox" + item.Id,
+                             new
+                             {
+                                 @class = "checkbox chkbxSelect",
+                                 value = item.Id
+                             })
+
+                </td>
+
+
+                <!--Thumbnail photo goes here-->
+                <td>  
+                    <a href="@Url.Action("Edit", "MemberPhoto", new {memberId = item.Id})">
+                        <img class="img-thumbnail thumbnailPhoto"
+                             width="80"
+                             height="80"
+                             alt="@item.FullName"
+                             src="@item.ImageSrc" />
+                    </a>
+
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+
+                <td class="hidden-xs">
+
+                    @if (item.IsUserMemberDeacon)
+                    {
+                        using (@Ajax.BeginForm("DialogData", new { id = item.Id, fName = item.FirstName, lName = item.LastName, number = item.PhoneNumber },
+                            ajaxOptions))
+                        {
+                            <button type="submit" class="btn btn-link openDialog">
+                                @item.PhoneNumber
+                            </button>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@item.HrefPhoneNumberLink" id="phoneLink">@item.PhoneNumber</a>
+                    }
+                </td>
+
+                <td class="hidden-xs hidden-sm">
+
+                    @if (item.IsUserMemberDeacon)
+                    {
+                        using (@Ajax.BeginForm("DialogData", new { id = item.Id, fName = item.FirstName, lName = item.LastName, number = item.CellPhoneNumber },
+                            ajaxOptions))
+                        {
+                            <button type="submit" class="btn btn-link openDialog">
+                                @item.CellPhoneNumber
+                            </button>
+                        }
+                    }
+                    else
+                    {
+                        <a href="@item.HrefCellNumberLink" id="phoneLink">@item.CellPhoneNumber</a>
+                    }
+                </td>
+
+                <td class="hidden-xs">
+                    @{
+                        string noEmailTxt = "No Email";
+                        var linkText = string.IsNullOrEmpty(item.EmailAddress) ? noEmailTxt : item.EmailAddress;
+                    }
+
+                    @if (item.IsUserMemberDeacon && linkText != noEmailTxt)
+                    {
+                        // link text cannot be null or empty
+                        @Html.ActionLink(linkText, "SendEmail", "Email", new { memberId = item.Id }, null)
+                    }
+                    else if (linkText != noEmailTxt)
+                    {
+                        <a href="mailto:@linkText">@linkText</a>
+                    }
+                    else // no email
+                    {
+                        @linkText
+                    }
+                </td>
+                <td>
+                    <div class="dropdown">
+                        @Html.Partial("_DropdownMenuToggleButton")
+                        <ul class="dropdown-menu pull-right">
+                            <li>@Html.ActionLink("Contacts", "Index", "ContactRecords", new { memberId = item.Id }, null)</li>
+                            <li>@Html.ActionLink("Prayer Requests", "Index", "PrayerRequest", new { memberId = item.Id }, null)</li>
+                            <li>@Html.ActionLink("Request Communion", "Edit", "NeedsCommunion", new { memberId = item.Id }, null)</li>
+                            <li>@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+
+                            @*Pastor role should not see edit links*@
+                            @if (!AuthHelper.IsInRole(User.Identity.Name, AppUserRole.Pastor))
+                            {
+                                <li>@Html.ActionLink("Photo", "Edit", "MemberPhoto", new { memberId = item.Id }, null)</li>
+                                <li>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+                            }
+
+
+                            @if (AuthHelper.HasAdminAccess(User.Identity.Name))
+                            {
+                                <li> @Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </td>
+            </tr>
+
+                        } @* / foreach *@
+
+                    </table>
+
+                </div>
+
+                @*Contact selected members form*@
+                @using (Html.BeginForm("ContactSelected", "BulkContact", null,
+                    FormMethod.Post, new { id = "frmContactSelected" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @*Passing route values to bulk contact controller to
+                        recreate exact list if 'Select All' is true*@
+                    <input name="ccgId" hidden="hidden" value="@ccgId" />
+                    <input name="getAll" hidden="hidden" value="@getAll.ToString()" />
+                    <input name="query" hidden="hidden" value="@query" />
+                    <input name="allAccess" hidden="hidden" value="@allAccess.ToString()" />
+                    <input id="selectAll" name="selectAll" hidden="hidden" value="" />
+
+                    @*hidden input elements are added here via jQuery
+                        the elements are passed to the 'memberIds' param in controller*@
+                    <div id="divMemberIds">
+
+                    </div>
+                }
+
+                <p>
+                    <button id="btnBulkContact" class="btn btn-primary" type="submit">
+                        Contact Selected Members <span class="fa fa-envelope"></span>
+                    </button>
+                </p>
+
+
+                @*Select all*@
+                @using (Html.BeginForm(actionName, controllerName, FormMethod.Get, new { id = "frmSelectAll" }))
+                {
+                    @*Form submit by jQuery script on change*@
+
+                    // Html helper does not work here. The value will not update.*@
+                    <input id="selectAll2" name="selectAll" hidden="hidden" value="" />
+
+                    @Html.Hidden("ccgId", ccgId)
+                    @Html.Hidden("query", query)
+                    @Html.Hidden("page", (int?)@ViewBag.Page)
+                    @Html.Hidden("itemsPerPage", itemsPerPage)
+                    @Html.Hidden("getAll", getAll)
+                    @Html.Hidden("allAccess", allAccess)
+                }
+
+                <!-- Modal dialog asks user if app should call or text -->
+                <div class="modal fade" id="callOrTextDialog" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+
+                        @*Replaced by AJAX with a partial*@
+                        <div id="modalDialogContent">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <p></p>
+
+                <!--Pagination-->
+                @if (Model != null && Model.PageCount > 0)
+                {
+                    <div>
+                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                        of @Model.PageCount
+                    </div>
+
+                    <br />
+
+                    if (Request?.Url != null)
+                    {
+                        var itemsPerPageSelect = new ItemsPerPageSelect
+                        {
+                            AbsPath = Request?.Url?.AbsolutePath,
+                            QueryStrings = HttpUtility.ParseQueryString(Request.Url.Query),
+                            ListAllOption = true,
+                            ListAllText = "All CCG Members"
+                        };
+
+                        @Html.Partial("_ItemsPerPage", itemsPerPageSelect)
+                    }
+
+                    <div>
+                        @Html.PagedListPager(Model, page => Url.Action(actionName, controllerName,
+            new
+            {
+                page,
+                itemsPerPage = itemsPerPage,
+                selectAll = isSelectAll,
+                getAll = getAll,
+                query = query,
+                allAccess = allAccess,
+                memberFilter = memberFilter
+            }))
+                    </div>
+                } <!-- / Pagination-->
+
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/App/ShowCallOrTextDialog.js")
+    @Scripts.Render("~/Scripts/App/InitBootstrapTooltipAndPopover.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+    @Scripts.Render("~/Scripts/App/SelectAllHandler.js")
+    @Scripts.Render("~/Scripts/App/BulkContactFormHandler.js")
+}

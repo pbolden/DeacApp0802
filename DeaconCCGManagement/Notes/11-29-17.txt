@@ -1,0 +1,1 @@
+﻿*don't delete app user. make inactive

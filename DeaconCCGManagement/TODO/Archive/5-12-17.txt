@@ -1,0 +1,32 @@
+﻿TODO: input mask
+TODO: date picker where needed
+//TODO: Set up 3rd party login test for Paul
+TODO: Select all
+TODO: Pass along to pastor feature
+TODO: Return url (login)
+TODO: Check for private contact
+TODO: helper method to auto record info about
+	  member and user when adding contact records
+TODO: Prayer request 
+		○ A contact record
+		○ Unless marked as private, all users should be able to access the requests
+		○ Should have a filter for recent prayer requests. 
+		  Eg, Last 2 weeks of a range of dates.
+TODO: Hook up McCoy's Site.css file
+TODO: Move pagination code to separate class
+TODO: Set up so user can select page size
+TODO: Select contact type
+TODO: Select deacon
+TODO: Deacon's can't delete members
+TODO: Contact member button
+TODO: Phone call-
+		*Telephone number link should open page
+		*Page should allow user to enter data about call
+		*after page loads, phone call initiated
+		*No service will be used. it will use default phone service
+		*no need to check if user is on a phone
+			If user is on desktop, a prompt for Skype will pop up. User
+			can just click cancel.
+		*upon call complete, user can enter info about call
+TODO: File upload
+		*Use jQuery AJAX file upload	

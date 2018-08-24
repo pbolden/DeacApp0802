@@ -1,0 +1,384 @@
+﻿body {
+    /*background-image: url('Images/Canvas.png');*/
+    /*background-image: url('Images/ChristCrossC.png');*/
+    background-image: url('Images/content.png');
+    /*background-image: url('Images/WhiteTexture.png');*/
+
+}
+
+h1 {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+
+h2 {
+    font-size: 1.25em;
+    font-weight: 400;
+    text-align: center;
+    color: #000;
+}
+
+p {
+  font-size: 1em;
+  line-height: 1.6;
+  color: #000;
+    text-align: center;
+}
+
+hr {
+  border-color: #999999;
+  max-width: 850px;
+    
+}
+
+.btn-lg {
+    background-color: #8d8b8b;
+    border-color: #999999;
+    color: #fff;
+}
+
+.btn-lg:hover {
+    background-color: #7a7878;
+}
+
+.btn-lg:focus,
+.btn-lg.focus {
+    background-color: #2b2828;
+}
+
+.btn-lg:active, 
+.btn-lg.active {
+    background-color: #8d8b8b;
+}
+
+.btn-default {
+    background-color: #8d8b8b;
+    color: #fff;
+}
+
+.btn-default:hover {
+    background-color: #7a7878;
+    color: #fff;
+}
+
+.btn-defaiult:focus {
+    background-color: #7a7878;
+    color: #fff;
+}
+
+.box {
+  margin-bottom: 20px;
+  padding: 30px 15px;
+}
+
+.intro-text {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 2.00em;
+  font-weight: 400;
+}
+
+@media screen and (max-width: 320px) {
+
+    .intro-text {
+        font-size: 1.40em;     
+    }
+}
+
+.img-border {
+  float: none;
+  margin: 0 auto 0;
+  border: #999999 solid 0px;
+}
+
+.img-left {
+  float: none;
+  margin: 0 auto 0;
+    padding-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+
+    .img-left {
+        float: left;
+        margin-right: 25px;
+      
+    }
+}
+
+@media screen and (min-width: 992px) {
+
+    .img-left {
+        float: left;
+        margin-right: 20px;
+        padding-left: 75px;
+      
+    }
+}
+
+
+@media screen and (min-width: 1200px) {
+    .box:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+
+    .img-left {
+        float: left;
+        padding-left: 155px;
+        margin-right: -4em;
+    }
+}
+
+.what .service {
+    padding: 20px;
+    /*border-radius: 10em;*/
+    margin-top: 1em;
+    /*min-height: 250px;*/
+    height: 250px;
+    width: 300px;
+    margin-right: 0;
+}
+
+
+.what .service:hover {
+    box-shadow:
+        0 5px 15px 0 rgba(0,0,0,.05),
+        0 1px 25px 0 rgba(0,0,0,.05) inset,
+        0 -1px 25px 0 rgba(0,0,0,.05) inset;
+    -o-transition: all .5s;
+    -moz-transition: all .5s;
+    -webkit-transition: all .5s;
+    -ms-transition: all .5s;
+}
+
+.what .service h4 {
+        margin-top: 5px;
+        font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #5d5d5d;
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 rgba(255,255,255,.7);
+}
+
+.what .service p {
+    padding-bottom: 10px;
+    line-height: 24px;
+}
+
+.breadcrumb {
+    background-color: rgba(255, 240, 245, 0);
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .what .service {
+    padding: 10px;
+    /*border-radius: 10em;*/
+    margin-top: 1em;
+    /*min-height: 250px;*/
+    height: 250px;
+    width: 200px;
+   
+       
+}
+}
+
+@media screen and (min-width: 420px) and (max-width: 768px) {
+    .what .service {
+    padding: 10px;
+    /*border-radius: 10em;*/
+    margin-top: 1em;
+    /*min-height: 250px;*/
+    height: 250px;
+    width: 300px;
+   
+       
+}
+}
+
+@media screen and (max-width: 390px) {
+    .what .service {
+    padding: 1px;
+    /*border-radius: 10em;*/
+    margin-top: 0;
+    /*min-height: 250px;*/
+    height: 180px;
+    width: 170px;      
+}
+
+    .what .service p {
+        line-height: 20px;
+    }
+
+    .what .service h3 {
+        margin-top: -.7em;
+        margin-bottom: -.7em;
+        font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        color: #070707;
+        text-transform: uppercase;
+        font-weight:bold
+       
+}
+}
+
+/*.icon-md {
+  font-size: 24px;
+  height: 68px;
+  width: 68px;
+  line-height: 68px;
+  color: #fff;
+  margin-right: 10px;
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  display: inline-block;
+  border-radius: 100%;
+  margin-bottom: 10px;
+}
+.icon-color1 {
+  background-color: #e74c3c;
+}*/
+
+.homeGlyph .glyphicon {
+    font-size: 3em;
+    color: #8D8B8B;
+
+}
+
+.homeGlyph h3 {
+    margin-top: -.5em;
+    margin-bottom: -.5em;
+    font-size: 1.5em;
+}
+
+.homeGlyph a {
+    color: #080808;
+}
+
+.mobileLinks{
+    color: #8d8b8b;
+    font-size: .85em;
+    font-weight:bold;
+}
+
+.panelTitle{
+    color: #8d8b8b;
+    font-size: 1.5em;
+    font-weight:bold;
+}
+
+
+
+.home-panel {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px; /* 5px rounded corners */
+    border: solid;
+    border-color: black;
+    background-color: white;
+    margin-bottom: 15px;   
+}
+
+/* On mouse-over, add a deeper shadow */
+.panel:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.panel-container {
+    padding: 15px 5px;
+} 
+
+
+
+@media screen and (max-width: 390px) {
+    .homeGlyph .glyphicon {
+        font-size: 2em;
+        
+    }
+
+    .homeGlyph h3 {
+        margin: 0;
+
+    }
+}
+
+@media screen and (max-width: 768px){
+    .acFix .service {
+        height: 200px;
+       
+    }
+}
+
+@media screen and (min-width: 336px) and (max-width: 395px) {
+    .what .service {
+    margin-top: 3em;
+    
+}
+}
+
+@media screen and (min-width: 240px) and (max-width: 336px) {
+    .what .service {
+    margin-top: 5.5em;
+        margin-bottom: -3em;
+    
+}
+}
+
+@media screen and (min-width: 395px) and (max-width: 768px) {
+    .what .service {
+    margin-top: 3em;
+        margin-bottom: -3em;
+    
+}
+}
+
+@media screen and (max-width: 239px) {
+    .what .service {
+    margin-top: 5em;
+        margin-bottom: -3em;
+    
+}
+}
+
+.acSmallfix .service {
+    width: 700px;
+    height: 140px;
+}
+
+@media screen and (max-width: 772px) {
+    .landing-base h1 {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 772px)
+{
+    .landing-base strong
+    {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 772px)
+{
+    .landing-base img
+    {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+@media screen and (max-width: 772px)
+{
+    .landing-base a
+    {
+        font-size: 20px;
+    }
+}
+
+
+

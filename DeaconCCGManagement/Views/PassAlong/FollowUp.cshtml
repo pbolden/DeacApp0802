@@ -1,0 +1,103 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@model DeaconCCGManagement.ViewModels.PassAlongFollowUpViewModel
+
+@{
+    ViewBag.Title = "Follow Up Comments";
+}
+
+@Html.Partial("_Breadcrumbs", "Follow Up")
+
+<h2>Follow Up Comments</h2>
+
+<div>
+    <h4>Save Follow Up Comments</h4>
+    <hr />
+    <div class="well well-md">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ContactDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactType.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactType.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Deacon")
+            </dt>
+
+            <dd>
+                @Html.ActionLink(@Model.DeaconFullName, "Details", "CcgAppUsers", new { id = Model.AppUserId }, new { target = "_blank" })
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Member")
+            </dt>
+
+            <dd>
+                @Html.ActionLink(@Model.MemberFullName, "Details", "CcgMembers", new { id = Model.CCGMemberId }, new { target = "_blank" })
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PassAlongComments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PassAlongComments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+        </dl>
+    </div><!-- / div well-->
+   
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ReturnUrl)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PassAlongFollowUpComments, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PassAlongFollowUpComments, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PassAlongFollowUpComments, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+    }
+
+    </div>
+
+    @Html.Partial("_BackToListLink")
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+}

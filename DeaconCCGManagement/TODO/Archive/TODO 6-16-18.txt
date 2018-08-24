@@ -1,0 +1,5 @@
+﻿*TODO: contact type sort option
+*TODO: replace with new icons
+*TODO: possibly doubling up when adding new contact
+*TODO: error adding member pic
+*TODO: redo admin and home pages

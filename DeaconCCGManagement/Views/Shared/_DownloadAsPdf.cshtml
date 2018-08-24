@@ -1,0 +1,21 @@
+﻿
+@model string
+@{
+    string fileName = Model;
+    string url = Request?.Url?.PathAndQuery;
+}
+
+<!--download as pdf-->
+@using (Html.BeginForm("DownloadUrlAsPdf", "PDF", FormMethod.Get))
+{
+    @Html.Hidden("url", url);
+    @Html.Hidden("fileName", fileName);
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">
+                Download As PDF <i class="fa fa-download"></i>
+            </button>
+        </div>
+    </div>
+}<!-- / download as pdf-->

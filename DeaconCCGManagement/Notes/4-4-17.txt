@@ -1,0 +1,6 @@
+﻿migration for specific context:
+	Add-Migration Initial -Context AppIdentityDbContext
+
+- Use SharePoint email for both username and email
+- Use identity after all. This will not break the 3rd party authentication setup
+	and it will make authorization and off-line testing much cleaner.

@@ -1,0 +1,76 @@
+﻿@media screen and (min-width: 240px) {
+    .checkboxPray .checkbox {
+        margin: -5px;
+    }
+}
+
+@media screen and (min-width: 290px) {
+    .checkboxPray .checkbox {
+        margin-left: -3em;
+    }
+}
+
+@media screen and (min-width: 325px) {
+    .checkboxPray .checkbox {
+        margin-left: -5em;
+    }
+}
+
+@media screen and (min-width: 373px) {
+    .checkboxPray .checkbox {
+        margin-left: -7em;
+    }
+}
+
+@media screen and (min-width: 425px) {
+    .checkboxPray .checkbox {
+        margin-left: -9em;
+    }
+}
+
+@media screen and (min-width: 475px) {
+    .checkboxPray .checkbox {
+        margin-left: -12em;
+    }
+}
+
+@media screen and (min-width: 525px) {
+    .checkboxPray .checkbox {
+        margin-left: -14em;
+    }
+}
+
+@media screen and (min-width: 575px) {
+    .checkboxPray .checkbox {
+        margin-left: -16em;
+    }
+}
+
+@media screen and (min-width: 625px) {
+    .checkboxPray .checkbox {
+        margin-left: -21em;
+    }
+}
+
+@media screen and (min-width: 675px) {
+    .checkboxPray .checkbox {
+        margin-left: -24em;
+    }
+}
+
+@media screen and (min-width: 725px) {
+    .checkboxPray .checkbox {
+        margin-left: -27em;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .checkboxPray .checkbox {
+        margin: 0;       
+    }
+
+    /*..control-label {
+        margin: -1em;
+    }*/
+}
+

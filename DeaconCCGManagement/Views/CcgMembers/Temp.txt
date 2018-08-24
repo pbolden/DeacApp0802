@@ -1,0 +1,12 @@
+﻿<!-- Modal dialog asks user if app should call or text -->
+<div class="modal fade" id="callOrTextDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <!--Replace by ajax with a partial-->
+        <div id="modalDialogContent">
+
+        </div>
+
+    </div>
+</div>

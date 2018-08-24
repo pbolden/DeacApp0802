@@ -1,0 +1,19 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+
+@{
+    ViewBag.Title = "Email Complete";
+}
+
+@Html.Partial("_Breadcrumbs", "Email Complete")
+
+
+  <h3 class="text-dark">Check your notifications for the status of your sent email(s).</h3>
+
+
+
+    @Html.Partial("_BackToListLink")
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+}

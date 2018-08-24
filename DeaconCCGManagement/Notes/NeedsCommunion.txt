@@ -1,0 +1,19 @@
+﻿Needs Communion feature notes
+
+*Deacon shall be able to select 'Needs Communion' for each of his members
+*Admins and leadership will see a list of members who need communion
+*This list should get refreshed every month.
+*need timestamp for each time this gets checked
+*Create separate model
+	-id
+	-member id
+	-timestamp
+	-virtual prop for members
+* user should be able to sort by range of dates
+	-last 30 days should be default
+*deacon will see an option for 'Needs Communion'
+	-this should be separate from Edit member
+	-deacon will see a checkbox
+	-if checked, a record should get stored in table
+	-Show deacon the 'last request date' for member to get communion
+	-don't allow more than one request per day

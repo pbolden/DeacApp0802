@@ -1,0 +1,27 @@
+﻿Pass along contacts to pastor
+
+new model: PassAlongContact
+
+On create new contact, if pass along checked send email to pastor
+and add to PassAlongContacts table
+
+On edit contact:
+	check if pass along
+	check if contact id already exists in PassAlongContacts
+	Email pastor if pass along changed to true
+
+Need a way to check if email has been sent. Otherwise
+deacon can edit contact and inadvertently resend email.
+
+Link to Pass Along Contacts on pastor's landing page
+
+Pastor can archive contacts. A button will show all archives.
+Pastor can restore archive records.
+
+Pastor can delete pass along records. Not the actual records
+
+Repository for PassAlongContact
+
+Follow up? 
+	boolean property
+	Should the pastor be able to create a follow up contact?

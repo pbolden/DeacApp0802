@@ -1,0 +1,100 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@model DeleteCcgAppUserViewModel
+
+@{
+    ViewBag.Title = "Delete App User";
+}
+
+@Html.Partial("_Breadcrumbs", "Delete App User")
+
+<h2>Delete<small>&nbsp;user @Model.FirstName @Model.LastName</small></h2>
+
+<div class="alert alert-warning">
+    <p>Are you sure you want to delete @Model.FirstName @Model.LastName?</p>
+</div>
+
+<div>
+
+    <div class="well well-md">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SharePointEmail)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SharePointEmail)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EmailAddress)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+
+            <dd>
+                <a href="tel:1+@Model.PhoneNumber">@Model.PhoneNumber</a>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CcgId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CCG.CCGName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ChangeRequestManager)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ChangeRequestManager)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ReturnUrl)
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+
+
+            </div>
+        }
+    </div>
+    
+     @Html.Partial("_BackToListLink")
+
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+}

@@ -1,0 +1,124 @@
+﻿@using DeaconCCGManagement.ViewModels
+@using PagedList.Mvc
+@model NeedsCommunionListViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@Html.Partial("_Breadcrumbs", "Needs Communion")
+
+@Html.Partial("_DownloadAsPdf", "Needs-Communion")
+
+<br /><br />
+
+<h2>Needs Communion (@Model.Count)</h2>
+
+
+<div class="input-group">
+    <p>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="well input-group" style="padding: .7em; margin-bottom: 1em; margin-top: 0; margin-left: -1em; margin-bottom: .5em">
+
+                    <!--Filter form-->
+                    @using (Html.BeginForm("Index", "NeedsCommunion", FormMethod.Get))
+                    {
+                        @Html.Hidden("itemsPerPage", (int)ViewBag.ItemsPerPage)
+                        <strong>Date Range: </strong>
+                        @Html.EnumDropDownListFor(pr => Model.CommunionDateRange,
+                                new { Name = "dateRange" })
+                        <text>&nbsp;</text>
+
+                        <button type="submit" class="btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-filter"></span>
+                        </button>
+                    }<!-- / Filter form-->
+                        &nbsp;
+
+                        <!--Purge form-->
+                        @using (Html.BeginForm("Index", "NeedsCommunion", FormMethod.Get))
+                        {
+                            @Html.Hidden("itemsPerPage", (int)ViewBag.ItemsPerPage)
+                            <strong>Purge: </strong>
+                            @Html.EnumDropDownListFor(pr => Model.PurgeNeedsCommunion,
+                                new { Name = "purgeOption" })
+                            <text>&nbsp;</text>
+
+                            <button type="submit" class="btn btn-default btn-xs">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        }<!-- / Purge form-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </p>
+</div>
+
+
+
+
+
+<div class="container">
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr class="info">
+                <th>@Html.DisplayNameFor(model => @Model.MembersNeedingCommunion.First().LastSelected)</th>
+                <th>@Html.DisplayNameFor(model => @Model.MembersNeedingCommunion.First().FullName)</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.MembersNeedingCommunion)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => item.LastSelected)
+                </td>
+                <td>
+                    <a href="@Url.Action("Details", "CcgMembers", new {id = item.MemberId})">
+                        @Html.DisplayFor(model => item.FullName)
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+<!--Pagination-->
+@if (Model != null && Model.MembersNeedingCommunion.PageCount > 0)
+{
+
+    <div>
+        Page @(Model.MembersNeedingCommunion.PageCount < Model.MembersNeedingCommunion.PageNumber ? 0 : Model.MembersNeedingCommunion.PageNumber)
+        of @Model.MembersNeedingCommunion.PageCount
+    </div>
+    <br />
+    if (Request?.Url != null)
+    {
+        var itemsPerPageSelect = new ItemsPerPageSelect
+        {
+            AbsPath = Request?.Url?.AbsolutePath,
+            QueryStrings = HttpUtility.ParseQueryString(Request.Url.Query),
+            ListAllOption = true,
+        };
+
+        @Html.Partial("_ItemsPerPage", itemsPerPageSelect)
+    }
+
+
+    <div>
+        @Html.PagedListPager(Model.MembersNeedingCommunion, page => Url.Action("Index",
+        new
+        {
+            page,
+            itemsPerPage = (int)@ViewBag.ItemsPerPage,
+            dateRange = (int)@ViewBag.DateRange
+        }))
+    </div>
+}<!-- / Pagination-->

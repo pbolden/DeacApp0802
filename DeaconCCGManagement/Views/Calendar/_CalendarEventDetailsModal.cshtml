@@ -1,0 +1,39 @@
+﻿<!-- Modal dialog to show calendar event details -->
+<div class="modal fade" id="calendarModal" tabindex="-1" role="dialog"
+     aria-labelledby="calendarModal" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div id="modalDialogContent">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                        <!--The 'x' in the top right corner-->
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="eventTitle"></h4>
+                </div>
+
+                <div class="modal-body" align="center">
+                    <p id="dateStr"></p>
+                    <p id="description"></p>
+                    <p>
+                        <a href="" id="name"></a>
+                    </p>
+                    <p id="phoneNumber"></p>
+                    <p id="cellNumber"></p>
+                    <p id="email"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

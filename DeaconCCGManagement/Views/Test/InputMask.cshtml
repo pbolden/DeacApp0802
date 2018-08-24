@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "InputMask";
+}
+
+<h2>InputMask</h2>
+
+<form>
+    <input id="mask"/>
+</form>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $("document").ready(function () {
+            $("#mask").mask();
+        });
+        
+    </script>
+    
+}

@@ -1,0 +1,132 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@model CreateCcgAppUserViewModel
+
+@{
+    ViewBag.Title = "Create New App User";
+}
+
+@Html.Partial("_Breadcrumbs", "Create App User")
+
+<h2>Create<small>&nbsp;New App User</small></h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="well well-md">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="container form-group">
+                    @Html.Partial("_ChangeRequestLabelAndPopover")
+                    &nbsp;
+                    @Html.CheckBoxFor(model => model.ChangeRequestManager, new { @class = "checkbox-inline" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", id= "firstName" }})
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.LastName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" }})
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SharePointEmail, new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.SharePointEmail, new { htmlAttributes = new { @class = "form-control" }} )
+                        @Html.ValidationMessageFor(model => model.SharePointEmail, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(model => model.EmailAddress, new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" }} )
+                        @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PhoneNumber, new {@class = "control-label col-md-2"})
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new {@class = "form-control phoneMask"}})
+                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new {@class = "text-danger"})
+                    </div>
+                    @Html.LabelFor(model => model.CellNumber, new {@class = "control-label col-md-2"})
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.CellNumber, new { htmlAttributes = new {@class = "form-control phoneMask"}})
+                        @Html.ValidationMessageFor(model => model.CellNumber, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    @Html.Label("CCG", new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.CcgId, ViewBag.CCGs as SelectList, new { @class = "form-control", style = "margin-top: 3px" })
+                        @Html.ValidationMessageFor(model => model.CcgId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EditRoles, new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.CheckBoxFor(model => model.EditRoles.IsPastor)
+                        @Html.LabelFor(model => model.EditRoles.IsPastor)
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        @Html.CheckBoxFor(model => model.EditRoles.IsDeaconLeadership)
+                        @Html.LabelFor(model => model.EditRoles.IsDeaconLeadership)
+
+                        <br />
+
+                        @Html.CheckBoxFor(model => model.EditRoles.IsDeacon)
+                        @Html.LabelFor(model => model.EditRoles.IsDeacon)
+                        &nbsp;&nbsp;&nbsp;
+                        @Html.CheckBoxFor(model => model.EditRoles.IsAdmin)
+                        @Html.LabelFor(model => model.EditRoles.IsAdmin)
+
+                        @Html.ValidationMessageFor(model => model.EditRoles, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 25px">
+            <div class="col-md-offset-5 col-md-12">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+    @Html.Partial("_BackToListLink")
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.maskedinput.js")
+    @Scripts.Render("~/Scripts/App/PhoneMask.js")
+    @Scripts.Render("~/Scripts/App/InitBootstrapTooltipAndPopover.js")
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+
+    <script type="text/javascript">
+        $(function() {
+            $("#firstName").focus();
+        });
+    </script>
+}

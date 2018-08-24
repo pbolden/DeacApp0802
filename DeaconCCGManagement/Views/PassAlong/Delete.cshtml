@@ -1,0 +1,113 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@model DeaconCCGManagement.ViewModels.DeletePassAlongContactViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@Html.Partial("_Breadcrumbs", "Delete Pass-Along Contact")
+
+<h2>Delete</h2>
+
+<div class="alert alert-warning">
+    <h3>Are you sure you want to delete this?</h3>
+    <small>
+        Note: This will not remove the contact from the database,
+        only from the review list.
+    </small>
+</div>
+
+<div>
+    <h4>@Model.MemberFullName</h4>
+    <hr />
+    <div class="well well-md">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactType.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactType.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PassAlong)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PassAlong)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PassAlongComments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PassAlongComments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Private)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Private)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            @if (!Model.Private)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Comments)
+                </dd>
+            }
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Duration)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Duration)
+            </dd>
+
+        </dl>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.Hidden("isFromArchive", (bool)ViewBag.IsArchive);
+        @Html.HiddenFor(model => model.ReturnUrl)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    }
+    @Html.Partial("_BackToListLink")
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+}

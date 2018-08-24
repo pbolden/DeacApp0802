@@ -1,0 +1,357 @@
+﻿@using DeaconCCGManagement.enums
+@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.ViewModels
+@using PagedList.Mvc
+
+@model ListContactRecordViewModel
+
+
+@{
+    ViewBag.Title = "Contact Records";
+    string headerText = "Contacts Records";
+    if (Model != null && Model.Params.Archive)
+    {
+        headerText = $"{"Archived"} {headerText}";
+    }
+    const string actionName = "Index";
+    const string controllerName = "ContactRecords";
+   
+    string memberFullName = Model?.ContactRecords.Count == 0 ? "Member Details" : Model?.ContactRecords.First().MemberFullName;
+    
+    var createButtonVM = new CreateButtonViewModel
+    {
+        ControllerName = controllerName,
+        MemberId = Model?.Params.MemberId,
+    };
+}
+
+@Html.Partial("_Breadcrumbs", "Contact Records")
+
+<div class="container">
+    <div class="row">
+        @*Archive button*@
+        @using (Html.BeginForm("Index", "ContactRecords", FormMethod.Get))
+        {
+            // Archive is false by default
+
+            string btnClass = Model.Params.Archive ? "fa fa-inbox" : "fa fa-archive";
+            string btnText = Model.Params.Archive ? "Inbox" : "Archive";
+
+            // Html helper doesn't update value for some quirky reason
+            string isArchiveToggleStr = Model.Params.Archive ? "false" : "true";
+            <input name="archive" type="hidden" value="@isArchiveToggleStr"/>
+
+            @Html.Hidden("memberId", Model.Params.MemberId)
+            @Html.Hidden("userId", Model.Params.UserId)
+            @Html.Hidden("getAll", Model.Params.GetAll)
+            @Html.Hidden("itemsPerPage", Model.Params.ItemsPerPage)
+            @Html.Hidden("dateRangeFilter", Model.Params.DateRangeFilter)
+
+            <div class="col-xs-offset-6">
+                <div class="pull-right" style="padding-right: 30px">
+                    <button type="submit" class="btn btn-default">
+                        <span class="@btnClass"></span> @btnText
+                    </button>
+                </div>
+            </div>
+        }@* / Archive button*@
+
+        <!--Export data as xls file-->
+        @using (Html.BeginForm("ContactRecords", "ExportData", FormMethod.Get))
+        {
+            @Html.Hidden("memberId", Model.Params.MemberId)
+            @Html.Hidden("ccgId", Model.Params.CCGId)
+            @Html.Hidden("getAll", Model.Params.GetAll)
+            @Html.Hidden("archive", Model.Params.Archive)
+            @Html.Hidden("dateRangeFilter", Model.Params.DateRangeFilter)
+            @Html.Hidden("dataDownloadFileType", (int) ExportDataFileType.Xls)
+
+            <div class="col-xs-6">
+                <div>
+                    <button type="submit" class="btn btn-primary">
+                        XLS <i class="fa fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        }<!-- / Export data as xls file-->
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            @if (Model.ContactRecords.Count != 0)
+            {
+                <h2>@headerText (@Model.ContactRecords.TotalItemCount)</h2>
+            }
+            else
+            {
+                <h2>No Contact Records</h2>
+            }
+
+        </div>
+    </div>
+
+</div>
+
+@*Display CCG name if filter by ccg*@
+@if (!string.IsNullOrEmpty(Model.CcgName))
+{
+    <h4>@Model.CcgName</h4>
+}
+
+@*TODO: pass member id to controller and back to view
+the Create button doesn't show up when nav back*@
+
+@if (Model.Params.MemberId != null)
+{
+    <div class="well well-sm">
+        <p>
+            <h3>
+                <a href="@Url.Action("Details", "CcgMembers", new {id = Model.Params.MemberId})">
+                    @memberFullName
+                </a>
+            </h3>
+        </p>
+        <p>
+            @if (AuthHelper.IsMemberDeacon(User.Identity.Name, (int)Model.Params.MemberId))
+            {
+                @Html.Partial("_CreateButton", createButtonVM)
+                
+            }
+        </p>
+      
+    </div>
+   
+}
+
+
+<!--Search form-->
+@using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+{
+    @Html.Hidden("archive", Model.Params.Archive)
+    @Html.Hidden("memberId", Model.Params.MemberId)
+    @Html.Hidden("userId", Model.Params.UserId)
+    @Html.Hidden("getAll", Model.Params.GetAll)
+    @Html.Hidden("itemsPerPage", Model.Params.ItemsPerPage)
+    @Html.Hidden("dateRangeFilter", Model.Params.DateRangeFilter)
+
+    @Html.Partial("_SearchFieldAndButton",  
+        new SearchViewModel
+        {
+            Placeholder = "search term",
+            Value = Model.Params.Query
+        })
+}
+
+<br />
+<br />  
+
+@*filter form*@
+@using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+{
+    @*To pass back to the controller for recreating list*@
+    @Html.Hidden("memberId", Model.Params.MemberId)
+    @Html.Hidden("getAll", Model.Params.GetAll)
+    @Html.Hidden("itemsPerPage", Model.Params.ItemsPerPage)
+    @Html.Hidden("archive", Model.Params.Archive)
+    @Html.Hidden("query", Model.Params.Query)
+
+    <p>
+        @{
+            var filterRecordsGroup = new FilterRecordsGroup
+            {
+                DateRangeFilter = Model.Params.DateRangeFilter,
+                FilterCCGs = Model.Params.GetAll,
+                CCGs = Model.CCGs
+            };
+
+            @Html.Partial("_FilterRecordsGroup", filterRecordsGroup);
+        }
+    </p>
+}
+
+
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr class="info">
+                <th>
+                    <a href="@Url.Action(actionName, controllerName,
+                                new
+                                {
+                                    memberId =  Model.Params.MemberId,
+                                    getAll = Model.Params.GetAll,
+                                    itemsPerPage = Model.Params.ItemsPerPage,
+                                    archive = Model.Params.Archive,
+                                    query = Model.Params.Query,
+                                    sortOption = Model.Params.ContactsSort != ContactsSort.DateAscending
+                                            ? (int) ContactsSort.DateAscending : (int) ContactsSort.DateDescending,
+                                    dateRangeFilter = (int)Model.Params.DateRangeFilter
+                                })">
+                        @Html.DisplayNameFor(model => model.ContactRecords.First().ContactDate)
+                        @{
+                            var dateSortIcon = Model.Params.ContactsSort != ContactsSort.DateAscending ? "fa fa-sort-asc" : "fa fa-sort-desc";
+                        }
+                        <i class="@dateSortIcon"></i>
+                    </a>
+                </th>
+
+                <th class="hidden-xs">
+                    <a href="@Url.Action(actionName, controllerName, new
+                        {
+                            memberId =  Model.Params.MemberId,
+                            getAll = Model.Params.GetAll,
+                            itemsPerPage = Model.Params.ItemsPerPage,
+                            archive = Model.Params.Archive,
+                            query = Model.Params.Query,
+                            sortOption = Model.Params.ContactsSort != ContactsSort.GroupByDeacon
+                                ? (int)ContactsSort.GroupByDeacon : (int)ContactsSort.DateDescending,
+                            dateRangeFilter = (int)Model.Params.DateRangeFilter
+                        })">
+                        @Html.DisplayName("Deacon")
+                        <i class="fa fa-group"></i>
+                    </a>
+                </th>
+
+                <th class="hidden-xs">
+                    @if (Model.Params.MemberId == null)
+                    {
+                        //Group by members
+                        <a href="@Url.Action(actionName, controllerName, new
+                            {
+                                memberId =  Model.Params.MemberId,
+                                getAll = Model.Params.GetAll,
+                                itemsPerPage = Model.Params.ItemsPerPage,
+                                archive = Model.Params.Archive,
+                                query = Model.Params.Query,
+                                sortOption = Model.Params.ContactsSort != ContactsSort.GroupByMember
+                                         ? (int) ContactsSort.GroupByMember : (int) ContactsSort.DateDescending,
+                                dateRangeFilter = (int)Model.Params.DateRangeFilter
+                            })">
+                            @Html.DisplayNameFor(model => model.ContactRecords.First().MemberFullName)
+                            <i class="fa fa-group"></i>
+                        </a>
+                    }
+                    else // Records are for only one member so no need to group by member
+                    {
+                        @Html.DisplayNameFor(model => model.ContactRecords.First().MemberFullName)
+                    }
+
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactRecords.First().Subject)
+                </th>
+                <th class="hidden-xs hidden-sm">
+                    @Html.DisplayNameFor(model => model.ContactRecords.First().Comments)
+                </th>
+                <th class="hidden-xs">
+                    @*Sort by contact type*@
+                    <a href="@Url.Action(actionName, controllerName, new
+                        {
+                            memberId =  Model.Params.MemberId,
+                            getAll = Model.Params.GetAll,
+                            itemsPerPage = Model.Params.ItemsPerPage,
+                            archive = Model.Params.Archive,
+                            query = Model.Params.Query,
+                            sortOption = Model.Params.ContactsSort != ContactsSort.GroupByContactType
+                                        ? (int) ContactsSort.GroupByContactType : (int) ContactsSort.DateDescending,
+                            dateRangeFilter = (int)Model.Params.DateRangeFilter
+                        })">
+                        @Html.DisplayNameFor(model => model.ContactRecords.First().ContactType)
+                        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                    </a>
+
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model.ContactRecords)
+        {
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactDate)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.DeaconFullName)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.MemberFullName)
+                </td>
+                <td>  
+                    @{ 
+                        item.Subject = WebUtility.HtmlDecode(item.Subject);
+                    }
+                     @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td class="hidden-xs hidden-sm">  
+                    @{ 
+                        item.Comments = WebUtility.HtmlDecode(item.Comments);
+                    }
+                    @Html.DisplayFor(modelItem => item.Comments)                  
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.ContactType.Name)
+                </td>
+                <td class="dropdownlist">
+                    <div class="dropdown">
+                        @Html.Partial("_DropdownMenuToggleButton")
+
+                        <ul class="dropdown-menu pull-right">
+                            <li>@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+                            @if (Model.Params.UserId == item.AppUserId)
+                            {
+                                string archiveRestoreText = !Model.Params.Archive ? "Send to Archive" : "Restore";
+
+                                <li>@Html.ActionLink(archiveRestoreText, "ArchiveOrRestoreContact", new { id = item.Id, archive = !Model.Params.Archive, dateRangeFilter = (int)Model.Params.DateRangeFilter })</li>
+                                <li>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+                                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                            }
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <!--Pagination-->
+    @if (Model != null && Model.ContactRecords.PageCount > 0)
+    {
+        <div>
+            Page @(Model.ContactRecords.PageCount < Model.ContactRecords.PageNumber ? 0 : Model.ContactRecords.PageNumber)
+            of @Model.ContactRecords.PageCount
+        </div>
+        <br/>
+
+        if (Request?.Url != null)
+        {
+            var itemsPerPageSelect = new ItemsPerPageSelect
+            {
+                AbsPath = Request?.Url?.AbsolutePath,
+                QueryStrings = HttpUtility.ParseQueryString(Request.Url.Query),
+                ListAllOption = false,
+            };
+
+            @Html.Partial("_ItemsPerPage", itemsPerPageSelect)
+        }
+
+
+        <div>
+           @Html.PagedListPager(Model.ContactRecords, page => Url.Action("Index", new
+           {
+               page,
+               memberId = Model.Params.MemberId,
+               itemsPerPage = Model.Params.ItemsPerPage,
+               getAll = Model.Params.GetAll,
+               sortOption = (int)Model.Params.ContactsSort,
+               query = Model.Params.Query,
+               dateRangeFilter = (int)Model.Params.DateRangeFilter
+           }))
+         </div>
+    }
+
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/App/InitBootstrapTooltipAndPopover.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+}

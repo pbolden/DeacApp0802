@@ -1,0 +1,179 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.ViewModels
+@using PagedList.Mvc
+
+@model ListCcgAppUsersViewModel
+
+
+@{
+    ViewBag.Title = "CCG Deacon Management App Users";
+    var actionName = "Index";
+    var controllerName = "CcgAppUsers";
+    int? filterOption = (int)Model.AppUserFilter;
+
+    // random number is appened to img src url to force browser to reload
+    int randomNumber = new Random().Next(100000);
+    var createButtonVM = new CreateButtonViewModel
+    {
+        ControllerName = controllerName,
+    };
+}
+
+@Html.Partial("_Breadcrumbs", "App Users")
+
+<h2>CCG Management App Users</h2>
+
+<p>
+    @Html.Partial("_CreateButton", createButtonVM)
+</p>
+
+
+<!--Search form-->
+@using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+{
+    @Html.Hidden("page", Model.Params.Page)
+    @Html.Hidden("itemsPerPage", Model.Params.ItemsPerPage)
+
+    @Html.Partial("_SearchFieldAndButton",
+                    new SearchViewModel
+                    {
+                        Placeholder = "type user's name",
+                        Value = Model.Params.Query
+                    })
+}<!-- / Search form-->
+<!--Filter form-->
+@using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+{
+    <p>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="well input-group" style="padding: .7em; margin-bottom: 1em; margin-top: 0; margin-left: -1em; margin-bottom: .5em">
+                        @Html.EnumDropDownListFor(m => m.AppUserFilter,
+                            new { name = "appUserFilter" })
+
+                        <button type="submit" class="btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-filter"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p>
+}<!-- / Filter form-->
+
+<table class="table table-condensed table-hover">
+    <thead>
+    <tr class="info">
+        <th class="hidden-xs"></th>
+        <th>
+            @Html.DisplayNameFor(model => model.AppUsers.First().FullName)
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.AppUsers.First().SharePointEmail)
+        </th>
+        <th class="hidden-xs hidden-sm">
+            @Html.DisplayNameFor(model => model.AppUsers.First().EmailAddress)
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.AppUsers.First().PhoneNumber)
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.AppUsers.First().CellNumber)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    @foreach (var item in Model.AppUsers)
+    {
+
+        @*Set image source for user's photo.*@
+        if (item.HasPhoto)
+        {
+            item.ImageSrc = item.ImageSrc;
+        }
+        else /*Otherwise use default image.*/
+        {
+            item.ImageSrc = ViewHelper.NoPhotoImgPath;
+        }
+
+
+        <tr>
+            <!--Thumbnail photo goes here-->
+            <td>
+                <a href="@Url.Action("Edit", "MemberPhoto", new {userId = item.Id})">
+                    <img class="img-thumbnail thumbnailPhoto" width="80" height="80" alt="@item.FullName"
+                         src="@item.ImageSrc" />
+                </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td class="hidden-xs">
+                @Html.DisplayFor(modelItem => item.SharePointEmail)
+            </td>
+            <td class="hidden-xs hidden-sm">
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td class="hidden-xs">
+                <a href="@item.HrefPhoneNumberLink">@item.PhoneNumber</a>
+            </td>
+
+            <td class="hidden-xs">
+                <a href="@item.HrefCellNumberLink">@item.CellNumber</a>
+            </td>
+            <td>
+                <div class="dropdown">
+                    @Html.Partial("_DropdownMenuToggleButton")
+                    <ul class="dropdown-menu pull-right">
+                        <li>@Html.ActionLink("Details", "Details", new {id = item.Id})</li>
+                        <li>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</li>
+                        <li>@Html.ActionLink("Photo", "Edit", "MemberPhoto", new { userId = item.Id }, null)</li>
+                        <li>@Html.ActionLink("Delete", "Delete", new {id = item.Id})</li>
+                    </ul>
+                </div>
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!--Pagination-->
+@if (Model != null && Model.AppUsers.PageCount > 0)
+{
+    <div>
+        Page @(Model.AppUsers.PageCount < Model.AppUsers.PageNumber ? 0 : Model.AppUsers.PageNumber)
+        of @Model.AppUsers.PageCount
+    </div>
+    <br />
+    if (Request?.Url != null)
+    {
+        var itemsPerPageSelect = new ItemsPerPageSelect
+        {
+            AbsPath = Request?.Url?.AbsolutePath,
+            QueryStrings = HttpUtility.ParseQueryString(Request.Url.Query),
+            ListAllOption = true,
+            ListAllText = "All App Users"
+        };
+        @Html.Partial("_ItemsPerPage", itemsPerPageSelect)
+    }
+
+
+        <div>
+            @Html.PagedListPager(Model.AppUsers, page => Url.Action("Index",
+           new
+           {
+               query = Model.Params.Query,
+               page,
+               itemsPerPage = Model.Params.ItemsPerPage,
+               AppUserFilter = filterOption,
+           }), PagedListRenderOptions.Classic)
+        </div>
+
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/InitiBootstrapTooltipAndPopover.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+}

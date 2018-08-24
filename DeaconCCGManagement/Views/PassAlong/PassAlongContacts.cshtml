@@ -1,0 +1,250 @@
+﻿@using DeaconCCGManagement.enums
+@using PagedList.Mvc
+@using DeaconCCGManagement.ViewModels
+@model PassAlongContactRecordViewModel
+
+@{
+    ViewBag.Title = "Pass Along Contacts";
+    string headerText = "Pass Along Contacts";
+    if (Model.Params.Archive)
+    {
+        headerText = $"{"Archived"} {headerText}";
+    }
+    string actionName = "PassAlongContacts";
+    string controllerName = "PassAlong";
+}
+
+@Html.Partial("_Breadcrumbs", "Pass Along Contacts")
+
+<div class="container">
+    <div class="row">
+        @using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+        {
+            // isArchive is false by default
+
+            string btnClass = Model.Params.Archive ? "fa fa-inbox" : "fa fa-archive";
+            string btnText = Model.Params.Archive ? "Inbox" : "Archive";
+
+            // Html helper doesn't update value for some quirky reason
+            string isArchiveToggleStr = Model.Params.Archive ? "false" : "true";
+            <input name="archive" type="hidden" value="@isArchiveToggleStr" />
+
+            <div class="col-xs-offset-6">
+                <div class="pull-right" style="padding-right: 30px">
+                    <button type="submit" class="btn btn-default">
+                        <span class="@btnClass"></span> @btnText
+                    </button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+        <h2>@headerText (@Model.ContactRecords.TotalItemCount)</h2>
+        <p>
+            Not Followed Up: @ViewBag.NotFollowedUpCount
+        </p>
+
+        <!--Search form-->
+        @using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+        {
+            @Html.Hidden("archive", Model.Params.Archive)
+            @Html.Hidden("listAll", Model.Params.ListAll)
+            @Html.Hidden("itemsPerPage", Model.Params.ItemsPerPage)
+
+            @Html.Partial("_SearchFieldAndButton",
+                    new SearchViewModel
+                    {
+                        Placeholder = "search term",
+                        Value = Model.Params.Query
+                    })
+        }<!-- / Search form-->
+
+        <br />
+        <br />
+
+        <table id="table" class="table table-condensed table-hover">
+            <tr class="info">
+                <th>
+                    <a href="@Url.Action(actionName, controllerName,
+                                new
+                                {
+                                    listAll = Model.Params.ListAll,
+                                    itemsPerPage = Model.Params.ItemsPerPage,
+                                    archive = Model.Params.Archive,
+                                    query = Model.Params.Query,
+                                    sortOption = Model.Params.ContactsSort != ContactsSort.DateAscending
+                                            ? (int) ContactsSort.DateAscending : (int) ContactsSort.DateDescending
+                                })">
+                        @Html.DisplayNameFor(model => model.ContactRecords.First().ContactDate)
+                        @{
+                            var dateSortIcon = Model.Params.ContactsSort != ContactsSort.DateAscending ? "fa fa-sort-asc" : "fa fa-sort-desc";
+                        }
+                        <i class="@dateSortIcon"></i>
+                    </a>
+                </th>
+
+                <th class="hidden-xs">
+                    <a href="@Url.Action(actionName, controllerName, new
+                        {
+                            listAll = Model.Params.ListAll,
+                            itemsPerPage = Model.Params.ItemsPerPage,
+                            archive = Model.Params.Archive,
+                            query = Model.Params.Query,
+                            sortOption = Model.Params.ContactsSort != ContactsSort.GroupByDeacon
+                                ? (int)ContactsSort.GroupByDeacon : (int)ContactsSort.DateDescending
+                        })">
+                        @Html.DisplayName("Deacon")
+                        <i class="fa fa-group"></i>
+                    </a>
+                </th>
+                <th class="hidden-xs">
+                    <a href="@Url.Action(actionName, controllerName, new
+                     {
+                        listAll = Model.Params.ListAll,
+                        itemsPerPage = Model.Params.ItemsPerPage,
+                        archive = Model.Params.Archive,
+                        query = Model.Params.Query,
+                        sortOption = Model.Params.ContactsSort != ContactsSort.GroupByMember
+                             ? (int) ContactsSort.GroupByMember : (int) ContactsSort.DateDescending
+                     })">
+                        @Html.DisplayNameFor(model => model.ContactRecords.First().MemberFullName)
+                        <i class="fa fa-group"></i>
+                    </a>
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.ContactRecords.First().PassAlongComments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactRecords.First().Subject)
+                </th>
+                <th class="hidden-xs">
+                    @Html.DisplayNameFor(model => model.ContactRecords.First().Comments)
+                </th>
+                <th class="hidden-xs">
+                    @*Sort by contact type*@
+                    <a href="@Url.Action(actionName, controllerName, new
+                        {
+                            listAll = Model.Params.ListAll,
+                            itemsPerPage = Model.Params.ItemsPerPage,
+                            archive = Model.Params.Archive,
+                            query = Model.Params.Query,
+                            sortOption = Model.Params.ContactsSort != ContactsSort.GroupByContactType
+                                        ? (int) ContactsSort.GroupByContactType : (int) ContactsSort.DateDescending
+                        })">
+                        @Html.DisplayNameFor(model => model.ContactRecords.First().ContactType.Name)
+                        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+                    </a>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.ContactRecords)
+            {
+                @*Used by JS script to determine which records have been followed up.
+                    Followed up records will be highlighted.*@
+            if (!string.IsNullOrEmpty(item.PassAlongFollowUpComments))
+            {
+                @Html.Hidden("followedUp", item.Id)
+            }
+
+            <tr id="@item.Id">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactDate)
+                </td>
+                <td class="hidden-xs">
+                    @Html.ActionLink(@item.DeaconFullName, "Details", "CcgAppUsers", new { id = item.AppUserId }, null)
+                </td>
+                <td class="hidden-xs">
+                    @Html.ActionLink(@item.MemberFullName, "Details", "CcgMembers", new { id = item.CCGMemberId }, null)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.PassAlongComments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td class="hidden-xs">
+                    @Html.DisplayFor(modelItem => item.ContactType.Name)
+                </td>
+
+                <td>
+                    <div class="dropdown">
+
+                        @Html.Partial("_DropdownMenuToggleButton")
+
+                        <ul class="dropdown-menu pull-right">
+
+                            <li>@Html.ActionLink("Details", "Details", "ContactRecords", new { id = item.Id, keepPrivate = true }, null)</li>
+                            <li>@Html.ActionLink("Follow Up", "FollowUp", "PassAlong", new { id = item.Id }, null)</li>
+                            @{
+                                string archiveRestoreText = !Model.Params.Archive ? "Send to Archive" : "Restore";
+                            }
+
+                            <li>@Html.ActionLink(@archiveRestoreText, "ArchiveOrRestoreContact", "PassAlong", new { id = item.Id, archive = !Model.Params.Archive }, null)</li>
+
+                            <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id, isFromArchive = Model.Params.Archive })</li>
+                        </ul>
+                    </div>
+                </td>
+
+            </tr>
+                                }
+
+        </table>
+
+        <!--Pagination-->
+        @if (Model != null && Model.ContactRecords.PageCount > 0)
+        {
+
+            <div>
+                Page @(Model.ContactRecords.PageCount < Model.ContactRecords.PageNumber ? 0 : Model.ContactRecords.PageNumber)
+                of @Model.ContactRecords.PageCount
+            </div>
+            <br />
+            if (Request?.Url != null)
+            {
+                var itemsPerPageSelect = new ItemsPerPageSelect
+                {
+                    AbsPath = Request?.Url?.AbsolutePath,
+                    QueryStrings = HttpUtility.ParseQueryString(Request.Url.Query),
+                    ListAllOption = false,
+                };
+
+                @Html.Partial("_ItemsPerPage", itemsPerPageSelect)
+            }
+
+            <div>
+                @Html.PagedListPager(Model.ContactRecords, page => Url.Action("PassAlongContacts",
+        new
+        {
+            query = @ViewBag.Query,
+            page,
+            itemsPerPage = @Model.Params.ItemsPerPage,
+            isArchive = @Model.Params.Archive,
+        }))
+            </div>
+        }
+
+
+        @*<input id="btnTest" type="button" value="test" />*@
+
+        @section Scripts{
+            @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+
+            <!--hightlight rows where records have been followed up-->
+            <script type="text/javascript">
+                var hiddenInputs = document.getElementsByName("followedUp");
+                hiddenInputs = $.makeArray(hiddenInputs);
+
+                for (var i = 0; i < hiddenInputs.length; i++) {
+                    var hiddenInput = hiddenInputs[i];
+                    var id = hiddenInput.getAttribute("value");
+                    $("#" + id).addClass("highlight-row");
+                }
+            </script>
+        }

@@ -1,0 +1,39 @@
+﻿@model DeaconCCGManagement.ViewModels.TestAutoMapper.PersonViewModel
+
+@{
+    ViewBag.Title = "TestAutoMapper";
+}
+
+<h2>TestAutoMapper</h2>
+
+<div>
+    <h4>PersonViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <p>Pets:</p>
+    @foreach (var pet in Model.PetNames)
+    {
+        <ul>
+            <li>Animal Type: @pet.AnimalType</li>
+            <li>Name: @pet.Name</li>
+        </ul>
+        <br/>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Home", "Index", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

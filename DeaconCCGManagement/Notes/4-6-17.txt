@@ -1,0 +1,7 @@
+﻿// Returns the web server path
+string root = HttpContext.Current.Server.MapPath(_folderName);
+
+// Provides data stream for a file on the web server
+var provider = new MultipartFormDataStreamProvider(root);
+
+mvcaction4 - code snippet for an action method

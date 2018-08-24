@@ -1,0 +1,70 @@
+﻿@model DeaconCCGManagement.ViewModels.NeedsCommunionViewModel
+
+@{
+    ViewBag.Title = "CCG Member Needs Communion?";
+}
+
+@Html.Partial("_Breadcrumbs", "Needs Communion?")
+
+<h2>@Model.FirstName @Model.LastName Needs Communion?</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Communion Request</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(Model => Model.MemberId)
+
+        @Html.HiddenFor(model => model.ReturnUrl)
+
+        @if (Model.LastSelected != null)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastSelected, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DisplayFor(model => model.LastSelected, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastSelected, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        }
+
+        @if (Model.SelectionAllowed)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.NeedsCommunion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.NeedsCommunion)
+                        @Html.ValidationMessageFor(model => model.NeedsCommunion, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <p>@Model.FirstName @Model.LastName has already been selected for communion today.</p>
+            </div>
+        }
+      
+    </div>
+}
+
+
+@Html.Partial("_BackToListLink")
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+}

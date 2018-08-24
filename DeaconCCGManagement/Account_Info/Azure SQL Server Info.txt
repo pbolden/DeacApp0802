@@ -1,0 +1,8 @@
+﻿
+
+SQL server: deaconappmanagemenettest
+username: HelloWorldAdmin
+password: hell0w0rld!
+
+conn string:
+Server=tcp:deaconappmanagementtest.database.windows.net,1433;Initial Catalog=CCGManagementDB;Persist Security Info=False;User ID=HelloWorldAdmin;Password=hell0w0rld!;MultipleActiveResultSets=True;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;

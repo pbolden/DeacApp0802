@@ -1,0 +1,149 @@
+﻿@using DeaconCCGManagement.enums
+@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@using Microsoft.AspNet.Identity.EntityFramework
+@model DetailsCcgAppUserViewModel
+
+@{
+    ViewBag.Title = "App User Details";
+    string imageSrc = string.Empty;
+
+    // random number is appened to img src url to force browser to reload
+    var randomizer = new Random();
+    int randomNumber = randomizer.Next(1000000);
+}
+@*Set image source for member's photo.
+    If member has image, use that.*@
+@if (Model.HasPhoto)
+{
+    imageSrc = Model.ImageSrc;
+}
+else /*Otherwise use default image.*/
+{
+    imageSrc = ViewHelper.NoPhotoImgPath;
+}
+
+
+@Html.Partial("_Breadcrumbs", "App User Details")
+
+<h2>Details<small>&nbsp;for @Model.FirstName @Model.LastName</small></h2>
+
+<div class="well well-md">
+
+    <dl class="dl-horizontal">
+        <dt>
+            <input id="reload" class="btn btn-link small" value="Refresh" />
+        </dt>
+        <dd>
+
+        </dd>
+
+        <dt>
+
+        </dt>
+
+        <dd>
+            <a href="@Url.Action("Edit", "MemberPhoto", new {userId = Model.Id})">
+                <img class="img-rounded" width="150" height="150" alt="@Model.FullName"
+                     src="@imageSrc" />
+            </a>
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SharePointEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SharePointEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            <a href="@Model.HrefPhoneNumberLink">@Model.PhoneNumber</a>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CellNumber)
+        </dt>
+
+        <dd>
+            <a href="@Model.HrefCellNumberLink">@Model.CellNumber</a>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChangeRequestManager)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChangeRequestManager)
+        </dd>
+
+        <dt>
+            Roles
+        </dt>
+
+        <dd>
+            <ul class="list-group-item" style="background-color: whitesmoke">
+                @foreach (string role in ViewBag.Roles)
+                {
+                    <li>
+                        @Html.DisplayName(role)
+                    </li>
+                }
+            </ul>
+        </dd>
+
+    </dl>
+</div>
+
+<p>
+    @if (AuthHelper.IsInRole(User.Identity.Name, AppUserRole.Admin) ||
+                 AuthHelper.IsInRole(User.Identity.Name, AppUserRole.DeaconLeadership))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    }
+</p>
+
+@Html.Partial("_BackToListLink")
+    
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+
+    <script type="text/javascript">
+        $(function () {
+                var reloadPage = function () {
+                    window.location.reload();
+                };
+
+                $("#reload").on("click", reloadPage);
+            });
+    </script>
+}

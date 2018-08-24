@@ -1,0 +1,110 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@model PrayerRequestViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+@{ 
+    Model.PassAlongComments = WebUtility.HtmlDecode(Model.PassAlongComments);
+    Model.PassAlongFollowUpComments = WebUtility.HtmlDecode(Model.PassAlongFollowUpComments);
+ }
+
+@section styles {
+  @Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+    @Styles.Render("~/Content/prayRequest.css")
+}
+
+@Html.Partial("_Breadcrumbs", "Edit Prayer Requests")
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="well well-md">
+        <div class="form-horizontal">
+            <h4>Edit Prayer Request</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(m => Model.CCGMemberId)
+            @Html.HiddenFor(model => model.ReturnUrl)
+
+            @Html.DisplayFor(m => m.MemberFullName)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2" style="padding: 0 0 0 15px">
+                    <div class="input-group date datepicker">
+                        <span class="input-group-addon addOn" style="width: 150px">
+                            @Html.EditorFor(model => model.ContactDate, new { htmlAttributes = new { @class = "form-control dateMask" } })
+
+                            <button class="btn btn-default calendar" type="button">
+                                <span class="fa fa-calendar"></span>
+                            </button>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.ContactDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MemberFullName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MemberFullName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MemberFullName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Subject, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Subject, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Private)
+                        @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+   @Html.Partial("_BackToListLink")
+
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/moment.min.js")
+    @Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+    @Scripts.Render("~/Scripts/App/DatePicker.js")
+    @Scripts.Render("~/Scripts/jquery.maskedinput.js")
+    @Scripts.Render("~/Scripts/App/DateMask.js")
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+}
+

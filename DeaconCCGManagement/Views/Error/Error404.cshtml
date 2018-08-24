@@ -1,0 +1,21 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+}
+
+@Html.Partial("_Breadcrumbs", "Error")
+
+
+<div class="alert alert-danger">
+    <p>
+        404 - File Not Found Error 
+    </p>
+    <p>
+        Unfortunately, this page does not exists. Please check the URL or return to the
+        <a href="@Url.Action("Index", "Home")">home page</a>.
+    </p>
+   
+</div>
+
+

@@ -1,0 +1,132 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@model DeaconCCGManagement.ViewModels.PrayerRequestViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section styles {
+    @Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+    @Styles.Render("~/Content/prayRequest.css")
+}
+
+@Html.Partial("_Breadcrumbs", "Create Prayer Request")
+
+<h2>New Prayer Request<small>&nbsp;for @Model.MemberFullName</small></h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => Model.CCGMemberId)
+    @Html.HiddenFor(model => model.ReturnUrl)
+
+    <div class="well well-md">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="input-group date datepicker">
+                    <div class="col-md-9 col-xs-7" style="padding: 0 0 0 15px">
+                        <span class="input-group-addon addOn" style="width: 150px">
+                            @Html.EditorFor(model => model.ContactDate, new { htmlAttributes = new { @class = "form-control dateMask" } })
+
+                            <button class="btn btn-default calendar" type="button">
+                                <span class="fa fa-calendar"></span>
+                            </button>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ContactDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Prayer Request", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control", id = "prayerRequest" } })
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group visible-md visible-lg">
+                @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-md-3", @style = "margin-left: -4em" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Private)
+                        @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group visible-sm">
+                @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-sm-3", @style = "margin-left: -1.35em" })
+                <div class="col-sm-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Private)
+                        @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group visible-xs">
+                @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-xs-10" })
+                <div class="checkboxPray">
+                    <div class="checkbox col-xs-2 col-sm-4">
+                        @Html.EditorFor(model => model.Private)
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+            </div>
+
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Private)
+                            @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+    @Html.Partial("_BackToListLink")
+
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/moment.min.js")
+    @Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+    @Scripts.Render("~/Scripts/App/DatePicker.js")
+    @Scripts.Render("~/Scripts/jquery.maskedinput.js")
+    @Scripts.Render("~/Scripts/App/DateMask.js")
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+
+    <script type="text/javascript">
+        $(function () {
+            $('#prayerRequest').focus();
+        });
+    </script>
+}
+

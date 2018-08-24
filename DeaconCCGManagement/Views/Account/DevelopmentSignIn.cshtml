@@ -1,0 +1,98 @@
+﻿@*Sign-in view for off-line development only.*@
+@using DeaconCCGManagement.Helpers
+@model DeaconCCGManagement.ViewModels.DevelopmentSignInViewModel
+
+
+@*@{ var ajaxOptions = new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "userroles"
+        };
+    }*@
+
+@{
+    ViewBag.Title = "Development Sign-in with no Internet";
+}
+
+
+
+<br />
+<br />
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+
+<!--Filter by role form-->
+
+@using (Html.BeginForm("FilterUsers", "Auth", null, FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="col-xs-12">
+            @Html.EnumDropDownListFor(r => r.FilterAppUserRole, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="padding-top-10 col-xs-12">
+            @Html.Submit("Filter")
+        </div>
+    </div>
+}
+
+
+<!--Sign-in form-->
+
+@using (Html.BeginForm("DevelopmentSignIn", "Auth", null, FormMethod.Post, new { id = "signinform" }))
+{
+    <div class="form-group col-xs-12">
+        @Html.LabelFor(model => model.Email, "App Users", htmlAttributes: new { @class = "control-label col-xs-12" })
+        <div class="row">
+            <div class="col-xs-12">
+                @Html.DropDownListFor(u => u.Email, ViewBag.AppUsers as SelectList, htmlAttributes: new { @class = "form-control", id = "selectEmail" })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="padding-top-10 col-xs-12">
+                @Html.Submit("Sign-in")
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+
+<div id="userroles">
+    <img src="~/Content/Images/loader.white.gif" id="loaderImg" alt="Loading" style="display: none" />
+</div>
+
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        //
+        //This uses Ajax to pass the selected email to an action method; returns
+        //user's roles and displays them.
+        //
+
+
+        // Gets the selected email in the dropdownlist and passes email to action
+        // method using the AJAX wrapper method 'post'
+        function getEmailAndEchoUserRoles() {
+            $.post('@Url.Action("UserRoles", "Auth")',
+                { email: $("#selectEmail").val() })
+                .done(function (data) {
+                    setTimeout(function () { $("#userroles").html(data); }, 1000);
+                });
+        };
+
+        $(function () {
+            $("#loaderImg").show();
+            getEmailAndEchoUserRoles();
+            $("#selectEmail").change(function () {
+                getEmailAndEchoUserRoles();
+
+            });
+        });
+
+    </script>
+}
+

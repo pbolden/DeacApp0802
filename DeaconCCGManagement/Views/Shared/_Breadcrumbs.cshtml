@@ -1,0 +1,10 @@
+﻿@model string
+    
+<!--Breadcrumbs-->
+<div id="breadcrumb_link_text" hidden="hidden">@Model</div>
+
+@if (!@Model.Equals("Home"))
+{
+    <ol id="breadcrumbs" class="breadcrumb"></ol>
+}
+<!-- / Breadcrumbs-->

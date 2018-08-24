@@ -1,0 +1,18 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+
+@{
+    ViewBag.Title = "Delete Permission Denied";
+}
+
+@Html.Partial("_Breadcrumbs", "Delete Record Denied")
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-warning">
+    <p>
+        Sorry, only the deacon who made this contact
+        record or and administrator is allowed to delete it.
+    </p>
+</div>
+

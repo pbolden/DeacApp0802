@@ -1,0 +1,24 @@
+﻿Deacon App Questions
+
+1. When a deacon submits a prayer request, should this prayer request
+	be visible to everyone, including other deacons?
+
+2. When a deacon checks 'pass along' when submitting a contact record,
+	this should make it visible to only the pastor, correct?
+
+3. What do we want in the Summary Reports? I haven't started on this yet.
+	Please give me a list of what we want in the report.
+
+3. Deacon Announcements is another section that is incomplete.
+	Do we just want to use texts and notifications for 
+	the deacon announcements instead of making this another section. 
+	If not, then what do we want in this section? Maybe we could have
+	a section in the admin panel that would blast a text message and notification
+	to all deacons.
+
+4. Where should users get push notifications?
+	Here are the places I have set up so far:
+		* prayer request (everyone gets one after a prayer request is submitted)
+		* pass along contact (one goes to the pastor only)
+		* member's birthday/wedding anniversary/join Zion anniversary
+		* change request (one goes to change request manager(s))

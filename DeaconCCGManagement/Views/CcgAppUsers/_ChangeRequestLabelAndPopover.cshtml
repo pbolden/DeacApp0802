@@ -1,0 +1,23 @@
+﻿
+@{
+    string crManagerPopoverText = "If checked, this user will receive change " +
+                                  "requests from deacons to update a member's " +
+                                  "information in the central database.";
+}
+
+<a href="#" role="button" tabindex="-1" animation="true"
+   data-toggle="popover" data-trigger="focus"
+   placement="auto right"
+   title="@crManagerPopoverText">
+    <span class="glyphicon glyphicon-question-sign"
+          aria-hidden="true"></span>
+</a>
+
+@*shorter label for 'change request manager' on phones*@
+@*hidden xs*@
+@Html.Label("Change Request Manager", new { @class = "hidden-xs" })
+
+@*hidden sm md lg xl*@
+<label class="hidden-sm hidden-md hidden-lg hidden-xl">
+    <abbr title="Change Request">CR</abbr> Manager
+</label>

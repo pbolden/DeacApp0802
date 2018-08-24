@@ -1,0 +1,56 @@
+﻿@using DeaconCCGManagement.ViewModels
+@model IEnumerable<CCGViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    string controllerName = "CCG";
+
+    var createButtonVM = new CreateButtonViewModel
+    {
+        ControllerName = controllerName,
+    };
+}
+
+@Html.Partial("_Breadcrumbs", "CCGs")
+
+<h2>CCGs</h2>
+
+<p>
+    @Html.Partial("_CreateButton", createButtonVM)
+</p>
+
+<table class="table">
+    <tr class="info">
+        <th>
+            @Html.DisplayNameFor(model => model.CCGName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CCGName)
+        </td>
+        <td>
+
+            <div class="dropdown">
+               @Html.Partial("_DropdownMenuToggleButton")
+
+                <ul class="dropdown-menu pull-right">
+                    <li>@Html.ActionLink("Deacons", "Index", "CcgAppUsers", new { ccgId = item.Id }, null)</li>
+                    <li>@Html.ActionLink("Members", "Index", "CcgMembers", new { ccgId = item.Id }, null)</li>
+                    <li>@Html.ActionLink("Edit", "Edit", new {id = item.Id })</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new {id = item.Id })</li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+}

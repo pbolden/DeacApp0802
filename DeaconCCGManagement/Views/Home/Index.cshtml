@@ -1,0 +1,317 @@
+﻿
+@using DeaconCCGManagement.enums
+@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.ViewModels
+@{
+    ViewBag.Title = "Zion Missionary Baptist Church CCG Deacons Application";
+
+    bool getAll = false;
+
+    // Store panels. HashSet to avoid duplication
+    var panels = new HashSet<DescriptionWithLinkPanel>();
+
+    // Pastor should get all members and contact records
+    if (AuthHelper.IsInRole(User.Identity.Name, AppUserRole.Pastor))
+    {
+        getAll = true;
+    }
+}
+
+@section styles{
+    @Styles.Render("~/Content/home-landing.css")
+}
+
+@Html.Partial("_Breadcrumbs", "Home")
+
+
+<div class="row hidden-xs">
+    <div class="landing-base" align="center">
+        <hr>
+        <h1>
+            Zion Missionary Baptist Church<br />
+            <strong>
+                <abbr title="Congregational Care Group">CCG</abbr>
+                Management Portal
+            </strong>
+        </h1>
+        <hr>
+        <img src="~/Content/Images/ZionLogoB.png" alt="Zion Missionary Baptist Church">
+        <p>The CCG Management Portal is a tool to assist deacons</p>
+        <p>in managing their Congregational Care Groups.</p>
+        <p>GREAT things are happening at Zion!</p>
+        <p> "...Where the people had a mind to work."</p>
+        <p>
+            <a class="btn btn-secondary zion-link" target="_blank" href="http://zionmbc.org">Check us out! <span class="fa fa-chevron-circle-right"></span></a>
+        </p>
+    </div>
+</div>
+
+
+
+@*Declare panel objects*@
+@{
+
+    string title = "CCG Members";
+    string description = "See the current listing of your CCG members. From here you can also place calls, edit members un fr et dol";
+    string href = Url.Action("Index", "CcgMembers", new { getAll = getAll });
+    string glyph = "";
+    string imageSrc = "/Content/Images/MembersIconGrayscale.svg";
+
+    var panelCCGMembers = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "Admin Console";
+    description = "Administrator console. Duis aute irure dolor in reprehenderit in voluptate velit esse";
+    href = Url.Action("Index", "Admin");
+    glyph = "";
+    imageSrc = "/Content/Images/Admin-Settings.svg";
+
+    var panelAdminConsole = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "Calendar";
+    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod";
+    href = Url.Action("Index", "Calendar", new { getAll = getAll });
+    glyph = "";
+    imageSrc = "/Content/Images/ccg-calendar.svg";
+
+    var panelCalendar = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+
+    title = "CCG Summary Report";
+    description = "View a summary report for your CCG, including contact frequency, member comments, and other items.";
+    href = "http://go.microsoft.com/fwlink/?LinkId=301866";
+    glyph = "";
+    imageSrc = "/Content/Images/ccg-summary.svg";
+
+    var panelSummaryReport = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "Change Requests";
+    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod";
+    href = Url.Action("Index", "ChangeRequests");
+    glyph = "";
+    imageSrc = "/Content/Images/change-request.svg";
+
+    var panelChangeRequests = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "Church Announcements";
+    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod";
+    href = "http://zionmbc.org";
+    glyph = "";
+    imageSrc = "/Content/Images/ccg-bullhorn.svg";
+
+    var panelChruchAnnouncements = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "CCG Contact Records";
+    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod";
+    href = Url.Action("Index", "ContactRecords", new { getAll = getAll });
+    glyph = "";
+    imageSrc = "/Content/Images/contact-records.svg";
+
+    var panelContactRecords = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "Deacon  Announcements";
+    description = "View any announcements available for ZMBC Deacons on this page. Great for Deacon networking and other.";
+    href = Url.Action("Index", "DeaconAnnouncement");
+    glyph = "";
+    imageSrc = "/Content/Images/ccg-bullhorn.svg";
+
+    var panelDeaconsAnnouncements = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "Contacts for Review";
+    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod";
+    href = Url.Action("PassAlongContacts", "PassAlong");
+    glyph = "";
+    imageSrc = "/Content/Images/ReviewGray.svg";
+
+    var panelContactsForReview = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+    title = "Prayer Requests";
+    description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod";
+    href = Url.Action("Index", "PrayerRequest", new { getAll = true });
+    glyph = "";
+    imageSrc = "/Content/Images/ccg-pray.svg";
+
+    var panelPrayerRequests = new DescriptionWithLinkPanel
+    {
+        Title = new HtmlString(title),
+        Description = new HtmlString(description),
+        href = new HtmlString(href),
+        Glyph = new HtmlString(glyph),
+        ImageSrc = new HtmlString(imageSrc)
+    };
+
+
+
+}
+@* / Declare panel objects*@
+
+
+
+@*Add panel objects to hashset*@
+@if (Request.IsAuthenticated)
+{
+    @*For Deacons only*@
+    if (AuthHelper.IsInRole(User.Identity.Name, AppUserRole.Deacon))
+    {
+        panels.Add(panelCCGMembers);
+        panels.Add(panelContactRecords);
+        panels.Add(panelSummaryReport);
+        panels.Add(panelCalendar);
+    }
+
+    @*Change request manager only*@
+    if (AuthHelper.IsChangeRequestManager(User.Identity.Name))
+    {
+        panels.Add(panelChangeRequests);
+    }
+
+    @*Prayer requests are for all users*@
+    panels.Add(panelPrayerRequests);
+
+    @*For admin or leadership only*@
+    if (AuthHelper.HasAdminAccess(User.Identity.Name))
+    {
+        panels.Add(panelAdminConsole);
+    }
+
+    @*For pastors and deacon leadership only*@
+    if (AuthHelper.IsInRole(User.Identity.Name, AppUserRole.Pastor)
+        || AuthHelper.IsInRole(User.Identity.Name, AppUserRole.DeaconLeadership))
+    {
+        panels.Add(panelContactsForReview);
+        panels.Add(panelCCGMembers);
+        panels.Add(panelContactRecords);
+        panels.Add(panelCalendar);
+        panels.Add(panelDeaconsAnnouncements);
+    }
+    
+
+    @*Available to all users*@
+    panels.Add(panelChruchAnnouncements);
+}
+@* / Add panel objects to hashset*@
+
+
+<!--Display only icon and title for mobile views-->
+<div class="visible-xs">
+    <div class="container-fluid">
+        <div class="row" style="margin-top: 30px">
+            <div class="col-xs-12" data-offset-top="0">
+                <div class="profile-block">
+                    <img src="~/Content/Images/ZionLogoB.png" alt="CCG Management Portal" class="img-circle" width="80" height="80" />
+                    <h4 class="profile-title" style="color: #000">CCG Management Portal</h4>
+
+                </div>
+
+                <p>
+                    <a class="btn btn-secondary zion-link" target="_blank" href="http://zionmbc.org">Check us out! »</a>
+                </p>
+
+                <hr />
+                <ul class="nav nav-pills nav-stacked" style="margin-left: 0px">
+
+                    <!--Display link and icon for mobile views-->
+                    @foreach (var panel in panels)
+                    {
+                        <li>
+                            <a href="@panel.href" class="transition">
+                                @*<span class="@panel.Glyph" aria-hidden="true"></span>*@
+                                <div>
+                                    <img src="@panel.ImageSrc" height="40" width="40" />
+                                    <span class="mobileLinks">&nbsp;&nbsp;@panel.Title</span>
+                                </div>
+                            </a>
+                        </li>
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/ Display icon and title only for mobile views-->
+<!--Display description panels in the view-->
+<div class="container hidden-xs">
+    @if (Request.IsAuthenticated)
+    {<hr />}
+    <div class="row">   
+        @{
+            foreach (var panel in panels)
+            {
+                @Html.Partial("_HomeDescriptionWithLinkPanel", panel)
+            }
+         }      
+    </div>
+</div>
+<!-- / Display description panels in the view-->

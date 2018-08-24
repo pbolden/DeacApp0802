@@ -1,0 +1,10 @@
+﻿Remaining Features
+
+* Deacon report - ReportGenerator
+* Prayer request
+* Mass contact
+* Calendar
+* Push Notifications
+* Save to spreadsheet
+* change requests
+* data upload from ACS database

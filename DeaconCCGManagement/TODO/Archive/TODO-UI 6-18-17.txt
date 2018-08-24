@@ -1,0 +1,74 @@
+﻿//TODO: new date picker
+	*set up with input mask so user can use both
+
+
+//TODO: Add 'All' to page size options	
+//TODO: Pagination on contact log
+//TODO: Back to List link should take user back to previous list
+//TODO: Pagination for pass along contact
+//TODO: sorting options
+	*enum for sorting options??
+
+TODO: Admin console
+	//*CCGs controller and views (for listing only)
+	//*format phone numbers
+	//*select CCG in create new user
+	//*tighten up Edit user
+	//*tighten up Details for user
+	//*tighten up delete confirm view for user
+	//*CCG Member listing should list all members
+	//*CCG Contact Log should list all contacts
+
+//TODO: tighten up contact records list view
+
+//TODO: pagination, bread crumbs, plus sign
+
+//TODO: no members selected in the members list
+
+//TODO: tighten up contact records listing
+
+//TODO: focus on message to pastor if 'pass along' checked
+
+//TODO: test new date picker with Less
+ 
+//TODO: tighten up contact records create/edit
+
+//TODO: tighten up contact records details
+
+//TODO: return urls
+
+//TODO: Pastor console
+	*members listing
+	*contact log
+
+//TODO: cell number for users
+
+TODO: text editor for the emails 
+	*'Bootstrap Essentials' p. 132
+
+//TODO: breadcrumbs
+	*need to track if from admin and pastor consoles
+
+//TODO: Enter phone number view need pass along comments
+
+//TODO: menu should flyout to the left
+
+//TODO: work on items per page button
+
+//TODO: back to list links should not use breadcrumbs
+		just pass url back to controller in get request
+
+//TODO: Create button in contact records list not showing
+		when user navs back. member id is null
+
+//TODO: need Create button for deacons in members list
+
+//TODO: sort app users by roles and change request managers
+	-use enum
+
+//TODO: pagination for change request
+
+//TODO: archive option for contact records
+
+//TODO: add search boxes
+

@@ -1,0 +1,15 @@
+﻿
+@model DeaconCCGManagement.ViewModels.SearchViewModel
+
+<!--Search field and button-->
+<p>
+    <div class="input-group pull-right">
+        <input name="query" type="text" class="form-control"
+               placeholder="@Model.Placeholder" style="float: right" value="@Model.Value">
+        <span class="input-group-btn">
+            <button class="btn btn-primary" type="submit">
+                <i class="fa fa-search"></i>
+            </button>
+        </span>
+    </div>
+</p><!-- / Search field and button-->

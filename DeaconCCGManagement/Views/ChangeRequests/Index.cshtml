@@ -1,0 +1,97 @@
+﻿@using DeaconCCGManagement.ViewModels
+@using PagedList.Mvc
+@model PagedList.IPagedList<ChangeRequestViewModel>
+
+
+@{
+    ViewBag.Title = "Change Requests";
+    int totalItemCount = @Model?.TotalItemCount ?? 0;
+
+    string actionName = "Index";
+    string controllerName = "ChangeRequests";
+}
+
+@Html.Partial("_Breadcrumbs", "Change Requests")
+
+<h2>Change Requests (@totalItemCount)</h2>
+
+<table class="table table-condensed table-hover">
+    <tr>
+        <th>
+            @Html.DisplayName("Date")
+        </th>
+        <th>
+            @Html.DisplayName("Deacon")
+        </th>
+        <th>
+            @Html.DisplayName("Member")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CRDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppUserFrom.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentMemberData.FullName)
+            </td>
+
+            <td>
+                <div class="dropdown">
+                    @Html.Partial("_DropdownMenuToggleButton")
+
+                    <ul class="dropdown-menu pull-right">
+                        <li>@Html.ActionLink("Details", "ChangeRequest", new { id = item.Id })</li>
+                        <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+
+<!--Pagination-->
+@if (Model != null && Model.PageCount > 0)
+{
+
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+    </div>
+    <br/>
+
+    if (Request?.Url != null)
+    {
+        var itemsPerPageSelect = new ItemsPerPageSelect
+        {
+            AbsPath = Request?.Url?.AbsolutePath,
+            QueryStrings = HttpUtility.ParseQueryString(Request.Url.Query),
+            ListAllOption = false,
+        };
+
+        @Html.Partial("_ItemsPerPage", itemsPerPageSelect)
+    }
+
+
+    <div>
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+        new
+        {
+            page,
+            itemsPerPage = @ViewBag.ItemsPerPage,
+        }))
+    </div>
+}
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+}

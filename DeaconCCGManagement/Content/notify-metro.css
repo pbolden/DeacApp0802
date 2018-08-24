@@ -1,0 +1,102 @@
+
+/*Notifications style*/
+
+.notifyjs-metro-base {
+	position: relative;
+	min-height: 52px;
+	color:#444;
+}
+
+	.notifyjs-metro-base .image {
+		display: table;
+		position: absolute;
+		height: auto;
+		width: auto;
+		left: 25px;
+		top: 50%;
+
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+
+
+	 .notifyjs-metro-base .closeX {
+		display: table;
+		position: absolute;
+		height: auto;
+		width: auto;
+		right: 10px;
+		top: 25%;
+		font-size: 18px;
+		font-weight: normal;
+
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+
+	  .notifyjs-metro-base .icon {
+		display: table;
+		position: absolute;
+		height: auto;
+		width: auto;
+		left: 25px;
+		top: 50%;
+		font-size: 24px;
+		font-weight: normal;     
+
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		-o-transform: translate(-50%, -50%);
+		-webkit-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	}
+
+	.notifyjs-metro-base .text-wrapper {
+		display: inline-block;
+		vertical-align: top;
+		text-align: left;
+		margin: 10px 10px 10px 52px;
+		clear: both;
+		font-family: 'Segoe UI';
+	}
+
+	.notifyjs-metro-base .title {
+		font-size: 16px;
+		font-weight: bold;
+	}
+
+	.notifyjs-metro-base .text {
+		font-size: 14px;
+		font-weight: normal;
+		vertical-align: middle;
+	}
+
+    .notifyjs-metro-base .url {
+	    font-size: 16px;
+		font-weight: normal;
+		vertical-align: middle;
+	}
+
+    .notifyjs-metro-base .url :link{
+        color: blue;
+    }
+
+    .notifyjs-metro-base .url :visited{
+        color: blue;
+    }
+
+    .notifyjs-metro-base .url :hover{
+        color: maroon;
+    }
+
+    .notifyjs-metro-base .url :active{
+        color: royalblue;
+    }
+
+    

@@ -1,0 +1,116 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using MvcFileUploader.HtmlHelper
+@using MvcFileUploader.Models
+@model DeaconCCGManagement.ViewModels.MemberPhotoEditViewModel
+
+
+@*For some reason, jQuery has to load at the top of the page
+    to work with MVCFileUpload. I don't understand why. And
+    it's loading twice since it's also in the _Layout view.
+    I can't get it to work any other way.*@
+@Scripts.Render("~/bundles/jquery")
+
+@{
+    ViewBag.Title = "Edit Member's Photo";
+
+    if (Model != null)
+    {
+        ViewBag.MemberId = Model.MemberId;
+        ViewBag.UserId = Model.UserId;
+        ViewBag.FullName = Model.FullName;
+    }
+
+    string imageSrc = string.Empty;
+}
+
+
+@Html.Partial("_Breadcrumbs", "Member Photo")
+
+@*Set image source for member's photo.
+    If member has image, use that.*@
+@if (Model != null && Model.HasPhoto)
+{
+    imageSrc = Model.ImageSrc;
+}
+else /*Otherwise use default image.*/
+{
+    imageSrc = ViewHelper.NoPhotoImgPath;
+}
+
+<div id="updatePhotoUrl" hidden="hidden">
+    @Url.Action("UpdatePhotoImgSrc", "MemberPhoto", new { memberId = Model.MemberId, userId = Model.UserId })
+</div>
+
+<div id="memberId" hidden="hidden">
+    @Model.MemberId
+</div>
+
+<div id="userId" hidden="hidden">
+    @Model.UserId
+</div>
+
+    <h2>Update @Model.FullName's Photo</h2>
+
+    <hr />
+
+    <h4>
+        @Html.DisplayFor(m => m.FullName)
+    </h4>
+
+
+    @*AJAX call in 'jquery.fileupload-ui.js' updates this image after
+        successful upload. Search for 'Dave-edit'*@
+    <div class="img-rounded" style="margin-right: 10px">
+        <img id="imgMemberPhoto" class="img-rounded" width="160" height="160"
+             alt="@Model.FullName" src="@imageSrc" />
+    </div>
+
+    @{
+        string memberId = Model.MemberId.ToString();
+        string userId = Model.UserId;
+        string fullName = @Model.FullName ?? "";
+    }
+
+    <div class="well">
+        <legend>Upload File</legend>
+        <p class="help-block">jpg/png only. Max size: 25 MB</p>
+        @(Html.MvcFileUpload()
+          .UploadAt(Url.Action("UploadFile", "MemberPhoto"))
+          .WithFileTypes(@"/(\.|\/)(jpe?g|png)$/i")
+          .UIStyle(UploadUI.Bootstrap)
+          .WithMaxFileSize(25000000) // 25MB max
+          .MaxNumberOfFiles(1)
+          .AddFormField("memberId", @memberId)
+          .AddFormField("userId", @userId)
+          .AddFormField("memberName", @fullName)          
+          .RenderInline("_MvcFileUpload"))
+    </div>
+
+    <br />
+
+    @Html.Partial("_BackToListLink")
+
+    <br />
+
+    @Html.Partial("_ConfirmPhotoDeleteModalDialog")
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+        @Scripts.Render("~/Scripts/App/ConfirmPhotoDeleteDialog.js")
+        @Scripts.Render("/Scripts/mvcfileupload/vendor/bootstrap.min.js")
+        @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+
+        <script type="text/javascript">
+            $(function () {
+                var reloadPage = function () {
+                    window.location.reload();
+                };
+
+                $("#reload").on("click", reloadPage);
+            });
+        </script>
+    }
+

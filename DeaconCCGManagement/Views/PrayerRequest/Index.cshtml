@@ -1,0 +1,245 @@
+﻿@using System.Diagnostics
+@using DeaconCCGManagement.enums
+@using DeaconCCGManagement.ViewModels
+@using PagedList.Mvc
+
+@model PrayerRequestListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    const string actionName = "Index";
+    const string controllerName = "PrayerRequest";
+    int totalItemCount = Model.PrayerRequests?.TotalItemCount ?? 0;
+
+    var createButtonVM = new CreateButtonViewModel
+    {
+        ControllerName = "PrayerRequest",
+        MemberId = Model.Params.MemberId
+    };
+
+    var partialVM = new PrayerRequestPartialViewModel
+    {
+        ControllerName = controllerName,
+        ActionName = actionName,
+        Params = Model.Params,
+        CCGs = Model.CCGs,
+        PrayerRequestsCount = Model.PrayerRequests?.Count ?? 0,
+        GetAll = Model.Params.GetAll
+    };
+}
+
+@Html.Partial("_Breadcrumbs", "Prayer Requests")
+
+<h2>Prayer Requests (@totalItemCount)</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.MemberName))
+{
+    <h3>@ViewBag.MemberName</h3>
+}
+
+
+@*Display CCG name if filter by ccg*@
+@if (!string.IsNullOrEmpty(Model.CcgName))
+{
+    <h4>@Model.CcgName</h4>
+}
+
+@*Create button should only show when listing PR for a specific member*@
+@if (Model.Params.MemberId != null)
+{
+    @Html.Partial("_CreateButton", createButtonVM)
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Partial("_FilterForm", partialVM)
+        </div>
+        <div class="col-md-6">
+            <!--Search form-->
+            @using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
+            {
+                @Html.Hidden("memberId", Model.Params.MemberId)
+                @Html.Hidden("userId", Model.Params.UserId)
+                @Html.Hidden("getAll", Model.Params.GetAll)
+                @Html.Hidden("itemsPerPage", Model.Params.ItemsPerPage)
+                @Html.Hidden("sortOption", (int)Model.Params.ContactsSort)
+                @Html.Hidden("dateRangeFilter", (int)Model.Params.DateRangeFilter)
+
+
+                @Html.Partial("_SearchFieldAndButton",
+                    new SearchViewModel
+                    {
+                        Placeholder = "search term",
+                        Value = Model.Params.Query
+                    })
+
+            }
+        </div>
+    </div>
+</div>
+
+<table class="table table-condensed table-hover">
+    <tr class="info">
+        <th>
+            <a href="@Url.Action(actionName, controllerName,
+                         new
+                         {
+                             memberId = Model.Params.MemberId,
+                             getAll = Model.Params.GetAll,
+                             itemsPerPage = Model.Params.ItemsPerPage,
+                             query = Model.Params.Query,
+                             sortOption = Model.Params.ContactsSort != ContactsSort.DateAscending
+                                 ? (int) ContactsSort.DateAscending : (int) ContactsSort.DateDescending,
+                             dateRangeFilter = (int) Model.Params.DateRangeFilter
+                         })">
+                @Html.DisplayNameFor(model => model.PrayerRequests.First().ContactDate)
+                @{
+                    var dateSortIcon = Model.Params.ContactsSort != ContactsSort.DateAscending ? "fa fa-sort-asc" : "fa fa-sort-desc";
+                }
+                <i class="@dateSortIcon"></i>
+            </a>
+        </th>
+        <th class="hidden-xs">
+            <a href="@Url.Action(actionName, controllerName, new
+                        {
+                            memberId = Model.Params.MemberId,
+                            getAll = Model.Params.GetAll,
+                            itemsPerPage = Model.Params.ItemsPerPage,
+                            archive = Model.Params.Archive,
+                            query = Model.Params.Query,
+                            sortOption = Model.Params.ContactsSort != ContactsSort.GroupByDeacon
+                                ? (int)ContactsSort.GroupByDeacon : (int)ContactsSort.DateDescending,
+                            dateRangeFilter = (int)Model.Params.DateRangeFilter
+                        })">
+                @Html.DisplayName("Deacon")
+                <i class="fa fa-group"></i>
+            </a>
+        </th>
+       
+        <th>
+            @if (Model.Params.MemberId == null)
+            {
+                //Group by members
+                <a href="@Url.Action(actionName, controllerName, new
+                            {
+                                memberId = Model.Params.MemberId,
+                                getAll = Model.Params.GetAll,
+                                itemsPerPage = Model.Params.ItemsPerPage,
+                                query = Model.Params.Query,
+                                sortOption = Model.Params.ContactsSort != ContactsSort.GroupByMember
+                                         ? (int) ContactsSort.GroupByMember : (int) ContactsSort.DateDescending,
+                                dateRangeFilter = (int)Model.Params.DateRangeFilter
+                            })">
+                    @Html.DisplayNameFor(model => model.PrayerRequests.First().MemberFullName)
+                    <i class="fa fa-group"></i>
+                </a>
+            }
+            else // Records are for only one member so no need to group by member
+            {
+                @Html.DisplayNameFor(model => model.PrayerRequests.First().MemberFullName)
+            }
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayName("Prayer Request")
+        </th>
+        <th class="hidden-xs">
+            @Html.DisplayNameFor(model => model.PrayerRequests.First().Comments)
+        </th>
+        <th></th>
+    </tr>
+
+
+    @{
+        Debug.Assert(Model?.PrayerRequests != null, "Model?.PrayerRequests != null");
+    }
+
+    @foreach (var item in Model?.PrayerRequests)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactDate)
+            </td>
+            <td class="hidden-xs">
+                @Html.DisplayFor(modelItem => item.DeaconFullName)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", "CcgMembers", new {id=item.CCGMemberId})">
+                   @Html.DisplayFor(modelItem => item.MemberFullName) 
+                </a>
+            </td>
+            <td class="hidden-xs">
+                @{ 
+                    item.Subject = WebUtility.HtmlDecode(item.Subject);
+                }
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td class="hidden-xs">
+                @{ 
+                    item.Comments = WebUtility.HtmlDecode(item.Comments);
+                }
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                <div class="dropdown">
+                    @Html.Partial("_DropdownMenuToggleButton")
+
+                    <ul class="dropdown-menu pull-right">
+                        <li>@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+
+                        @if (Model.Params.UserId == item.AppUserId)
+                        {
+                            <li>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+                            <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                        }
+
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+<!--Pagination-->
+@if (Model != null && Model.PrayerRequests.PageCount > 0)
+{
+    <div>
+        Page @(Model.PrayerRequests.PageCount < Model.PrayerRequests.PageNumber ? 0 : Model.PrayerRequests.PageNumber)
+        of @Model.PrayerRequests.PageCount
+    </div>
+    <br/>
+    if (Request?.Url != null)
+    {
+        var itemsPerPageSelect = new ItemsPerPageSelect
+        {
+            AbsPath = Request?.Url?.AbsolutePath,
+            QueryStrings = HttpUtility.ParseQueryString(Request.Url.Query),
+            ListAllOption = false,
+        };
+
+        @Html.Partial("_ItemsPerPage", itemsPerPageSelect)
+    }
+
+
+        <div>
+            @Html.PagedListPager(Model?.PrayerRequests, page => Url.Action("Index",
+        new
+        {
+            page,
+            memberId = Model.Params.MemberId,
+            itemsPerPage = Model.Params.ItemsPerPage,
+            getAll = Model.Params.GetAll,
+            dateRangeFilter = (int)Model.Params.DateRangeFilter,
+            sortOption = (int)Model.Params.ContactsSort,
+            ccgId = Model.Params.CCGId,
+            query = Model.Params.Query
+        }))
+        </div>
+}
+
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+}

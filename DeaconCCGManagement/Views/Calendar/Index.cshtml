@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Deacon's Calendar";
+}
+
+@section styles{
+    @Styles.Render("~/css/fullcalendar.min.css")
+}
+
+@Html.Partial("_Breadcrumbs", "Calendar")
+
+<div id="getAll" hidden="hidden">@ViewBag.GetAll.ToString()</div>
+
+<h2>Deacon's Calendar</h2>
+
+
+<div id="calendar"></div>
+
+
+@Html.Partial("_CalendarEventDetailsModal")
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/moment.min.js")
+    @Scripts.Render("~/Scripts/fullcalendar.min.js")
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var getAll = $("#getAll").text();
+            var actionUrl = "/Calendar/GetEvents?getAll=" + getAll;
+
+            $("#calendar").fullCalendar({
+                header: {
+                    left: "prev,next today",
+                    center: "title",
+                    right: "month,basicWeek,basicDay,listMonth"
+                },
+                // customize the button names
+                views: {
+                    listMonth: { buttonText: 'list month' }
+                },
+                defaultView: "month",
+                defaultDate: new Date(),
+                navLinks: true, // can click day/week names to navigate views
+                editable: false,
+                eventLimit: true, // allow "more" link when too many events
+                events: { url: actionUrl },
+
+                eventClick: function(calEvent, jsEvent, view) {
+                    $("#eventTitle").html(calEvent.title);
+                    $("#dateStr").html(calEvent.dateString);
+                    $("#description").html(calEvent.description);
+
+                    var name = calEvent.firstName + " " + calEvent.lastName;
+                    $("#name").attr("href", calEvent.memberDetailsUrl).html(name);
+                    $("#phoneNumber").html("Phone Number: " + calEvent.phoneNumber);
+                    $("#cellNumber").html("Cell Number: " + calEvent.cellNumber);
+                    $("#email").html(calEvent.email),
+
+                    $("#calendarModal").modal();
+                }
+            });
+        });
+    </script>
+
+}

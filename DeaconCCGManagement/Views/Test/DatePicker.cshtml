@@ -1,0 +1,48 @@
+﻿
+@model DeaconCCGManagement.Models.ContactRecord
+
+@{
+    ViewBag.Title = "DatePicker";
+}
+
+<h2>DatePicker</h2>
+
+
+<!--Plain HTML example-->
+@*<form method="Get" action="">
+    <input id="myDate" class="datepicker" readonly="readonly"/>
+</form>*@
+
+<br/>
+<br/>
+
+<!--Using an HTML helper example-->
+<div class='input-group date' id='datepicker1'>
+    @Html.EditorFor(model => model.ContactDate, new {htmlAttributes = new { @class = "form-control datepicker", @readonly = "readonly"}})
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</div>
+
+
+
+<div class='input-group date' id='datepicker2'>
+    @Html.EditorFor(model => model.Timestamp, new { htmlAttributes = new { @class = "form-control datepicker", @readonly = "readonly" } })
+    <span class="input-group-addon">
+        @*<i class="fa fa-calendar-o"></i>*@
+        <button type="button">
+            <i class="fa fa-calendar-o"></i>
+        </button>
+    </span>
+</div>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $('#datepicker1').datepicker();
+            $('#datepicker2').datepicker();
+        });
+    </script>
+}

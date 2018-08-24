@@ -1,0 +1,212 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@model DeaconCCGManagement.ViewModels.EditContactRecordViewModel
+
+@{
+    ViewBag.Title = "Edit Contact Record";
+    string ControllerName = "ContactRecords";
+    string listViewName = "Contact Records";
+}
+
+@section styles {
+    @Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+    @Styles.Render("~/Content/prayRequest.css")
+}
+
+
+@Html.Partial("_Breadcrumbs", "Edit Record")
+
+<h2>@ViewBag.Title</h2>
+<h3 style="margin: 0">@Html.DisplayFor(m => m.MemberFullName)</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="well well-md">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.ReturnUrl)
+
+
+            @{ 
+                // Decodes html. example: &quot; ==> "
+                // Necessary because all text entered by user is html encoded
+                Model.Subject = WebUtility.HtmlDecode(Model.Subject);
+                Model.Comments = WebUtility.HtmlDecode(Model.Comments);
+                Model.PassAlongComments = WebUtility.HtmlDecode(Model.PassAlongComments);
+                Model.PassAlongFollowUpComments = WebUtility.HtmlDecode(Model.PassAlongFollowUpComments);
+            }
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3" style="padding: 0 0 0 15px">
+                    <div class="input-group date datepicker">
+                        <span class="input-group-addon addOn" style="width: 120px">
+                            @Html.EditorFor(model => model.ContactDate, new { htmlAttributes = new { @class = "form-control dateMask" } })
+
+                            <button class="btn btn-default calendar" type="button">
+                                <span class="fa fa-calendar"></span>
+                            </button>
+                        </span>
+                        @Html.ValidationMessageFor(model => model.ContactDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control durationMask" } })
+                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group visible-md visible-lg visible-xl" align="left">
+                @Html.LabelFor(model => model.PassAlong, htmlAttributes: new { @class = "control-label col-md-3", @style = "margin-left: -4em" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.PassAlong, new { id = "chkbxPassAlong" })
+                        @Html.ValidationMessageFor(model => model.PassAlong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group visible-sm">
+                @Html.LabelFor(model => model.PassAlong, htmlAttributes: new { @class = "control-label col-sm-3", @style = "margin-left: -3.35em" })
+                <div class="col-sm-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.PassAlong, new { id = "chkbxPassAlong" })
+                        @Html.ValidationMessageFor(model => model.PassAlong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group visible-xs">
+                @Html.LabelFor(model => model.PassAlong, htmlAttributes: new { @class = "control-label col-xs-10" })
+                <div class="checkboxPray">
+                    <div class="checkbox col-xs-2 col-sm-4">
+                        @Html.CheckBoxFor(model => model.PassAlong, new { id = "chkbxPassAlong" })
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(model => model.PassAlong, "", new { @class = "text-danger" })
+            </div>
+
+
+
+
+            @*jQuery script will hide this initially if 'PassAlong' is false *@
+            <div id="msgToPastor" class="form-group">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PassAlongComments, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.PassAlongComments, new { htmlAttributes = new { @class = "form-control", id = "msgPassAlongTextArea" } })
+                        @Html.ValidationMessageFor(model => model.PassAlongComments, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group hidden-xs hidden-sm">
+                @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-md-3", @style = "margin-left: -4em" })
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Private)
+                        @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group visible-sm">
+                @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-sm-3", @style = "margin-left: -1.35em" })
+                <div class="col-sm-2">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.Private)
+                        @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group visible-xs">
+                @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-xs-10" })
+                <div class="col-xs-2">
+                    <div class="checkboxPray">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.Private)
+                            @Html.ValidationMessageFor(model => model.Private, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comments, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Comments, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Comments, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ContactTypes, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ContactTypeId, Model.ContactTypes, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ContactTypes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+    @Html.Partial("_BackToListLink")
+
+
+
+@*<input id="btnTest" value="Test" type="button"/>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/moment.min.js")
+    @Scripts.Render("~/Scripts/bootstrap-datetimepicker.min.js")
+    @Scripts.Render("~/Scripts/App/DatePicker.js")
+    @Scripts.Render("~/Scripts/jquery.maskedinput.js")
+    @Scripts.Render("~/Scripts/App/DateMask.js")
+    @Scripts.Render("~/Scripts/App/durationMask.js")
+    @Scripts.Render("~/Scripts/App/ShowHidePassAlongComments.js")
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+
+    <script type="text/javascript">
+        // When DOM is ready, hide 'pass along' comments if
+        // 'PassAlong' is set to false
+        $(function () {
+            var msgPassAlong = $("#msgPassAlong");
+            var passAlong = "@Model.PassAlong";
+
+            if (passAlong === "False") {
+                msgPassAlong.hide();
+            }
+        });
+    </script>
+}
+
+

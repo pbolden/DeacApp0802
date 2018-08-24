@@ -1,0 +1,252 @@
+﻿body
+{
+    /*background-color: #2b303b;*/
+    background-image: url('Images/content.png');
+}
+
+.panelTitle{
+    color: #8d8b8b;
+    font-size: 1.5em;
+    font-weight:bold;
+}
+
+
+.profile-block img {
+    width: 50px;
+    margin-top: 2.5em;
+    margin-left: -1.5em;
+}
+
+.profile-block * {
+    display: inline-block;
+}
+
+.profile-title {
+    margin-top: 3em;
+    color: #000;
+    margin-left: 1rem;
+    font-size: 1em;
+    vertical-align: middle;
+}
+
+.profile-title small {
+    display: block;
+    }
+
+.transition,
+.transition:hover,
+.transition:focus {
+
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+    -o-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+
+.nav-pills li > a {
+    color: #777;
+    margin-left: -2.2em;
+    font-size: .9em;
+}
+
+.nav-pills > li > a .badge { 
+    font-size: .8em;
+}
+
+ul.nav a:hover,
+ul.nav a:focus {
+    color: #2b303b;
+    background-color: #d0cece;
+}
+
+ul.nav {
+    margin-top: .6em;
+}
+
+.nav-pills .nav-divider {
+background-color: #777;
+    margin-left: -1em;
+    margin-top: .1em;
+}
+
+.dashClear {
+    color: #919090;
+}
+
+@media (min-width: 350px) {
+
+.profile-block img {
+    width: 70px;
+    margin-top: 2.6em;
+    margin-left: -1.5em;
+}
+
+.profile-title {
+    margin-top: 2em;
+    color: #fff;
+    margin-left: 1rem;
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+
+.nav-pills li > a {
+    color: #777;
+    margin-left: -2em;
+    font-size: 1.2em;
+}
+
+.nav-pills > li > a .badge { 
+    font-size: .6em;
+}
+
+ul.nav {
+    margin-top: .6em;
+}
+
+.nav-pills .nav-divider {
+background-color: #777;
+    margin-left: -1em;
+    margin-top: .1em;
+}
+
+}
+
+@media (min-width: 550px) {
+
+.profile-block img {
+    width: 80px;
+    margin-top: 2.6em;
+    margin-left: -1.5em;
+}
+
+.profile-title {
+    margin-top: 2em;
+    color: #f2efef;
+    margin-left: 1rem;
+    font-size: 1.8em;
+    vertical-align: middle;
+}
+
+.nav-pills li > a {
+    color: #777;
+    margin-left: -2em;
+    font-size: 1.3em;
+}
+
+.nav-pills > li > a .badge {
+    margin-right: 8em;
+}
+
+}
+
+@media (min-width: 650px) {
+
+.nav-pills > li > a .badge {
+        margin-right: 10em;
+    }
+
+}
+
+.body-content hr {
+    border-color: #777
+}
+
+@media screen and (min-width: 768px) {
+
+.imgHome {
+    float: left;
+}
+
+.body-content hr {
+    border-color: #777
+}
+
+.glyphicon:hover,
+.glyphicon:focus {
+    color: #777;
+}
+
+}
+
+.bigHome h1 {
+    margin-top: 1.5em;
+    color: #777;
+    font-size: 2em;
+    line-height: 1.2em;
+    margin-right: -3.3em;
+}
+
+.bigHome p { 
+    color: #777;
+    font-size: 1em;
+}
+
+
+.bigHome h2 {
+    color: #777;
+    font-size: 1.5em;
+    margin-top: 5px;
+}
+
+.bigHome .glyphicon  {
+    color: #777;
+    font-size: 1.5em;
+  
+}
+
+.bigHome .glyphicon:hover,
+.bigHome .glyphicon:focus {
+    color: #777;
+}
+
+.card {
+    margin-bottom: 3em;
+}
+
+@media (min-width: 992px){
+    .bigHome h1 {
+    margin-top: 1em;
+    font-size: 2.3em;
+    margin-left: 1.5em;
+}
+
+.glyphicon:hover,
+.glyphicon:focus {
+    color: #777;
+}
+
+}
+
+@media (min-width: 1200px){
+    .bigHome h1 {
+    margin-top: 1em;
+    font-size: 2.5em;
+    margin-left: 2em;
+}
+
+.imgHome {
+    margin-left: 8em;
+}
+
+.bigHome .glyphicon  {
+    font-size: 2.5em;
+    margin-top: 1em;
+}
+
+.bigHome h2 {
+    font-size: 1.7em;
+    margin-top: 5px;
+}
+
+.bigHome p {
+    font-size: 1.1em;
+}
+
+.glyphicon:hover,
+.glyphicon:focus {
+    color: #777;
+}
+
+}
+

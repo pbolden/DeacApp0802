@@ -1,0 +1,214 @@
+﻿body {
+    padding-top: 30px;
+    padding-bottom: 10px;
+
+    /*This line keeps the background image from scrolling!!!*/
+    background: center fixed;
+    background-image: url('../Resources/Blue Crucifix.jpg');
+    background-size: 100%;
+
+    /*This is a drop shadow on the text and the text color and size*/
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    color: white;
+    font-size: 1.60em;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*Only applies at 768px or less*/
+@media (max-width: 768px) {
+    .padding-top-10-xs {
+        padding-top: 10px;
+    }
+    .padding-top-5-xs {
+        padding-top: 5px;
+    }
+}
+
+ .padding-top-10 {
+        padding-top: 10px;
+    }
+
+/*Sets text to white and gives it a drop-shadow in the Jumbotron*/
+.jumbotron {
+    background-color: transparent;
+    color: white;
+    padding-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/*Sets text on navbar to white, text size, and makes backgroud transparent*/
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.navbar-inverse .navbar-brand {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+/*Creates gradient shadow on links in navbar when mouse hovers*/
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-nav > li > a:hover{
+	background-image: linear-gradient(bottom, #228b22 2%, #006400 42%, #029b72 90%, #006400 100%);
+	background-image: -o-linear-gradient(bottom, #228b22 2%, #006400 42%, #029b72 90%, #006400 100%);
+	background-image: -moz-linear-gradient(bottom, #228b22 2%, #006400 42%, #029b72 90%, #006400 100%);
+	background-image: -webkit-linear-gradient(bottom, #228b22 2%, #006400 42%, #029b72 90%, #006400 100%);
+	background-image: -ms-linear-gradient(bottom, #228b22 2%, #006400 42%, #029b72 90%, #006400 100%);
+}
+
+/*Gradient color and drop-shadow to navbar.*/
+.navbar {
+	background-image: linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -o-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -moz-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -webkit-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -ms-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    border: none;
+}
+
+/*Turns off dotted line around selected buttons*/
+.a:focus,
+.btn:focus,
+.navbar-inverse .navbar-brand:focus,
+.navbar-inverse .navbar-nav > li > a:focus {
+    outline: none;
+}
+
+/*Well, Sets gradient color, rounds the ends, sets drop-shadow,
+    enlarges fonts, and aligns buttons with the bottom of their elements.
+*/
+.btn {
+    border-radius: 24px;
+    padding: 10px 16px;
+    font-size: 18px;
+    line-height: 1.33;
+    border-color: white;
+	background-image: linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -o-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -moz-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -webkit-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -ms-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+    color: white;
+    text-decoration: none;
+    margin: 15px 0;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    vert-align: bottom;
+}
+
+/*Sets text color with mouse hover-over*/
+.btn:hover {
+    color: gray;
+}
+
+/*Shifts background color when button is clicked*/
+.btn:active {
+   background-color: #008080;
+    border: none; 
+}
+
+/*Sets gradient background and drop-shadows to table headers*/
+.table th {
+	background-image: linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -o-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -moz-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -webkit-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+	background-image: -ms-linear-gradient(bottom, #006400 1%, #228b22 12%, #029b72 90%, #006400 100%);
+    border: none;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.75);
+}
+
+/*Center-aligns text and puts a white line between options on Home page.*/
+.indexBoxes {
+    text-align: center;
+    border-bottom: solid;
+    border-bottom-width: 1px;
+    border-color: white;
+    padding: 0 20px;
+}
+
+/*Inset on dropdown for Filter and Sign-in textboxes*/
+.form-control {
+    border: 3px inset;
+}
+
+/*Color glyphicons, increase their size, and add a drop shadow*/
+.colrdGlyph {
+    font-size: 1.5em;
+    color: #228b22;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75)
+}
+
+.table td {
+    border-bottom: 1px solid white;
+}
+
+.picAttribs {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+    border: 6px double #008080;
+    border-radius: 14px;
+}
+
+.roles {
+    display: inline-block;
+    width: 70%;
+    margin: 5px 10px 10px 10px;
+}
+
+.modal-body {
+    background-color: #228b22;
+}
+
+.modal-footer,
+.modal-header {
+    background-color: #006400;
+}
+
+.navbar-inverse .navbar-text {
+  color: white;
+    font-size: 20px;
+    padding: 0 20px 0 15px;
+}
+
+hr {
+    border: none;
+}
+
+.close:hover {
+    color: white;
+}
+
+.calendar {
+    height: 2.3em;
+    margin: 0 0 5px 20px;
+    padding: 0 12px 0 12px;
+}
+
+.addOn {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}

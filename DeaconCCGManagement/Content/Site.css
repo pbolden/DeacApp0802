@@ -1,0 +1,214 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.top-nav-link {
+    font-size: 14px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/*Bootstrap grid details
+    xs: <  768px
+    sm: >= 768px
+    md: >= 992px
+    lg: >= 1200px
+*/
+
+
+/*Only applies at 768px or less*/
+@media (max-width: 768px) {
+    .padding-top-10-xs {
+        padding-top: 10px;
+    }
+}
+
+ .padding-top-10 {
+        padding-top: 10px;
+    }
+
+/*.navbar-inverse .navbar-brand {
+        color: red;
+    }*/
+
+/*
+    Applied to multiple buttons in a list that will 
+    invoke a modal dialog via jQuery.
+*/
+.openDialog {
+    padding: 0 0 0 0;
+}
+
+/*Buttons that look like links are not left aligned.*/
+.btn-link {
+    padding: 0 0 0 0;
+}
+
+.calendar {
+    height: 2.3em;
+    margin: 0 0 5px 20px;
+    padding: 0 12px 0 12px;
+}
+
+.addOn {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+}
+
+/*Applies to the 'items per page' drop down menus*/
+.itemsPerPage,
+.itemsPerPage:hover,
+.itemsPerPage:visited,
+.itemsPerPage:active,
+.itemsPerPage:focus
+ {
+     background-color: #428bca;
+     color: #ffffff;
+}
+
+
+/*navbar attributes*/
+.navbar-inverse {
+    background-color: #7a7878;
+    color: #fff;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #ddd;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+        color: #ddd;
+}
+
+
+/*Makes the navbar font size responsive*/
+@media (max-width: 365px) {
+    .navbar-inverse .navbar-brand {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 335px) {
+    .navbar-inverse .navbar-brand {
+        font-size: 16px;
+    }
+}
+
+/*@media (max-width: 305px) {
+    .navbar-inverse .navbar-brand {
+        font-size: 14px;
+    }
+}*/
+
+@media (max-width: 272px) {
+    .navbar-inverse .navbar-brand {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 247px) {
+    .navbar-inverse .navbar-brand {
+        font-size: 10px;
+    }
+}
+
+/*Makes the thumbnail photos responsive*/
+@media (max-width: 360px) {
+    .thumbnailPhoto {
+        height: 50px;
+        width: 50px
+    }
+}
+
+@media (max-width: 305px) {
+    .thumbnailPhoto {
+        height: 40px;
+        width: 40px
+    }
+}
+
+@media (max-width: 272px) {
+    .thumbnailPhoto {
+        height: 30px;
+        width: 30px
+    }
+}
+
+ .deleteMessage {
+    color: #ff0000;
+}
+ 
+.highlight-row {
+    background-color: #eee8aa;
+}
+
+.zion-link {
+    font-size: 24px;
+}
+
+/*Override Bootstrap breadcrumb divider char*/
+.breadcrumb > li + li:before {
+    content: "";
+}
+
+.xlsButton {
+     /*margin: 0 200px 200px 20px;*/
+     padding: 0 0 0 0;
+}
+
+.admin-home-icons {
+    width: 50px;
+    height: 50px
+}
+
+/*Notification bell and badge style*/
+.notify-bell-base {
+    font-size: x-large;
+}
+
+.notify-bell-base .notify-inactive {
+    color: lightgray;
+}
+
+.notify-bell-base .notify-active {
+    color: aliceblue;
+}
+
+.notify-badge {
+    position: absolute;
+    /*right: 1px;*/
+    left: 28px;
+    top: 5px;
+    background: maroon;
+    text-align: center;
+    width: auto;
+    height: auto;
+    border-radius: 20px 20px 20px 20px;
+    color:white;
+    padding: 2px 5px;
+    font-size: 14px;
+    border: 2px solid;
+    border-color: gray;
+}
+/*end Notification bell and badge style*/

@@ -1,0 +1,182 @@
+﻿<error errorId="66f232b4-718a-4610-9cc8-1ded71734c1e" application="/LM/W3SVC/2/ROOT" host="DESKTOP-8HS8923" type="System.InvalidOperationException" message="A claim of type 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier' or 'http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider' was not present on the provided ClaimsIdentity. To enable anti-forgery token support with claims-based authentication, please verify that the configured claims provider is providing both of these claims on the ClaimsIdentity instances it generates. If the configured claims provider instead uses a different claim type as a unique identifier, it can be configured by setting the static property AntiForgeryConfig.UniqueClaimTypeIdentifier." source="System.Web.WebPages" detail="System.InvalidOperationException: A claim of type 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier' or 'http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider' was not present on the provided ClaimsIdentity. To enable anti-forgery token support with claims-based authentication, please verify that the configured claims provider is providing both of these claims on the ClaimsIdentity instances it generates. If the configured claims provider instead uses a different claim type as a unique identifier, it can be configured by setting the static property AntiForgeryConfig.UniqueClaimTypeIdentifier.&#xD;&#xA;   at System.Web.Helpers.AntiXsrf.ClaimUidExtractor.GetUniqueIdentifierParameters(ClaimsIdentity claimsIdentity, String uniqueClaimTypeIdentifier)&#xD;&#xA;   at System.Web.Helpers.AntiXsrf.ClaimUidExtractor.ExtractClaimUid(IIdentity identity)&#xD;&#xA;   at System.Web.Helpers.AntiXsrf.TokenValidator.GenerateFormToken(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken cookieToken)&#xD;&#xA;   at System.Web.Helpers.AntiXsrf.AntiForgeryWorker.GetTokens(HttpContextBase httpContext, AntiForgeryToken oldCookieToken, AntiForgeryToken&amp; newCookieToken, AntiForgeryToken&amp; formToken)&#xD;&#xA;   at System.Web.Helpers.AntiXsrf.AntiForgeryWorker.GetFormInputElement(HttpContextBase httpContext)&#xD;&#xA;   at System.Web.Helpers.AntiForgery.GetHtml()&#xD;&#xA;   at System.Web.Mvc.HtmlHelper.AntiForgeryToken()&#xD;&#xA;   at ASP._Page_Views_CcgMembers_Index_cshtml.Execute() in C:\Users\paulb\OneDrive\Documents\Zion\DeaconApp\DeacApp0802\DeaconCCGManagement\Views\CcgMembers\Index.cshtml:line 293&#xD;&#xA;   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.Mvc.WebViewPage.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.WebPages.StartPage.RunPage()&#xD;&#xA;   at System.Web.WebPages.StartPage.ExecutePageHierarchy()&#xD;&#xA;   at System.Web.WebPages.WebPageBase.ExecutePageHierarchy(WebPageContext pageContext, TextWriter writer, WebPageRenderingBase startPage)&#xD;&#xA;   at System.Web.Mvc.RazorView.RenderView(ViewContext viewContext, TextWriter writer, Object instance)&#xD;&#xA;   at System.Web.Mvc.BuildManagerCompiledView.Render(ViewContext viewContext, TextWriter writer)&#xD;&#xA;   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilterRecursive(IList`1 filters, Int32 filterIndex, ResultExecutingContext preContext, ControllerContext controllerContext, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass3_6.&lt;BeginInvokeAction&gt;b__3()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass3_1.&lt;BeginInvokeAction&gt;b__5(IAsyncResult asyncResult)" user="pbolden@zionmbc.org" time="2018-08-16T18:24:50.4253715Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:close&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate, br&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US&#xD;&#xA;HTTP_COOKIE:OpenIdConnect.nonce.icD04gQJk0AUokkvrJ6DXrT3mLbaG5RPAg538%2FY0dLo%3D=N3NYMWJ2bTQ3TndrTVVScFZPU3NyazQ5TDJwU0NFekNtQVNCbFlCU3VYdWlmdmJlam1LTURjU1U0X0JfUHdYT1FvaG1tTklFMXJLV29STzAyUVpJWC1DeFN4X1ZQZEJ6ZDZkNFd0dlJZbDFMQ2pSNzFueEtIMDFnd3gyMDNFTWlXLTVvV2hCc1JsSzItLUFveHY3bGFFbHZOMFd5TEtFVXFhdnBmY29Mdk5aZVYyNW56N1U0b3dHYjh3R1ZkSnE4TkRkMGw0ZWp5NzlBQ01sc1FVY2VWeUVTbjMycjdxM3ZESjg1Z2phRGhaWQ%3D%3D; OpenIdConnect.nonce.uunq2298ASLzAQRNSLiVHZicxe4JfNvSE0UhQpjq1Pw%3D=SGFXb1A0WnFXNFNRWEtjR0ZhX0J2SHVBZmM2OFBFT2NTdUQyNW9wMWdNSkZxZUx4NHU0dzZBVHpGQV8zZENLZVQ4UFdEWXpuQWFlRGhoNHhMR1NlbkNxM3dlN0s1dDhrQ3Q4SnJ1N1JjZFphYVlvU3JfX0xDV1g3NFBldHpjQWV1TzdsTldPWFhfc0x4TTNyZ1NqbjBqWnVzcnlYRkJMbEJyLVA1RjNfQ09tRmhOSWJmcVNLY29zM0F0S053Y25MYUFlTHJvVXJiMHB6LUU0aWg0cnBYbjBTSDVFR0FsbHpvVDcyRTZpbDJHMA%3D%3D; OpenIdConnect.nonce.4B1EGJXsKmeyy2JquRE0XoF%2Frn0AZkI4CVoLlytv2wE%3D=SG9SdUdxaHlvUDZCalZqaUZQTF9EYVY0djlKTFhpQ2ZhU3pFQzkyNzFCYWV4dEpWMDdFaWluc2NXVTJyZkhYZ2lPdzB4WVRlRUY0dGpmZTlPTVJhTnFUWk85SENQWjc0ZXAyT0RDOEQ0eV9ST3R5Mnc4ZXR4bThWT0I4TWFNdVZkdHhrTmh5b2o4WDRnNWYzTlEwdWU5NmVUOFpUMTBOQndwemhmZUI3VHBENVd0NHRhWkNoY25pdzNiSjJUNUhxSVhVZGU5ZnlZamV4bTdLRUI2N3NCUnVjQjFMeFc5aF9pT0FBUTRpMVY3bw%3D%3D; .AspNet.Cookies=djRAqO0iSHkzM4yRn97yiJf2U7j5ULgUqy6WIHAoBcyqFxrYIamkC0xICDsDVYUxgmz5uE2rHZPJXp94IvPuR7OODVgbZiDQeWALVT5F4jrXSVjrixhgrDOdxPOsetBWGxHLjef3J7kjz4zPxZs_E59KvqzLs-dCYD6K-jMo70_Ko17EoMbbMAzuBO4kSmSss4aN6ugzaKkxpt8yneThuSTbO1CoY3yMupbSrg162TIxzzdAnCupANqAMf5HhblFFaYj6yrSCyGKFF9umjnFU_hMZ_xucU0EwXuPzoJIFHByMzqGIMHCsHtxgXjDGplTFpCTS7EgjhpiAjMm4NQXi7KhhIy5KB9s8eTTkVpiqO3lSTboBUUKKFdLVRLoen3hCpbltpQVpyqSs34dS8qivi91Xa0Xu9l1gROA8al5XSLvnhgR5PlV8kNB8izC_UMNvqrPFSHJqv12PVRu3zk9pDL9qlimu1AuiECLBVXtER3uBeFUzeey7AMk5fIYejpN_2iASUD3H_qzn4w7eg90w8O1LFAiF36c0OPpwlSWCBO50DaaCIe1YqY32m-FwnWuZmVEcR5OjK-XSTrmO5iWR1YxG4fF15hf71YCIDcEYGlYQnDi7G7muo4OunKI6eZrKPAQinjmD5gStKWI5peMvZuT1WrM7BncGYr3WLaqM4cUm8nOpmRdgWE3MwGtn9AkYOd3EBdymhk-Qy4wRYw96OMgVBZhGGfYhkgOqH0j6gdmjOech53Bj2uRMm73qOh_i5ORLbPEUa3GlcHm-PUl62OMVeHPOw0oT68Lg7ZHHTNieZ3XD_r2CCinaeP90120OBQKMgAAFz87rB1U4h-EWIaAgmMzV3f0HHlay0dVVN2chan0T0pelcOXUh1_LEaATwP4JZKAaisotcaUYFs7bB7fV2W5eUNi8FooHifc3ym3iOmLd-VBhfAIjjSDNbkBWkPqBaX3w4iM6SIs7-fELH2mpv4QdlXDz3T4TpZ9K51Z66SEOajgbh_VCglhnbhwRkilwPP89j2DovdvH3zXSb2IguTGiS80sxC40e-WEVF0eVRgEncqPaZ7gdyflnXhPiJ1N_J1OOVI47WseFfhBmEsCxkrGeLY1cM-TTECHUbiy9df1z9bWIiQmFhB7aL_qtlj81sXJqHzXnvhlxZN3LYBU1h7ZN76kpbOQTtFVUiP27TgW001F0oNyTyvM3UxuFzYBXQHTHQ5GreuuKa6sQ&#xD;&#xA;HTTP_HOST:localhost:44393&#xD;&#xA;HTTP_REFERER:https://localhost:44393/Admin&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134&#xD;&#xA;HTTP_UPGRADE_INSECURE_REQUESTS:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: close&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate, br&#xD;&#xA;Accept-Language: en-US&#xD;&#xA;Cookie: OpenIdConnect.nonce.icD04gQJk0AUokkvrJ6DXrT3mLbaG5RPAg538%2FY0dLo%3D=N3NYMWJ2bTQ3TndrTVVScFZPU3NyazQ5TDJwU0NFekNtQVNCbFlCU3VYdWlmdmJlam1LTURjU1U0X0JfUHdYT1FvaG1tTklFMXJLV29STzAyUVpJWC1DeFN4X1ZQZEJ6ZDZkNFd0dlJZbDFMQ2pSNzFueEtIMDFnd3gyMDNFTWlXLTVvV2hCc1JsSzItLUFveHY3bGFFbHZOMFd5TEtFVXFhdnBmY29Mdk5aZVYyNW56N1U0b3dHYjh3R1ZkSnE4TkRkMGw0ZWp5NzlBQ01sc1FVY2VWeUVTbjMycjdxM3ZESjg1Z2phRGhaWQ%3D%3D; OpenIdConnect.nonce.uunq2298ASLzAQRNSLiVHZicxe4JfNvSE0UhQpjq1Pw%3D=SGFXb1A0WnFXNFNRWEtjR0ZhX0J2SHVBZmM2OFBFT2NTdUQyNW9wMWdNSkZxZUx4NHU0dzZBVHpGQV8zZENLZVQ4UFdEWXpuQWFlRGhoNHhMR1NlbkNxM3dlN0s1dDhrQ3Q4SnJ1N1JjZFphYVlvU3JfX0xDV1g3NFBldHpjQWV1TzdsTldPWFhfc0x4TTNyZ1NqbjBqWnVzcnlYRkJMbEJyLVA1RjNfQ09tRmhOSWJmcVNLY29zM0F0S053Y25MYUFlTHJvVXJiMHB6LUU0aWg0cnBYbjBTSDVFR0FsbHpvVDcyRTZpbDJHMA%3D%3D; OpenIdConnect.nonce.4B1EGJXsKmeyy2JquRE0XoF%2Frn0AZkI4CVoLlytv2wE%3D=SG9SdUdxaHlvUDZCalZqaUZQTF9EYVY0djlKTFhpQ2ZhU3pFQzkyNzFCYWV4dEpWMDdFaWluc2NXVTJyZkhYZ2lPdzB4WVRlRUY0dGpmZTlPTVJhTnFUWk85SENQWjc0ZXAyT0RDOEQ0eV9ST3R5Mnc4ZXR4bThWT0I4TWFNdVZkdHhrTmh5b2o4WDRnNWYzTlEwdWU5NmVUOFpUMTBOQndwemhmZUI3VHBENVd0NHRhWkNoY25pdzNiSjJUNUhxSVhVZGU5ZnlZamV4bTdLRUI2N3NCUnVjQjFMeFc5aF9pT0FBUTRpMVY3bw%3D%3D; .AspNet.Cookies=djRAqO0iSHkzM4yRn97yiJf2U7j5ULgUqy6WIHAoBcyqFxrYIamkC0xICDsDVYUxgmz5uE2rHZPJXp94IvPuR7OODVgbZiDQeWALVT5F4jrXSVjrixhgrDOdxPOsetBWGxHLjef3J7kjz4zPxZs_E59KvqzLs-dCYD6K-jMo70_Ko17EoMbbMAzuBO4kSmSss4aN6ugzaKkxpt8yneThuSTbO1CoY3yMupbSrg162TIxzzdAnCupANqAMf5HhblFFaYj6yrSCyGKFF9umjnFU_hMZ_xucU0EwXuPzoJIFHByMzqGIMHCsHtxgXjDGplTFpCTS7EgjhpiAjMm4NQXi7KhhIy5KB9s8eTTkVpiqO3lSTboBUUKKFdLVRLoen3hCpbltpQVpyqSs34dS8qivi91Xa0Xu9l1gROA8al5XSLvnhgR5PlV8kNB8izC_UMNvqrPFSHJqv12PVRu3zk9pDL9qlimu1AuiECLBVXtER3uBeFUzeey7AMk5fIYejpN_2iASUD3H_qzn4w7eg90w8O1LFAiF36c0OPpwlSWCBO50DaaCIe1YqY32m-FwnWuZmVEcR5OjK-XSTrmO5iWR1YxG4fF15hf71YCIDcEYGlYQnDi7G7muo4OunKI6eZrKPAQinjmD5gStKWI5peMvZuT1WrM7BncGYr3WLaqM4cUm8nOpmRdgWE3MwGtn9AkYOd3EBdymhk-Qy4wRYw96OMgVBZhGGfYhkgOqH0j6gdmjOech53Bj2uRMm73qOh_i5ORLbPEUa3GlcHm-PUl62OMVeHPOw0oT68Lg7ZHHTNieZ3XD_r2CCinaeP90120OBQKMgAAFz87rB1U4h-EWIaAgmMzV3f0HHlay0dVVN2chan0T0pelcOXUh1_LEaATwP4JZKAaisotcaUYFs7bB7fV2W5eUNi8FooHifc3ym3iOmLd-VBhfAIjjSDNbkBWkPqBaX3w4iM6SIs7-fELH2mpv4QdlXDz3T4TpZ9K51Z66SEOajgbh_VCglhnbhwRkilwPP89j2DovdvH3zXSb2IguTGiS80sxC40e-WEVF0eVRgEncqPaZ7gdyflnXhPiJ1N_J1OOVI47WseFfhBmEsCxkrGeLY1cM-TTECHUbiy9df1z9bWIiQmFhB7aL_qtlj81sXJqHzXnvhlxZN3LYBU1h7ZN76kpbOQTtFVUiP27TgW001F0oNyTyvM3UxuFzYBXQHTHQ5GreuuKa6sQ&#xD;&#xA;Host: localhost:44393&#xD;&#xA;Referer: https://localhost:44393/Admin&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134&#xD;&#xA;upgrade-insecure-requests: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Users\paulb\OneDrive\Documents\Zion\DeaconApp\DeacApp0802\DeaconCCGManagement\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="Cookies" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="256" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="2048" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="CN=localhost" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="CN=localhost" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="on" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="256" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="2048" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="CN=localhost" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="CN=localhost" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/CcgMembers" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Users\paulb\OneDrive\Documents\Zion\DeaconApp\DeacApp0802\DeaconCCGManagement\CcgMembers" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="getAll=True" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="51832" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/CcgMembers" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="44393" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="1" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/10.0" />
+    </item>
+    <item name="URL">
+      <value string="/CcgMembers" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="close" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate, br" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="OpenIdConnect.nonce.icD04gQJk0AUokkvrJ6DXrT3mLbaG5RPAg538%2FY0dLo%3D=N3NYMWJ2bTQ3TndrTVVScFZPU3NyazQ5TDJwU0NFekNtQVNCbFlCU3VYdWlmdmJlam1LTURjU1U0X0JfUHdYT1FvaG1tTklFMXJLV29STzAyUVpJWC1DeFN4X1ZQZEJ6ZDZkNFd0dlJZbDFMQ2pSNzFueEtIMDFnd3gyMDNFTWlXLTVvV2hCc1JsSzItLUFveHY3bGFFbHZOMFd5TEtFVXFhdnBmY29Mdk5aZVYyNW56N1U0b3dHYjh3R1ZkSnE4TkRkMGw0ZWp5NzlBQ01sc1FVY2VWeUVTbjMycjdxM3ZESjg1Z2phRGhaWQ%3D%3D; OpenIdConnect.nonce.uunq2298ASLzAQRNSLiVHZicxe4JfNvSE0UhQpjq1Pw%3D=SGFXb1A0WnFXNFNRWEtjR0ZhX0J2SHVBZmM2OFBFT2NTdUQyNW9wMWdNSkZxZUx4NHU0dzZBVHpGQV8zZENLZVQ4UFdEWXpuQWFlRGhoNHhMR1NlbkNxM3dlN0s1dDhrQ3Q4SnJ1N1JjZFphYVlvU3JfX0xDV1g3NFBldHpjQWV1TzdsTldPWFhfc0x4TTNyZ1NqbjBqWnVzcnlYRkJMbEJyLVA1RjNfQ09tRmhOSWJmcVNLY29zM0F0S053Y25MYUFlTHJvVXJiMHB6LUU0aWg0cnBYbjBTSDVFR0FsbHpvVDcyRTZpbDJHMA%3D%3D; OpenIdConnect.nonce.4B1EGJXsKmeyy2JquRE0XoF%2Frn0AZkI4CVoLlytv2wE%3D=SG9SdUdxaHlvUDZCalZqaUZQTF9EYVY0djlKTFhpQ2ZhU3pFQzkyNzFCYWV4dEpWMDdFaWluc2NXVTJyZkhYZ2lPdzB4WVRlRUY0dGpmZTlPTVJhTnFUWk85SENQWjc0ZXAyT0RDOEQ0eV9ST3R5Mnc4ZXR4bThWT0I4TWFNdVZkdHhrTmh5b2o4WDRnNWYzTlEwdWU5NmVUOFpUMTBOQndwemhmZUI3VHBENVd0NHRhWkNoY25pdzNiSjJUNUhxSVhVZGU5ZnlZamV4bTdLRUI2N3NCUnVjQjFMeFc5aF9pT0FBUTRpMVY3bw%3D%3D; .AspNet.Cookies=djRAqO0iSHkzM4yRn97yiJf2U7j5ULgUqy6WIHAoBcyqFxrYIamkC0xICDsDVYUxgmz5uE2rHZPJXp94IvPuR7OODVgbZiDQeWALVT5F4jrXSVjrixhgrDOdxPOsetBWGxHLjef3J7kjz4zPxZs_E59KvqzLs-dCYD6K-jMo70_Ko17EoMbbMAzuBO4kSmSss4aN6ugzaKkxpt8yneThuSTbO1CoY3yMupbSrg162TIxzzdAnCupANqAMf5HhblFFaYj6yrSCyGKFF9umjnFU_hMZ_xucU0EwXuPzoJIFHByMzqGIMHCsHtxgXjDGplTFpCTS7EgjhpiAjMm4NQXi7KhhIy5KB9s8eTTkVpiqO3lSTboBUUKKFdLVRLoen3hCpbltpQVpyqSs34dS8qivi91Xa0Xu9l1gROA8al5XSLvnhgR5PlV8kNB8izC_UMNvqrPFSHJqv12PVRu3zk9pDL9qlimu1AuiECLBVXtER3uBeFUzeey7AMk5fIYejpN_2iASUD3H_qzn4w7eg90w8O1LFAiF36c0OPpwlSWCBO50DaaCIe1YqY32m-FwnWuZmVEcR5OjK-XSTrmO5iWR1YxG4fF15hf71YCIDcEYGlYQnDi7G7muo4OunKI6eZrKPAQinjmD5gStKWI5peMvZuT1WrM7BncGYr3WLaqM4cUm8nOpmRdgWE3MwGtn9AkYOd3EBdymhk-Qy4wRYw96OMgVBZhGGfYhkgOqH0j6gdmjOech53Bj2uRMm73qOh_i5ORLbPEUa3GlcHm-PUl62OMVeHPOw0oT68Lg7ZHHTNieZ3XD_r2CCinaeP90120OBQKMgAAFz87rB1U4h-EWIaAgmMzV3f0HHlay0dVVN2chan0T0pelcOXUh1_LEaATwP4JZKAaisotcaUYFs7bB7fV2W5eUNi8FooHifc3ym3iOmLd-VBhfAIjjSDNbkBWkPqBaX3w4iM6SIs7-fELH2mpv4QdlXDz3T4TpZ9K51Z66SEOajgbh_VCglhnbhwRkilwPP89j2DovdvH3zXSb2IguTGiS80sxC40e-WEVF0eVRgEncqPaZ7gdyflnXhPiJ1N_J1OOVI47WseFfhBmEsCxkrGeLY1cM-TTECHUbiy9df1z9bWIiQmFhB7aL_qtlj81sXJqHzXnvhlxZN3LYBU1h7ZN76kpbOQTtFVUiP27TgW001F0oNyTyvM3UxuFzYBXQHTHQ5GreuuKa6sQ" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:44393" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="https://localhost:44393/Admin" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134" />
+    </item>
+    <item name="HTTP_UPGRADE_INSECURE_REQUESTS">
+      <value string="1" />
+    </item>
+    <item name="HTTP_APPLICATIONINSIGHTS_REQUESTTRACKINGTELEMETRYMODULE_ROOTREQUEST_ID">
+      <value string="c8a6ce7c-7763-461e-9045-85a1da260ab6" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="getAll">
+      <value string="True" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="OpenIdConnect.nonce.icD04gQJk0AUokkvrJ6DXrT3mLbaG5RPAg538%2FY0dLo%3D">
+      <value string="N3NYMWJ2bTQ3TndrTVVScFZPU3NyazQ5TDJwU0NFekNtQVNCbFlCU3VYdWlmdmJlam1LTURjU1U0X0JfUHdYT1FvaG1tTklFMXJLV29STzAyUVpJWC1DeFN4X1ZQZEJ6ZDZkNFd0dlJZbDFMQ2pSNzFueEtIMDFnd3gyMDNFTWlXLTVvV2hCc1JsSzItLUFveHY3bGFFbHZOMFd5TEtFVXFhdnBmY29Mdk5aZVYyNW56N1U0b3dHYjh3R1ZkSnE4TkRkMGw0ZWp5NzlBQ01sc1FVY2VWeUVTbjMycjdxM3ZESjg1Z2phRGhaWQ%3D%3D" />
+    </item>
+    <item name="OpenIdConnect.nonce.uunq2298ASLzAQRNSLiVHZicxe4JfNvSE0UhQpjq1Pw%3D">
+      <value string="SGFXb1A0WnFXNFNRWEtjR0ZhX0J2SHVBZmM2OFBFT2NTdUQyNW9wMWdNSkZxZUx4NHU0dzZBVHpGQV8zZENLZVQ4UFdEWXpuQWFlRGhoNHhMR1NlbkNxM3dlN0s1dDhrQ3Q4SnJ1N1JjZFphYVlvU3JfX0xDV1g3NFBldHpjQWV1TzdsTldPWFhfc0x4TTNyZ1NqbjBqWnVzcnlYRkJMbEJyLVA1RjNfQ09tRmhOSWJmcVNLY29zM0F0S053Y25MYUFlTHJvVXJiMHB6LUU0aWg0cnBYbjBTSDVFR0FsbHpvVDcyRTZpbDJHMA%3D%3D" />
+    </item>
+    <item name="OpenIdConnect.nonce.4B1EGJXsKmeyy2JquRE0XoF%2Frn0AZkI4CVoLlytv2wE%3D">
+      <value string="SG9SdUdxaHlvUDZCalZqaUZQTF9EYVY0djlKTFhpQ2ZhU3pFQzkyNzFCYWV4dEpWMDdFaWluc2NXVTJyZkhYZ2lPdzB4WVRlRUY0dGpmZTlPTVJhTnFUWk85SENQWjc0ZXAyT0RDOEQ0eV9ST3R5Mnc4ZXR4bThWT0I4TWFNdVZkdHhrTmh5b2o4WDRnNWYzTlEwdWU5NmVUOFpUMTBOQndwemhmZUI3VHBENVd0NHRhWkNoY25pdzNiSjJUNUhxSVhVZGU5ZnlZamV4bTdLRUI2N3NCUnVjQjFMeFc5aF9pT0FBUTRpMVY3bw%3D%3D" />
+    </item>
+    <item name=".AspNet.Cookies">
+      <value string="djRAqO0iSHkzM4yRn97yiJf2U7j5ULgUqy6WIHAoBcyqFxrYIamkC0xICDsDVYUxgmz5uE2rHZPJXp94IvPuR7OODVgbZiDQeWALVT5F4jrXSVjrixhgrDOdxPOsetBWGxHLjef3J7kjz4zPxZs_E59KvqzLs-dCYD6K-jMo70_Ko17EoMbbMAzuBO4kSmSss4aN6ugzaKkxpt8yneThuSTbO1CoY3yMupbSrg162TIxzzdAnCupANqAMf5HhblFFaYj6yrSCyGKFF9umjnFU_hMZ_xucU0EwXuPzoJIFHByMzqGIMHCsHtxgXjDGplTFpCTS7EgjhpiAjMm4NQXi7KhhIy5KB9s8eTTkVpiqO3lSTboBUUKKFdLVRLoen3hCpbltpQVpyqSs34dS8qivi91Xa0Xu9l1gROA8al5XSLvnhgR5PlV8kNB8izC_UMNvqrPFSHJqv12PVRu3zk9pDL9qlimu1AuiECLBVXtER3uBeFUzeey7AMk5fIYejpN_2iASUD3H_qzn4w7eg90w8O1LFAiF36c0OPpwlSWCBO50DaaCIe1YqY32m-FwnWuZmVEcR5OjK-XSTrmO5iWR1YxG4fF15hf71YCIDcEYGlYQnDi7G7muo4OunKI6eZrKPAQinjmD5gStKWI5peMvZuT1WrM7BncGYr3WLaqM4cUm8nOpmRdgWE3MwGtn9AkYOd3EBdymhk-Qy4wRYw96OMgVBZhGGfYhkgOqH0j6gdmjOech53Bj2uRMm73qOh_i5ORLbPEUa3GlcHm-PUl62OMVeHPOw0oT68Lg7ZHHTNieZ3XD_r2CCinaeP90120OBQKMgAAFz87rB1U4h-EWIaAgmMzV3f0HHlay0dVVN2chan0T0pelcOXUh1_LEaATwP4JZKAaisotcaUYFs7bB7fV2W5eUNi8FooHifc3ym3iOmLd-VBhfAIjjSDNbkBWkPqBaX3w4iM6SIs7-fELH2mpv4QdlXDz3T4TpZ9K51Z66SEOajgbh_VCglhnbhwRkilwPP89j2DovdvH3zXSb2IguTGiS80sxC40e-WEVF0eVRgEncqPaZ7gdyflnXhPiJ1N_J1OOVI47WseFfhBmEsCxkrGeLY1cM-TTECHUbiy9df1z9bWIiQmFhB7aL_qtlj81sXJqHzXnvhlxZN3LYBU1h7ZN76kpbOQTtFVUiP27TgW001F0oNyTyvM3UxuFzYBXQHTHQ5GreuuKa6sQ" />
+    </item>
+  </cookies>
+</error>

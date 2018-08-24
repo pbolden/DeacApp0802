@@ -1,0 +1,16 @@
+﻿@using System.Collections
+@model IEnumerable<string>
+
+<div>
+    <p>Roles:</p>
+    <ul>
+        @foreach (var role in Model)
+        {
+            <li>
+                @Html.DisplayFor(r => role)
+            </li>
+        }
+    </ul>
+</div>
+
+

@@ -1,0 +1,165 @@
+﻿@using DeaconCCGManagement.ViewModels
+@model TextMessageViewModel
+
+@{
+    ViewBag.Title = "Send Text Message";
+}
+
+@Html.Partial("_Breadcrumbs", "Send Text Message")
+
+@if (Model.Bulk)
+{
+    <h2>Send Text Message</h2>
+}
+else
+{
+    <h2>Send a Text Message to @Model.TextMessageContact.MemberFullName</h2>
+}
+
+
+@if (Model.Bulk)
+{
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse"
+                data-target="#listMembers" id="btnShowHideMembers">
+            <span id="btnIcon" class="glyphicon glyphicon-eye-open"></span>
+            <span id="spanShowHideMembers">Show Selected Members</span>
+        </button>
+    </p>
+    <div class="collapse" id="listMembers">
+        <div class="well">
+            <p>
+                @{
+                    int num = 1;
+                    foreach (var item in Model.Members)
+                    {
+                        <label>@num. @item.MemberFullName</label>
+                        <br />
+                        num++;
+                    }
+                }
+            </p>
+        </div>
+    </div>
+
+    <br />
+}
+
+
+
+@using (Html.BeginForm("SendTextMessage", "Sms", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.TextMessageContact.MemberId)
+    @Html.HiddenFor(m => m.TextMessageContact.MemberFullName)
+    @Html.HiddenFor(m => m.TextMessageContact.ToPhoneNumber)
+    @Html.HiddenFor(m => m.TextMessageContact.DateSent)
+    @Html.HiddenFor(m => m.Bulk)
+
+
+    // for bulk only
+    if (Model.Bulk)
+    {
+        for (int i = 0; i < Model.Members.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => modelItem.Members[i].MemberId)
+            @Html.HiddenFor(modelItem => modelItem.Members[i].MemberFullName)
+        }
+        @Html.HiddenFor(t => t.TextMessageContact.ToPhoneNumber)
+    }
+
+
+
+    <div class="well well-md">
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            @*Show message if text has been sent*@
+            @if (Model.TextMessageSent)
+            {
+                <h3 class="text-dark">Check your notifications for the status of your text message(s).</h3>
+            }
+
+            @if (Model.TextMessageContact.MemberFullName != null)
+            {
+                <h4>@Model.TextMessageContact.MemberFullName</h4>
+            }
+
+
+
+
+            @if (Model.IsTest && !Model.Bulk)
+            {
+                <p class="alert alert-warning">
+                    This is for testing only.
+                </p>
+
+                @* for testing only
+                    TODO: set up a bool prop so admin can turn this
+                    off and on*@
+                <div class="form-group">
+                    @Html.LabelFor(t => t.TestFromNumber, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(t => t.TestFromNumber, new { @class = "form-control phoneMask" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(t => t.TestToNumber, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(t => t.TestToNumber, new { @class = "form-control phoneMask" })
+                    </div>
+                </div>
+            }
+            else
+            {
+                if (!Model.Bulk)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TextMessageContact.ToPhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.TextMessageContact.ToPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                }
+
+            }
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TextMessageContact.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TextMessageContact.Message, new { htmlAttributes = new { @class = "form-control", autofocus = "autofocus", id = "message" } })
+                    @Html.ValidationMessageFor(model => model.TextMessageContact.Message, "", new { @class = "text-danger" })
+                    <div class="remaining">Characters Remaining: <span id="charCount">160</span></div>
+                </div>
+            </div>
+
+            @*'Send' button will not display if message has already been sent.*@
+            @if (!Model.TextMessageSent)
+            {
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Send" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+}
+
+
+@Html.Partial("_BackToListLink")
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/App/RemainingCharsCount.js")
+    @Scripts.Render("~/Scripts/jquery.maskedinput.js")
+    @Scripts.Render("~/Scripts/App/PhoneMask.js")
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+}

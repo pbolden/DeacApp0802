@@ -1,0 +1,80 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models@model DeaconCCGManagement.ViewModels.DeleteContactRecordViewModel
+
+@{
+    ViewBag.Title = "Delete";
+    string ControllerName = "ContactRecords";
+    string listViewName = "Contact Records";
+}
+
+
+@{ 
+    // Decodes html. example: &quot; ==> "
+    // Necessary because all text entered by user is html encoded
+    Model.Subject = WebUtility.HtmlDecode(Model.Subject);
+    Model.Comments = WebUtility.HtmlDecode(Model.Comments);
+}
+
+@Html.Partial("_Breadcrumbs", "Delete Record")
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Delete Contact Record</h4>
+    <hr />
+    <div class="well well-md">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PassAlong)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PassAlong)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactTypeId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactTypeId)
+            </dd>
+
+        </dl>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ReturnUrl)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default"/>
+        </div>
+    }
+    <br />
+@Html.Partial("_BackToListLink")
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/App/SetBackToListUrlAsReturnUrl.js")
+}

@@ -1,0 +1,24 @@
+﻿SQL Injection Threat
+
+
+Safeguards in place to protect against SQL Injection:
+
+-All forms use an anti-forgery token. This prevents anyone from submitting
+	form data outside of the app. 
+-All data submitted by the user is HTML encoded before it is sent to the web page.
+-All data is validated at the client and server side.
+-Users have to log in before they can submit data.
+
+Notes:
+
+*LINQ to Entity statements run on the server side so the client will not
+	send SQL statements in requests.
+*we're using hundreds of LINQ to Entity statements so it 
+	would be very time-consuming to convert those to stored procedures.
+*stored procedures would require plain SQL which would defeat the point
+	of LINQ. I believe that would be unnecessary anyway.
+
+
+
+Is there something else we can do short of converting all LINQ statements
+	to stored procedures to help prevent SQL injection attacks?

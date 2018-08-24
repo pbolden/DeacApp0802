@@ -1,0 +1,26 @@
+﻿// TODO: Add dummy member data to the spreadsheet. Use names of guys in the dorm.
+// TODO: Multiple select members feature
+TODO: return url
+TODO: Summary report for deacons
+// TODO: Manually add contact record
+TODO: Setup email feature
+// TODO: Move offlinedev flag to config file
+// TODO: Mock phone call method
+// TODO: Make list of jQuery widgets we need
+// TODO: User view models
+// TODO: Edit user views
+// TODO: View all contact logs in deacon's CCG
+// TODO: View contact logs for each member
+// TODO: Action links out of phone numbers
+// TODO: TestDialog
+// TODO: set up dialog to work with phone numbers links
+	     user will be able to select between phone call or text msg
+// TODO: datepicker
+// TODO: input mask 
+TODO: picture upload
+// TODO: Hook up view models in contact records controller
+TODO: Pass along feature should email pastor
+TODO: Set up push notifications
+TODO: Twilio test
+TODO: Email test
+TODO: phone call test

@@ -1,0 +1,54 @@
+﻿
+@using DeaconCCGManagement.ViewModels
+@model IEnumerable<ContactTypeViewModel>
+
+@{
+    ViewBag.Title = "Contact Types";
+
+    //string backToListUrl = Request?.Url?.PathAndQuery;
+
+    var createButtonVM = new CreateButtonViewModel
+    {
+        ControllerName = "ContactTypes",
+    };
+
+}
+
+@Html.Partial("_Breadcrumbs", "Contact Types")
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.Partial("_CreateButton", createButtonVM)
+</p>
+<table class="table">
+    <tr class="info">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            <div class="dropdown">
+               @Html.Partial("_DropdownMenuToggleButton")
+
+                <ul class="dropdown-menu pull-right">
+                    <li>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</li>
+                    <li>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/SetBackToListLink.js")
+}

@@ -1,0 +1,18 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+
+@{
+    ViewBag.Title = "Editing Permission Denied";
+}
+
+@Html.Partial("_Breadcrumbs", "Edit Record Denied")
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-warning">
+    <p>
+        Sorry, only the deacon who made this contact
+        record is allowed to edit it.
+    </p>
+</div>
+

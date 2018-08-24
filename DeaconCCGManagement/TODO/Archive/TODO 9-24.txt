@@ -1,0 +1,10 @@
+﻿TODO
+
+*log errors in database
+*export data as xls/csv file
+*test custom error page
+*more refactoring and comments
+*add link to admin console for error
+*redo console
+*more testing
+*AntiXss

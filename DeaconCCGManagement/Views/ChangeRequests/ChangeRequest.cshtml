@@ -1,0 +1,234 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@model ChangeRequestViewModel
+
+@{
+    ViewBag.Title = "Change Request";
+}
+
+@Html.Partial("_Breadcrumbs", "Change Request")
+
+@*@Html.Partial("_DownloadAsPdf", "Deacon Change Request")*@
+
+
+<!--download as pdf-->
+@using (Html.BeginForm("DownloadChangeRequestAsPdf", "PDF", FormMethod.Get))
+{
+
+    @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+        <div class="col-md-offset-0 col-md-12">
+            <button type="submit" class="btn btn-primary">
+                Download As PDF <i class="fa fa-download"></i>
+            </button>
+        </div>
+    </div>
+}<!-- / download as pdf-->
+
+<br /><br />
+<h2>Change Request<small> for @Model.CurrentMemberData.FullName</small></h2>
+
+
+
+<div class="container">
+    <div class="well well-md">
+
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Deacon")
+            </dt>
+            <dd>
+                <a href="@Url.Action("Details", "CcgAppUsers", new {id = Model.AppUserFrom.Id})">
+                    @Html.DisplayFor(model => model.AppUserFrom.FullName)
+                </a>
+
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Change Request Manager(s)")
+            </dt>
+            <dd>
+                <ul class="list-group-item" style="background-color: #F5F5F5">
+                    @foreach (var user in Model.AppUsersTo)
+                    {
+                        <li>@Html.DisplayName(user.FullName)</li>
+                    }
+                </ul>
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CurrentMemberData.IndividualId)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CurrentMemberData.IndividualId)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Member's Name")
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CurrentMemberData.FullName)
+            </dd>
+        </dl>
+    </div>
+</div>
+
+
+
+<div class="container">
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr class="info">
+                <th>@Html.DisplayName("Field")</th>
+                <th>@Html.DisplayName("Current Data")</th>
+                <th>@Html.DisplayName("New Data")</th>
+            </tr>
+        </thead>
+
+        @{
+            // for adding a class to highlight rows if data has changed
+            string rowClass = string.Empty;
+            string className = "highlight-row";
+        }
+
+        @{
+            rowClass = Model.CurrentMemberData.LastName != Model.NewMemberData.LastName ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.LastName)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.LastName)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.LastName)</td>
+        </tr>
+
+
+        @{
+            rowClass = Model.CurrentMemberData.FirstName != Model.NewMemberData.FirstName ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.FirstName)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.FirstName)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.FirstName)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.Title != Model.NewMemberData.Title ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.Title)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.Title)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.Title)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.Suffix != Model.NewMemberData.Suffix ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.Suffix)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.Suffix)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.Suffix)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.Address != Model.NewMemberData.Address ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.Address)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.Address)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.Address)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.City != Model.NewMemberData.City ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.City)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.City)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.City)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.State != Model.NewMemberData.State ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.State)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.State)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.State)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.ZipCode != Model.NewMemberData.ZipCode ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.ZipCode)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.ZipCode)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.ZipCode)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.PhoneNumber != Model.NewMemberData.PhoneNumber ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.PhoneNumber)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.PhoneNumber)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.PhoneNumber)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.CellPhoneNumber != Model.NewMemberData.CellPhoneNumber ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.CellPhoneNumber)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.CellPhoneNumber)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.CellPhoneNumber)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.BirthDate != Model.NewMemberData.BirthDate ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.BirthDate)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.BirthDate)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.BirthDate)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.EmailAddress != Model.NewMemberData.EmailAddress ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.EmailAddress)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.EmailAddress)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.EmailAddress)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.IsMemberActive != Model.NewMemberData.IsMemberActive ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.IsMemberActive)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.IsMemberActive)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.IsMemberActive)</td>
+        </tr>
+
+        @{
+            rowClass = Model.CurrentMemberData.AnniversaryDate != Model.NewMemberData.AnniversaryDate ? className : string.Empty;
+        }
+        <tr class="@rowClass">
+            <td>@Html.DisplayNameFor(model => model.NewMemberData.AnniversaryDate)</td>
+            <td>@Html.DisplayFor(model => model.CurrentMemberData.AnniversaryDate)</td>
+            <td>@Html.DisplayFor(model => model.NewMemberData.AnniversaryDate)</td>
+        </tr>
+
+    </table>
+
+   
+    @Html.Partial("_BackToListLink")
+   
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+}

@@ -1,0 +1,10 @@
+﻿*deacons should only see prayer requests for their CCG
+*admin, leadership and pastor shall see all CCGs option to sort
+*Pass along contacts: 
+	-second table for contacts that have been followed up.
+	-allow admin to purge that second table
+	-number display in view should only reflect the primary table
+
+
+*To delete members, the contact records and pass along records related to the member
+	should be deleted first. 

@@ -1,0 +1,16 @@
+﻿@model DeaconCCGManagement.ViewModels.DescriptionWithLinkPanel
+
+
+     <div class="col-sm-4">
+        <div class="panel panel-info" align="center">
+            <a href="@Model.href" class="transition">                          
+                @*<span class="@Model.Glyph" aria-hidden="true"></span>*@
+                <img src="@Model.ImageSrc" height="80" width="80" style="margin-top:10px"/>
+                <p>
+                    <span class="panelTitle">@Model.Title</span>
+                </p>                
+            </a>
+            <p>@Model.Description</p>
+        </div>
+     </div>
+

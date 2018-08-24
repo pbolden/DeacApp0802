@@ -1,0 +1,32 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.ViewModels
+@model ItemsPerPageSelect
+
+@{
+    Model.ItemsPerPage = new[] { 5, 10, 25, 50, 100 }; ;
+}
+
+<!--Items per page-->
+<div class="btn-group dropup">
+
+    @Html.Partial("_ItemsPerPageButton", "Items Per Page")
+
+    <ul class="dropdown-menu">
+        @foreach (var numItems in Model.ItemsPerPage)
+        {
+            <li>
+                <a href="@ViewHelper.GetUrlWithPerPageQuery(numItems, Model.AbsPath, Model.QueryStrings)">@numItems</a>
+            </li>
+        }
+
+        @if (Model.ListAllOption) 
+        {
+
+            <li role="separator" class="divider"></li>
+            <li>
+                <a href="@ViewHelper.GetUrlWithPerPageQuery(Model.AbsPath, Model.QueryStrings, "listAll")">@Model.ListAllText</a>
+            </li>
+        }
+    </ul>
+</div> <!-- / Items per page-->
+

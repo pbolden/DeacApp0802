@@ -1,0 +1,34 @@
+﻿@model DeaconCCGManagement.ViewModels.TextOrCallModalDialog
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true">
+            <!--The 'x' in the top right corner-->
+            &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+            Call or Text @Model.FirstName @Model.LastName?
+        </h4>
+    </div>
+    <div class="modal-body" align="center">
+
+        <a href=@Url.Action("CallMember", "PhoneCall", new {id = Model.Id, number = Model.Number }) class="btn btn-primary">
+            <i class="fa fa-phone"></i> Call
+        </a>
+
+        <a href=@Url.Action("SendTextMessage", "Sms", new { id = Model.Id, number = Model.Number }) class="btn btn-primary">
+            <span class="glyphicon glyphicon-phone"></span> Text
+        </a>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                data-dismiss="modal">
+            Close
+        </button>
+    </div>
+</div>
+
+
+
+
+

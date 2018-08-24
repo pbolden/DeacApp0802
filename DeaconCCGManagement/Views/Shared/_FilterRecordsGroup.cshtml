@@ -1,0 +1,35 @@
+﻿@model DeaconCCGManagement.ViewModels.FilterRecordsGroup
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            @*<div class="well input-group" style="padding: 0em; margin-bottom: 1em; margin-top: 0; margin-left: 0em; margin-bottom: 0em">*@
+            <div class="well input-group" style="padding: .7em; margin-bottom: 1em; margin-top: 0; margin-left: -1em; margin-bottom: .5em">
+
+                <div>
+                    @if (Model.FilterCCGs)
+                    {
+                        @Html.DropDownList("CcgId", Model.CCGs)
+                        <text>&nbsp;</text>
+                    }
+                </div>
+                <p></p>
+                <div>
+                    @Html.EnumDropDownListFor(pr => Model.DateRangeFilter,
+                            new { Name = "dateRangeFilter" })
+                    &nbsp;
+                    <button type="submit" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-filter"></span>
+                    </button>
+
+                </div>
+
+                <div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

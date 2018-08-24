@@ -1,0 +1,20 @@
+﻿TODO: add resize image functions on azure
+	-save as regular size and thumbnail (append _thumbnail)
+TODO: test everything
+
+TODO: how to do the reports
+TODO: research how to pass data from controller to controller 
+	w/o TempData
+TODO: bundle not working
+TODO: use WebUtility with AntiXss
+
+
+TODO: what is the best approach to setting up app settings
+TODO: tighten up email
+TODO: tighten up send sms
+TODO: add notifications
+TODO: ckeditor can't use space for few seconds
+TODO: check breadcrumbs in email view
+TODO: try catch repository: System.Data.Entity.Validation.DbEntityValidationException
+TOOO: get elmah working and log all exceptions
+

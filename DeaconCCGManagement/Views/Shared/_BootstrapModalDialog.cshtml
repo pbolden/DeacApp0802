@@ -1,0 +1,36 @@
+﻿<!-- Button trigger modal -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    Click for modal dialog fun
+</button>
+
+
+<!-- Modal dialog -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    @ViewBag.Message
+                    This is the modal dialog!
+                </h4>
+            </div>
+            <div class="modal-body">
+                Quite exciting, isn't it?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Acknowledge how exciting this is
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

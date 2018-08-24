@@ -1,0 +1,47 @@
+﻿//TODO: Make Paul a video about the SendGrid set up
+//TODO: Set up phone call test
+//TODO: Set up Twilio test
+//TODO: Pass along to pastor feature
+TODO: helper method to auto record info about
+	  member and user when adding contact records
+//TODO: Prayer request 
+		○ A contact record
+		○ Unless marked as private, all users should be able to access the requests
+		○ Should have a filter for recent prayer requests. 
+		  Eg, Last 2 weeks of a range of dates.
+TODO: Move pagination code to separate class
+
+//TODO: Phone call-
+		*Telephone number link should open page
+		*Page should allow user to enter data about call
+		*after page loads, phone call initiated
+		*No service will be used. it will use default phone service
+		*no need to check if user is on a phone
+			If user is on desktop, a prompt for Skype will pop up. User
+			can just click cancel.
+		*upon call complete, user can enter info about call
+//TODO: File upload		
+TODO: Mass email
+TODO: Mass text
+
+//TODO: Display count of chars for the text message
+//TODO: Set up sample calendar
+
+TODO: refactor CcgMembers controller
+
+//TODO: change request  
+
+//TODO: migration
+
+//TODO: deny edit permission for prayer requests if user
+		didn't create it
+
+TODO: content management system for descriptions
+
+TODO: send push notification to deacon when pastor writes follow up
+
+TODO: Work out a strategy to prevent querying many thousands of contact
+	records at one time. If we have 100,000 records and an admin queries
+	all of them, we don't want all of those records loading into the server's memory.
+
+TODO: auto archive after one year??

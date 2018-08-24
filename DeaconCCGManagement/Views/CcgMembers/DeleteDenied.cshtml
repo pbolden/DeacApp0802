@@ -1,0 +1,17 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+
+@{
+    ViewBag.Title = "Delete Permission Denied";
+}
+
+@Html.Partial("_Breadcrumbs", "Delete Denied")
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-warning">
+    <p>
+        Sorry, only administrators are allowed to delete a member.
+    </p>
+</div>
+

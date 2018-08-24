@@ -1,0 +1,41 @@
+﻿Breadcrumb notes
+
+Purpose: to make breadcrumbs "on the fly." Some pages
+can be reached by different paths so static breadcrumbs
+may not accurately represent the path to the current page.
+
+
+* no more than 8 links per breadcrumbs. otherwise it will
+  be too long. 
+* if more than 8, truncate with an ellipses
+  eg., ... / foo2 / foo3 / foo4 / foo5 / foo6 / foo7 / foo8
+* if truncated, when user goes back the truncated should
+	show back up. 
+	eg., ... / foo2 / foo3 / foo4 / foo5 / foo6 / foo7 / foo8
+	User clicks on 'foo6'; this will make foo1 show in foo6 page:
+	foo1 / foo2 / foo3 / foo4 / foo5 / foo6
+* if user circles around to a page by a different path, remove all
+	pages after that.
+	eg., foo1 / foo2 / foo3 / foo4 / foo5 / foo6 / foo7
+	User goes to foo4 by some other route. foo5 - foo7
+	should be removed
+* when user goes back, last view(s) should be removed
+	eg., foo1 / foo2 / foo3 / foo4 / foo5
+	User clicks on foo4, foo5 should be removed from list.
+	user clicks on foo3, foo4 and foo5 should be removed
+* a page should not be in the list twice
+
+** ALL GET and POST requests will need to send back the breadcrumb guid
+	
+* instantiate breadcrumb service object in base controller
+* when user goes home, all breadcrumbs are cleared from list
+* use ViewBag property for breadcrumb guid
+* all views should have a unique name set assigned to a variable 
+	within a Razor code block
+* the url for all views should be set in controller by:
+	Request?.Url?.PathAndQuery
+	-this gets the url with the query string for get requests
+	-no need to get posted data for post requests
+	-assign to viewbag in all action methods
+	-in post action methods, do not add breadcrumb
+* use view partial to render breadcrumbs

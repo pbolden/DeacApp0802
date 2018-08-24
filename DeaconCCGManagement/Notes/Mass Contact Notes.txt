@@ -1,0 +1,21 @@
+﻿Mass Contact feature
+
+contact selected members button
+
+Need a controller for bulk contacts
+
+User will select members either by the select all
+check box or one at a time. Then user can click
+contact selected members button.
+This will lead to a mass contact view.
+
+Mass contact view:
+	drop down of contacts (email, text, newsletter)
+	if email selected, use email controller
+	same for 'text'
+	Need email and sms view models
+		props for mass contact (bool) and list of members
+	if mass contact is true, send back to mass contact controller
+	show/hide list of members (we can do this with bootstrap)
+
+need service class for email and sms

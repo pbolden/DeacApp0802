@@ -1,0 +1,60 @@
+﻿<!-- Modal dialog to confirm photo delete -->
+
+@{
+    string memberId = ViewBag.MemberId == null ? null : ViewBag.MemberId.ToString();
+    string userId = ViewBag.UserId;
+}
+
+
+<div class="modal fade" id="confirmDelDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div id="modalDialogContent">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                        <!--The 'x' in the top right corner-->
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Are you sure you want to delete @ViewBag.FullName's photo?
+                    </h4>
+                </div>
+
+                <div class="modal-body" align="center">
+
+                    @using (Html.BeginForm("DeletePhoto", "MemberPhoto", FormMethod.Post))
+                    {
+                        if (memberId != null)
+                        {
+                            @Html.Hidden("memberId", memberId);
+                        }
+                        else
+                        {
+                            @Html.Hidden("userId", userId);
+                        }
+
+                        <button type="submit" class="btn btn-success">
+                            <span class="glyphicon glyphicon-ok-circle"></span> Yes
+                        </button>
+
+                        <button type="button" class="btn btn-danger"
+                                data-dismiss="modal">
+                            <span class="glyphicon glyphicon-ban-circle"></span> No
+                        </button>
+                    }
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                            data-dismiss="modal">
+                        Close
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

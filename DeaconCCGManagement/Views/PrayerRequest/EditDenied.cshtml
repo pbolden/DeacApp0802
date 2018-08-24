@@ -1,0 +1,25 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+
+@{
+    ViewBag.Title = "Editing Permission Denied";
+}
+
+@Html.Partial("_Breadcrumbs", "Edit Prayer Requests Denied")
+
+<h2>@ViewBag.Title</h2>
+
+<div class="alert alert-warning">
+    <p>
+        Sorry, only the deacon who made this prayer request
+        is allowed to edit it.
+    </p>
+</div>
+
+
+@Html.Partial("_BackToListLink")
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+}

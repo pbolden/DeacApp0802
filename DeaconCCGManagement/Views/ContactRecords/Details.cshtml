@@ -1,0 +1,125 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@model DetailsContactRecordViewModel
+
+@{
+    ViewBag.Title = "Contact Record Details";
+}
+
+@Html.Partial("_Breadcrumbs", "Record Details")
+
+ @{  
+    // Decodes html. example: &quot; ==> "
+    // Necessary because all text entered by user is html encoded
+    Model.Subject = WebUtility.HtmlDecode(Model.Subject);
+    Model.Comments = WebUtility.HtmlDecode(Model.Comments);
+    Model.PassAlongComments = WebUtility.HtmlDecode(Model.PassAlongComments);
+    Model.PassAlongFollowUpComments = WebUtility.HtmlDecode(Model.PassAlongFollowUpComments);
+  }
+
+
+
+<h2>@ViewBag.Title</h2>
+<h4>@Model.MemberFullName</h4>
+
+
+<div>
+
+    <div class="well well-md">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.MemberFullName)
+            </dt>
+            <dd>
+                <a href="@Url.Action("Details", "CcgMembers", new {id = Model.CCGMemberId})">
+                    @Html.DisplayFor(model => model.MemberFullName)
+                </a>
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Deacon")
+            </dt>
+            <dd>
+                <a href="@Url.Action("Details", "CcgAppUsers", new {id = Model.AppUserId})">
+                    @Html.DisplayFor(model => model.DeaconFullName)
+                </a>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Duration)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Duration)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PassAlong)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PassAlong)
+            </dd>
+
+            @if (Model.PassAlong)
+            {
+                <dt>                  
+                    @Html.DisplayNameFor(model => model.PassAlongComments)
+                </dt>
+                <dd>                    
+                    @Html.DisplayFor(model => model.PassAlongComments)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PassAlongFollowUpComments)
+                </dt>
+                <dd>                    
+                    @Html.DisplayFor(model => model.PassAlongFollowUpComments)
+                </dd>
+            }
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Subject)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>               
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactType.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactType.Name)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+</p>
+@Html.Partial("_BackToListLink")
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+}

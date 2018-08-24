@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Text Message Complete";
+}
+
+@Html.Partial("_Breadcrumbs", "Text Message Complete")
+
+
+@Html.ValidationSummary("", new { @class = "text-danger" })
+
+<h3 class="text-dark">Check your notifications for the status of your text message(s).</h3>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Home")
+</div>
+

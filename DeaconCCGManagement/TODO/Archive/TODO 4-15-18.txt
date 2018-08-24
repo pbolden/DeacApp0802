@@ -1,0 +1,29 @@
+﻿TODO:
+
+- Tighten up filter UI in views. Looks good in needs communion view.
+- Test search feature in prayer requests view
+- Test add/edit prayer requests
+- Test private comments
+- Delete prayer requests
+- badge for total records number?
+- contact type sort in contact for review
+- test follow up contact records for review
+- test archive feature
+- add total number of records to CCG Members
+- test download excel doc of contact records
+- Test add/edit contact records
+* replace icons for sections
+* tighten up admin console home view
+- add link to error page in admin
+- add breadcrumbs to calendar
+- test change requests
+- test add/edit contact types
+- add ccg namge to filter in filter box
+- send to archive in contact records
+* make sure all pagination looks the same
+* make sure right sections show up in home view for each role
+- use AntiXssEncoder for all add/updates
+* tighten up pass along contacts view
+- ccg filter should include deacon names
+- members in admin should have ccg filter
+

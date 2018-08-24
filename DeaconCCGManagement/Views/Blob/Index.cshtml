@@ -1,0 +1,95 @@
+﻿@model IEnumerable<DeaconCCGManagement.BlobStorage.BlobViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Blob Demo</h2>
+
+@*<h3>@Url.Action("RemoveBlob", "Blob")</h3>*@
+
+<div class="container">
+
+    @Html.ActionLink("Upload to Azure Blob", "UploadBlob", new { controller = "Blob" }, new { @class = "btn btn-link" })
+
+    <div class="table table-striped table-responsive">
+        <table id="tablex">
+            <thead>
+            <th></th>
+            <th>Container</th>
+            <th>File Name</th>
+            <th></th>
+            </thead>
+
+
+            <tbody>
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr id="row_@item.PrimaryUri">
+                            <td><img src="@item.Uri" alt="@item.Uri" height="100" width="100" /></td>
+                            <td>@item.BlobContainerName&nbsp;&nbsp;&nbsp;</td> 
+                            <td>@item.ActualFileName&nbsp;&nbsp;&nbsp;</td>
+
+
+                            <td><a href="@item.Uri">Download</a></td>
+                            @*<td>@Html.ActionLink("Download", "DownloadBlob", new { controller = "Blob", file = item.FileNameWithoutExt, extension = item.FileExtension }, new { @class = "btn btn-link"})</td>*@
+
+                            <td>
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                <input type="submit" href="#" class="btn btn-link" id="btndel" value="Remove" data-id="@item.ActualFileName" />
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+
+        </table>
+
+
+
+    </div>
+
+</div>
+
+@section scripts{
+    
+    
+    <script type="text/javascript">
+        //debugger
+        $(document).ready(function () {
+
+            //$('table tbody tr td input[type="submit"]').on("click", function () {
+            $('input[type="submit"]').on("click", function () {      
+           
+
+                var fileName = $(this).attr("data-id");
+                var ext = fileName.split('.').pop();
+                var file = fileName.substr(0, fileName.lastIndexOf('.'));
+                var tr = $(this).closest('tr');
+
+                var msgx = confirm("Are you sure you want to delete blob?");
+
+
+                var url = "/Blob/RemoveBlob";
+                if (msgx === true) {
+                    $.ajax({
+                        type: 'post',
+                        url: url,
+                        data: { file: file, extension: ext },
+                        success: function (response) {
+                            if (response === true) {
+                                tr.remove();
+                            }
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+    
+    }
+

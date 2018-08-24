@@ -1,0 +1,64 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@model DeaconCCGManagement.ViewModels.PrayerRequestViewModel
+
+@{
+    ViewBag.Title = "Prayer Request Details";
+}
+
+@{ 
+    Model.PassAlongComments = WebUtility.HtmlDecode(Model.PassAlongComments);
+    Model.PassAlongFollowUpComments = WebUtility.HtmlDecode(Model.PassAlongFollowUpComments);
+ }
+
+@Html.Partial("_Breadcrumbs", "Prayer Request Details")
+
+<h2>Prayer Request Details</h2>
+
+<div>
+    <h4>Prayer Request for @Model.MemberFullName</h4>
+    <hr />
+    <div class="well well-md">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ContactDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ContactDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.MemberFullName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MemberFullName)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Prayer Request")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Subject)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Comments)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Comments)
+            </dd>
+        </dl>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+</p>
+@Html.Partial("_BackToListLink")
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+}

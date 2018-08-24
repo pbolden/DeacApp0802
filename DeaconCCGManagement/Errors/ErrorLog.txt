@@ -1,0 +1,4 @@
+﻿Error Log
+
+* Select all members doesn't work after search
+* 

@@ -1,0 +1,34 @@
+﻿@model DeaconCCGManagement.ViewModels.DescriptionWithLinkPanel
+
+
+
+@*p {
+        word-break: break-all;
+        white-space: normal;
+    }*@
+
+<div class="col-sm-4">
+       <div class="panel panel-default panel-container" align="center" style="padding: 10px, 10px">
+           <a href="@Model.href" class="transition">
+               <img src="@Model.ImageSrc" height="80" width="80" />
+
+               <div class="panel-heading panelTitle">@Model.Title</div>
+            </a>
+               <div class="panel-body text-left">
+                   @Model.Description
+               </div>
+           <a href="@Model.href" class="btn btn-primary text-left">@Model.Title <span class="fa fa-chevron-circle-right"></span></a>
+       </div>
+    </div>
+
+@*<div class="col-sm-4">
+    <div class="card card-container" align="center" style="width: 35rem;">      
+        <div class="card-body">
+            <img src="@Model.ImageSrc" height="80" width="80" />
+            <h3 class="card-title">@Model.Title</h3>
+            <p class="card-text">@Model.Description</p>
+            <a href="@Model.href" class="btn btn-primary text-left">@Model.Title <span class="fa fa-chevron-circle-right"></span></a>
+        </div>
+    </div>
+</div>*@
+

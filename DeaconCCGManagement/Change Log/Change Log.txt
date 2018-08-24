@@ -1,0 +1,94 @@
+﻿
+Deacon App Change Log
+
+
+2-8-18
+
+
+
+1-28-18
+*Refactored Repository base class so each method uses a using statement
+*Removed DbContext field from UnitOfWork class
+*Edited all repository classes to put all data access code in using block.
+	Also to remove the constructor param for the data context since it's no longer needed.
+
+*Files edited:
+	CCGAuthorizeAttribute
+	ViewHelper
+	AuthHelper
+	DefaultController
+	DefaultService
+	ContactRecordsService
+	UnitOfWork
+	ALL repository classes (all files in DAL folder)
+	PassAlongContact
+	ContactRecord
+	BulkContactController
+	CcgAppUsersController
+	MemberPhotoService
+	CCGController
+	CcgMembersController
+	ChangeRequestsController
+	ContactRecordsController
+	PassAlongController
+	ContactRecordsService
+	ContactTypesController
+	EmailController
+	NeedsCommunionController
+	PrayerRequestController
+    public class SmsController : DefaultController
+	DatabaseSeeder
+	DatabaseSeederProduction
+	CcgMembersService
+	NeedsCommunionService
+	PhoneCallService
+	FileUploadService
+	PassAlongContacts
+
+
+9-21-17
+*Set up ELMAH for error logging
+*Set up CKEditor WYSIWIG editor so deacons can write and send html emails.
+*Download data as xls file
+
+
+9-16-17
+*Updated the admin console view
+*deacons can now filter by 'Needs Communion' for their own ccg
+*Pass along contacts will display total and 'not followed up' counts
+*Installed the NuGet package AntiXSS
+*Added the NuGet packages Rotativa.MVC and Rotativa.Core that generates pdf or image files out of url/action/view
+*Implemented Rotativa to download change requests and Needs Communion views as a pdf file.
+*updated Web.config for custom error handling 
+
+
+9-13-17
+*Set up the 'Needs Communion' feature. The deacons can now request communion for a member
+	and the admin will see a list. They can also filter and purge that list.
+*Added a property to some of the view models called 'ReturnUrl'. I use jQuery to 
+	assign this property the 'back to list' url that's stored in the browser's
+	session storage. After a user edits, creates, or deletes a record  they
+	will get redirected to the back-to-list url.
+*Finished the calendar feature. Deacons can now pull up a calendar of the members's
+	birthdays, wedding anniversaries, and joined-Zion anniversaries. Admins will
+	see all events.
+*Deacons only see prayer requests from their own CCG now.
+*Drop down list for CCG filter in Prayer Request list view now shows last names
+	of users assigned to that CCG. 
+
+
+9-4-17
+*Fixed members filter to work with pagination in CCG Members listing page.
+*Now using the plug-in JS Storage to get/set breadcrumbs. Breadcrumbs are
+	now stored in the browser's session storage. JavaScript file takes care of the logic.
+*Removed all old code for breadcrumbs including the breadcrumb model.
+*Database no longer has a table for breadcrumbs.
+*Now using browser storage for all 'Back to List' links. One script sets the 
+	link in browser storage and another one gets the link.  
+*Removed all old code and parameters for passing 'Back to List' link
+	to and from the web page.
+*Now using variables in the Admin console partial views for the description/link boxes.
+*Changed how the query string is made when using the 'Items Per Page' drop down menu.
+	Now it uses the Request object to get a collection of queries and concats them
+	together with the itemsPerPage or listAll as requested. New static method in ViewHelper 
+	called GetUrlWithPerPageQuery takes care of the logic. This is much cleaner.

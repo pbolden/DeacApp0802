@@ -1,0 +1,287 @@
+﻿@using DeaconCCGManagement.Helpers
+@using DeaconCCGManagement.Models
+@using DeaconCCGManagement.ViewModels
+@model DeaconCCGManagement.ViewModels.DetailsMemberViewModel
+
+@{
+    ViewBag.Title = "Details";
+    string imageSrc = string.Empty;
+
+    // random number is appened to img src url to force browser to reload
+    var randomizer = new Random();
+    int randomNumber = randomizer.Next(1000000);
+}
+
+@Html.Partial("_Breadcrumbs", "Member Details")
+
+@*Set image source for member's photo.
+    If member has image, use that.*@
+@if (Model.HasPhoto)
+{
+    imageSrc = Model.ImageSrc;
+}
+else /*Otherwise use default image.*/
+{
+    imageSrc = ViewHelper.NoPhotoImgPath;
+}
+
+@*AJAX is used to send member's phone number and name to the
+    server and pass it to a view partial for the modal dialog.*@
+@{ var ajaxOptions = new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "modalDialogContent"
+    };
+}
+
+
+<h2>Member's Details</h2>
+
+<div>
+    <h4>@Model.FullName</h4>
+    <hr/>
+    <div class="well well-md">
+        <dl class="dl-horizontal">
+            <dt>
+                <input id="reload" class="btn btn-link small" value="Refresh"/>
+            </dt>
+            <dd>
+
+            </dd>
+
+            <dt>
+
+            </dt>
+
+            <dd>
+                <a href="@Url.Action("Edit", "MemberPhoto", new {memberId = Model.Id})">
+                    <img class="img-rounded" width="150" height="150" alt="@Model.FullName"
+                         src="@imageSrc"/>
+                </a>
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastDateContacted)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastDateContacted)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Suffix)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Suffix)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.City)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.City)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.State)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.State)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ZipCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ZipCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+
+            <dd>
+                @if (Model.IsUserMemberDeacon)
+                {
+                    using (@Ajax.BeginForm("DialogData",
+                        new {id = Model.Id, fName = Model.FirstName, lName = Model.LastName, number = Model.PhoneNumber},
+                        ajaxOptions))
+                    {
+                        <button type="submit" class="btn btn-link openDialog">
+                            @Model.PhoneNumber
+                        </button>
+                    }
+                }
+                else
+                {
+                    <a href="@Model.HrefPhoneNumberLink" id="phoneLink">@Model.PhoneNumber</a>
+                }
+
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CellPhoneNumber)
+            </dt>
+
+            <dd>
+
+                @if (Model.IsUserMemberDeacon)
+                {
+                    using (@Ajax.BeginForm("DialogData", new {id = Model.Id, fName = Model.FirstName, lName = Model.LastName, number = Model.CellPhoneNumber},
+                        ajaxOptions))
+                    {
+                        <button type="submit" class="btn btn-link openDialog">
+                            @Model.CellPhoneNumber
+                        </button>
+                    }
+                }
+                else
+                {
+                    <a href="@Model.HrefCellNumberLink" id="phoneLink">@Model.CellPhoneNumber</a>
+                }
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BirthDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </dt>
+
+        <dd>
+            @if (Model.IsUserMemberDeacon)
+            {
+                @Html.ActionLink(Model.EmailAddress, "SendEmail", "Email", new {memberId = Model.Id}, null)
+            }
+            else
+            {
+                <a href="mailto:@Model.EmailAddress">@Model.EmailAddress</a>
+            }
+
+        </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateJoinedZion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateJoinedZion)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ZionEntryDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ZionEntryDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.IsMemberActive)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.IsMemberActive)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AnniversaryDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AnniversaryDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CCG.CCGName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CCG.CCGName)
+            </dd>
+
+        </dl>
+        </div>
+    </div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) 
+</p>
+@Html.Partial("_BackToListLink")
+
+<!-- Modal dialog asks user if app should call or text -->
+<div class="modal fade" id="callOrTextDialog" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        Replaced by AJAX with a partial
+        <div id="modalDialogContent">
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/Scripts/App/ShowCallOrTextDialog.js")
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+
+<script type="text/javascript">
+    $(function () {
+            var reloadPage = function () {
+                window.location.reload();
+            };
+
+            $("#reload").on("click", reloadPage);
+        });
+</script>
+}
+
+
+

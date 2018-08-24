@@ -1,0 +1,194 @@
+﻿<error errorId="9e8d9c82-0eb5-4fec-bf1e-717ec64f742a" application="/LM/W3SVC/2/ROOT" host="WIN10-3" type="System.Web.HttpException" message="The remote host closed the connection. The error code is 0x80070057." source="System.Web" detail="System.Web.HttpException (0x80070057): The remote host closed the connection. The error code is 0x80070057.&#xD;&#xA;   at System.Web.Hosting.IIS7WorkerRequest.RaiseCommunicationError(Int32 result, Boolean throwOnDisconnect)&#xD;&#xA;   at System.Web.Hosting.IIS7WorkerRequest.ExplicitFlush()&#xD;&#xA;   at System.Web.HttpResponse.Flush(Boolean finalFlush, Boolean async)&#xD;&#xA;   at System.Web.HttpResponse.Flush()&#xD;&#xA;   at System.Web.HttpWriter.WriteFromStream(Byte[] data, Int32 offset, Int32 size)&#xD;&#xA;   at System.Web.HttpResponseStream.Write(Byte[] buffer, Int32 offset, Int32 count)&#xD;&#xA;   at Microsoft.Owin.Host.SystemWeb.CallStreams.OutputStream.Write(Byte[] buffer, Int32 offset, Int32 count)&#xD;&#xA;   at Microsoft.AspNet.SignalR.Owin.ServerResponse.Write(ArraySegment`1 data)&#xD;&#xA;   at Microsoft.AspNet.SignalR.Hosting.ResponseExtensions.End(IResponse response, String data)&#xD;&#xA;   at Microsoft.AspNet.SignalR.PersistentConnection.SendJsonResponse(HostContext context, String jsonPayload)&#xD;&#xA;   at Microsoft.AspNet.SignalR.PersistentConnection.&lt;&gt;c.&lt;ProcessStartRequest&gt;b__79_0(HostContext c)&#xD;&#xA;   at Microsoft.AspNet.SignalR.TaskAsyncHelper.GenericDelegates`5.&lt;&gt;c__DisplayClass7_0.&lt;ThenWithArgs&gt;b__0()&#xD;&#xA;   at Microsoft.AspNet.SignalR.TaskAsyncHelper.TaskRunners`2.&lt;&gt;c__DisplayClass2_0.&lt;RunTask&gt;b__0(Task t)&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.Owin.Mapping.MapMiddleware.&lt;Invoke&gt;d__0.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.Owin.Host.SystemWeb.IntegratedPipeline.IntegratedPipelineContextStage.&lt;RunApp&gt;d__5.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.Owin.Security.Infrastructure.AuthenticationMiddleware`1.&lt;Invoke&gt;d__0.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.AspNet.Identity.Owin.IdentityFactoryMiddleware`2.&lt;Invoke&gt;d__0.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.AspNet.Identity.Owin.IdentityFactoryMiddleware`2.&lt;Invoke&gt;d__0.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.AspNet.Identity.Owin.IdentityFactoryMiddleware`2.&lt;Invoke&gt;d__0.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.Owin.Host.SystemWeb.IntegratedPipeline.IntegratedPipelineContextStage.&lt;RunApp&gt;d__5.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Microsoft.Owin.Host.SystemWeb.IntegratedPipeline.IntegratedPipelineContext.&lt;DoFinalWork&gt;d__2.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at Microsoft.Owin.Host.SystemWeb.IntegratedPipeline.StageAsyncResult.End(IAsyncResult ar)&#xD;&#xA;   at Microsoft.Owin.Host.SystemWeb.IntegratedPipeline.IntegratedPipelineContext.EndFinalWork(IAsyncResult ar)&#xD;&#xA;   at System.Web.HttpApplication.AsyncEventExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()&#xD;&#xA;   at System.Web.HttpApplication.&lt;&gt;c__DisplayClass285_0.&lt;ExecuteStepImpl&gt;b__0()&#xD;&#xA;   at System.Web.HttpApplication.StepInvoker.Invoke(Action executionStep)&#xD;&#xA;   at System.Web.HttpApplication.StepInvoker.&lt;&gt;c__DisplayClass4_0.&lt;Invoke&gt;b__0()&#xD;&#xA;   at Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule.OnExecuteRequestStep(HttpContextBase context, Action step)&#xD;&#xA;   at System.Web.HttpApplication.&lt;&gt;c__DisplayClass284_0.&lt;OnExecuteRequestStep&gt;b__0(Action nextStepAction)&#xD;&#xA;   at System.Web.HttpApplication.StepInvoker.Invoke(Action executionStep)&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStepImpl(IExecutionStep step)&#xD;&#xA;   at System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)" user="pbolden@zionmbc.org" time="2018-07-13T11:50:35.2585184Z" statusCode="500">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:Keep-Alive&#xD;&#xA;HTTP_CONTENT_TYPE:application/json; charset=UTF-8&#xD;&#xA;HTTP_ACCEPT:text/plain, */*; q=0.01&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US&#xD;&#xA;HTTP_COOKIE:_ga=GA1.1.880167566.1528047836; .AspNet.ApplicationCookie=qn2ofjM9i8-SSuETX65afIO2tL1zeSU3Bsc4dRBXoWlldzWsecVSTYOPjUF16ghw9n7x03jakLrNizMyADYLkCfRL35NJDtX0DqXCW2NQLyHF9SfaHvO4F6QpcxPmtuWlVBYgM2tjjfO84BMuQuw5-On0_cQBOo-d-dkgiqBRgX4XOD8zw9-YZSsnLf39TewBGrDAU_LhaV3fveZJimq5jP0p-sZCmscDc9O4TX5IFPycpPlA8ZDYHizz5nAZTH3BfmrSBSdP-X9At6lsKZMoyFdENCPBvPKCU7wdlJvVUMmcmInTyvaVElB6n2Dmdrl1XUO57V9XUKTq-r4vi4Lr2eUclYFuus_oBV99G0WbHb2HIrzqk48jlzlxrLEbayEzayrBcgGyeeoc9yg8NZsFcJMX5u1iYGvtpRsNtkxk7U5jqLrlFK_sR5_OytRGmyEozfdOpQ9i__um9oHqAhfQ3egEDXjlWkcjY1hZQPONkidjSdzmPFSnYVuX-lHpSlpqzFRMJF_7qzSzK1qCKvksyOd4T8-jSQY9LiejafrL4O568O3Xfs9Z9lLr-ZHXjzG; __RequestVerificationToken=CfIvNIB2zWXOgEXwu23omqLl8wEnBqhMxnc4FcQGoz0s3ZXcaJKeqyCZP4ijV9sx1LtCQslCkxCnRfdAF-SWiat7qVXTCoR93i845WM76wQ1&#xD;&#xA;HTTP_HOST:localhost:50614&#xD;&#xA;HTTP_REFERER:http://localhost:50614/CcgMembers?getAll=False&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299&#xD;&#xA;HTTP_X_REQUESTED_WITH:XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: Keep-Alive&#xD;&#xA;Content-Type: application/json; charset=UTF-8&#xD;&#xA;Accept: text/plain, */*; q=0.01&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-US&#xD;&#xA;Cookie: _ga=GA1.1.880167566.1528047836; .AspNet.ApplicationCookie=qn2ofjM9i8-SSuETX65afIO2tL1zeSU3Bsc4dRBXoWlldzWsecVSTYOPjUF16ghw9n7x03jakLrNizMyADYLkCfRL35NJDtX0DqXCW2NQLyHF9SfaHvO4F6QpcxPmtuWlVBYgM2tjjfO84BMuQuw5-On0_cQBOo-d-dkgiqBRgX4XOD8zw9-YZSsnLf39TewBGrDAU_LhaV3fveZJimq5jP0p-sZCmscDc9O4TX5IFPycpPlA8ZDYHizz5nAZTH3BfmrSBSdP-X9At6lsKZMoyFdENCPBvPKCU7wdlJvVUMmcmInTyvaVElB6n2Dmdrl1XUO57V9XUKTq-r4vi4Lr2eUclYFuus_oBV99G0WbHb2HIrzqk48jlzlxrLEbayEzayrBcgGyeeoc9yg8NZsFcJMX5u1iYGvtpRsNtkxk7U5jqLrlFK_sR5_OytRGmyEozfdOpQ9i__um9oHqAhfQ3egEDXjlWkcjY1hZQPONkidjSdzmPFSnYVuX-lHpSlpqzFRMJF_7qzSzK1qCKvksyOd4T8-jSQY9LiejafrL4O568O3Xfs9Z9lLr-ZHXjzG; __RequestVerificationToken=CfIvNIB2zWXOgEXwu23omqLl8wEnBqhMxnc4FcQGoz0s3ZXcaJKeqyCZP4ijV9sx1LtCQslCkxCnRfdAF-SWiat7qVXTCoR93i845WM76wQ1&#xD;&#xA;Host: localhost:50614&#xD;&#xA;Referer: http://localhost:50614/CcgMembers?getAll=False&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299&#xD;&#xA;X-Requested-With: XMLHttpRequest&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="ApplicationCookie" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="0" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/json; charset=UTF-8" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/signalr/start" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\signalr\start" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="transport=webSockets&amp;clientProtocol=1.5&amp;connectionToken=wmH1kZQzB7apI%2B6VL6YwRoBKNAVx1s9cVFLhwpzpA81nnZeckgRY3A%2BMi00c1aMNEOqFF3Jjp%2FGqny7FR8jylHhu8n4q7pNky1nsmNDBf7%2FQxSlyiY42GqW1l3y3KD54K3UZFxEQ37z4eQFKD3jIag%3D%3D&amp;connectionData=%5B%7B%22name%22%3A%22notifyhub%22%7D%5D&amp;_=1531482605993" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="49829" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="GET" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/signalr/start" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="50614" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/10.0" />
+    </item>
+    <item name="URL">
+      <value string="/signalr/start" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="Keep-Alive" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/json; charset=UTF-8" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/plain, */*; q=0.01" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="_ga=GA1.1.880167566.1528047836; .AspNet.ApplicationCookie=qn2ofjM9i8-SSuETX65afIO2tL1zeSU3Bsc4dRBXoWlldzWsecVSTYOPjUF16ghw9n7x03jakLrNizMyADYLkCfRL35NJDtX0DqXCW2NQLyHF9SfaHvO4F6QpcxPmtuWlVBYgM2tjjfO84BMuQuw5-On0_cQBOo-d-dkgiqBRgX4XOD8zw9-YZSsnLf39TewBGrDAU_LhaV3fveZJimq5jP0p-sZCmscDc9O4TX5IFPycpPlA8ZDYHizz5nAZTH3BfmrSBSdP-X9At6lsKZMoyFdENCPBvPKCU7wdlJvVUMmcmInTyvaVElB6n2Dmdrl1XUO57V9XUKTq-r4vi4Lr2eUclYFuus_oBV99G0WbHb2HIrzqk48jlzlxrLEbayEzayrBcgGyeeoc9yg8NZsFcJMX5u1iYGvtpRsNtkxk7U5jqLrlFK_sR5_OytRGmyEozfdOpQ9i__um9oHqAhfQ3egEDXjlWkcjY1hZQPONkidjSdzmPFSnYVuX-lHpSlpqzFRMJF_7qzSzK1qCKvksyOd4T8-jSQY9LiejafrL4O568O3Xfs9Z9lLr-ZHXjzG; __RequestVerificationToken=CfIvNIB2zWXOgEXwu23omqLl8wEnBqhMxnc4FcQGoz0s3ZXcaJKeqyCZP4ijV9sx1LtCQslCkxCnRfdAF-SWiat7qVXTCoR93i845WM76wQ1" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:50614" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:50614/CcgMembers?getAll=False" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299" />
+    </item>
+    <item name="HTTP_X_REQUESTED_WITH">
+      <value string="XMLHttpRequest" />
+    </item>
+    <item name="HTTP_APPLICATIONINSIGHTS_REQUESTTRACKINGTELEMETRYMODULE_ROOTREQUEST_ID">
+      <value string="4ed7826e-a5bb-4d6e-a39c-202e004383b5" />
+    </item>
+  </serverVariables>
+  <queryString>
+    <item name="transport">
+      <value string="webSockets" />
+    </item>
+    <item name="clientProtocol">
+      <value string="1.5" />
+    </item>
+    <item name="connectionToken">
+      <value string="wmH1kZQzB7apI+6VL6YwRoBKNAVx1s9cVFLhwpzpA81nnZeckgRY3A+Mi00c1aMNEOqFF3Jjp/Gqny7FR8jylHhu8n4q7pNky1nsmNDBf7/QxSlyiY42GqW1l3y3KD54K3UZFxEQ37z4eQFKD3jIag==" />
+    </item>
+    <item name="connectionData">
+      <value string="[{&quot;name&quot;:&quot;notifyhub&quot;}]" />
+    </item>
+    <item name="_">
+      <value string="1531482605993" />
+    </item>
+  </queryString>
+  <cookies>
+    <item name="_ga">
+      <value string="GA1.1.880167566.1528047836" />
+    </item>
+    <item name=".AspNet.ApplicationCookie">
+      <value string="qn2ofjM9i8-SSuETX65afIO2tL1zeSU3Bsc4dRBXoWlldzWsecVSTYOPjUF16ghw9n7x03jakLrNizMyADYLkCfRL35NJDtX0DqXCW2NQLyHF9SfaHvO4F6QpcxPmtuWlVBYgM2tjjfO84BMuQuw5-On0_cQBOo-d-dkgiqBRgX4XOD8zw9-YZSsnLf39TewBGrDAU_LhaV3fveZJimq5jP0p-sZCmscDc9O4TX5IFPycpPlA8ZDYHizz5nAZTH3BfmrSBSdP-X9At6lsKZMoyFdENCPBvPKCU7wdlJvVUMmcmInTyvaVElB6n2Dmdrl1XUO57V9XUKTq-r4vi4Lr2eUclYFuus_oBV99G0WbHb2HIrzqk48jlzlxrLEbayEzayrBcgGyeeoc9yg8NZsFcJMX5u1iYGvtpRsNtkxk7U5jqLrlFK_sR5_OytRGmyEozfdOpQ9i__um9oHqAhfQ3egEDXjlWkcjY1hZQPONkidjSdzmPFSnYVuX-lHpSlpqzFRMJF_7qzSzK1qCKvksyOd4T8-jSQY9LiejafrL4O568O3Xfs9Z9lLr-ZHXjzG" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="CfIvNIB2zWXOgEXwu23omqLl8wEnBqhMxnc4FcQGoz0s3ZXcaJKeqyCZP4ijV9sx1LtCQslCkxCnRfdAF-SWiat7qVXTCoR93i845WM76wQ1" />
+    </item>
+  </cookies>
+</error>

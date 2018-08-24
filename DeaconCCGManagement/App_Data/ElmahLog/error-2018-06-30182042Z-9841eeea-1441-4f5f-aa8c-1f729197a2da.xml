@@ -1,0 +1,209 @@
+﻿<error errorId="9841eeea-1441-4f5f-aa8c-1f729197a2da" application="/LM/W3SVC/2/ROOT" host="WIN10-3" type="System.IO.FileLoadException" message="Could not load file or assembly 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)" source="Twilio" detail="System.IO.FileLoadException: Could not load file or assembly 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed' or one of its dependencies. The located assembly's manifest definition does not match the assembly reference. (Exception from HRESULT: 0x80131040)&#xD;&#xA;File name: 'Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed'&#xD;&#xA;   at Twilio.Clients.TwilioRestClient.ProcessResponse(Response response)&#xD;&#xA;   at Twilio.Clients.TwilioRestClient.&lt;RequestAsync&gt;d__13.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Twilio.Rest.Api.V2010.Account.MessageResource.&lt;CreateAsync&gt;d__6.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at Twilio.Rest.Api.V2010.Account.MessageResource.&lt;CreateAsync&gt;d__8.MoveNext()&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()&#xD;&#xA;   at DeaconCCGManagement.SmsService.TwillioWrapperClient.&lt;SendSmsAsync&gt;d__9.MoveNext() in C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\SmsService\TwillioWrapperClient.cs:line 40&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()&#xD;&#xA;   at DeaconCCGManagement.Controllers.SmsController.&lt;SendTextMessageAsync&gt;d__1.MoveNext() in C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\Controllers\SmsController.cs:line 93&#xD;&#xA;--- End of stack trace from previous location where exception was thrown ---&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)&#xD;&#xA;   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)&#xD;&#xA;   at System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass8_0.&lt;BeginInvokeAsynchronousActionMethod&gt;b__1(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__11_0()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.&lt;&gt;c__DisplayClass11_1.&lt;InvokeActionMethodFilterAsynchronouslyRecursive&gt;b__2()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass7_0.&lt;BeginInvokeActionMethodWithFilters&gt;b__1(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass3_6.&lt;BeginInvokeAction&gt;b__3()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass3_1.&lt;BeginInvokeAction&gt;b__5(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.&lt;&gt;c.&lt;BeginExecuteCore&gt;b__152_1(IAsyncResult asyncResult, ExecuteCoreState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.&lt;&gt;c.&lt;BeginExecute&gt;b__151_2(IAsyncResult asyncResult, Controller controller)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.&lt;&gt;c.&lt;BeginProcessRequest&gt;b__20_1(IAsyncResult asyncResult, ProcessRequestState innerState)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncVoid`1.CallEndDelegate(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResultBase`1.End()&#xD;&#xA;   at System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.&lt;&gt;c__DisplayClass7_0.&lt;InvokeEndHandler&gt;b__0()&#xD;&#xA;   at System.Web.HttpApplication.StepInvoker.Invoke(Action executionStep)&#xD;&#xA;   at System.Web.HttpApplication.StepInvoker.&lt;&gt;c__DisplayClass4_0.&lt;Invoke&gt;b__0()&#xD;&#xA;   at Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule.OnExecuteRequestStep(HttpContextBase context, Action step)&#xD;&#xA;   at System.Web.HttpApplication.&lt;&gt;c__DisplayClass284_0.&lt;OnExecuteRequestStep&gt;b__0(Action nextStepAction)&#xD;&#xA;   at System.Web.HttpApplication.StepInvoker.Invoke(Action executionStep)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.InvokeEndHandler(IAsyncResult ar)&#xD;&#xA;   at System.Web.HttpApplication.CallHandlerExecutionStep.OnAsyncHandlerCompletion(IAsyncResult ar)&#xD;&#xA;&#xD;&#xA;=== Pre-bind state information ===&#xD;&#xA;LOG: DisplayName = Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed&#xA; (Fully-specified)&#xD;&#xA;LOG: Appbase = file:///C:/Users/Public/Documents/Hello World Projects/Deacon App/Deacon App Offline/DeaconCCGManagement/DeaconCCGManagement/&#xD;&#xA;LOG: Initial PrivatePath = C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\bin&#xD;&#xA;Calling assembly : Twilio, Version=5.13.5.0, Culture=neutral, PublicKeyToken=null.&#xD;&#xA;===&#xD;&#xA;LOG: This bind starts in default load context.&#xD;&#xA;LOG: Using application configuration file: C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\web.config&#xD;&#xA;LOG: Using host configuration file: C:\Users\hello\Documents\IISExpress\config\aspnet.config&#xD;&#xA;LOG: Using machine configuration file from C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config.&#xD;&#xA;LOG: Post-policy reference: Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed&#xD;&#xA;LOG: Attempting download of new URL file:///C:/Users/hello/AppData/Local/Temp/Temporary ASP.NET Files/vs/65294685/234fbaea/Newtonsoft.Json.DLL.&#xD;&#xA;LOG: Attempting download of new URL file:///C:/Users/hello/AppData/Local/Temp/Temporary ASP.NET Files/vs/65294685/234fbaea/Newtonsoft.Json/Newtonsoft.Json.DLL.&#xD;&#xA;LOG: Attempting download of new URL file:///C:/Users/Public/Documents/Hello World Projects/Deacon App/Deacon App Offline/DeaconCCGManagement/DeaconCCGManagement/bin/Newtonsoft.Json.DLL.&#xD;&#xA;WRN: Comparing the assembly name resulted in the mismatch: Major Version&#xD;&#xA;ERR: Failed to complete setup of assembly (hr = 0x80131040). Probing terminated.&#xD;&#xA;" user="pbolden@zionmbc.org" time="2018-06-30T18:20:42.7876519Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CACHE_CONTROL:no-cache&#xD;&#xA;HTTP_CONNECTION:Keep-Alive&#xD;&#xA;HTTP_CONTENT_LENGTH:487&#xD;&#xA;HTTP_CONTENT_TYPE:application/x-www-form-urlencoded&#xD;&#xA;HTTP_ACCEPT:text/html, application/xhtml+xml, image/jxr, */*&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US&#xD;&#xA;HTTP_COOKIE:_ga=GA1.1.880167566.1528047836; .AspNet.ApplicationCookie=o3J1xS11CL_GGp9NrF5F2jAeXitKmF-2TVx0xADLF7h4srFM6xnKDRZrWeuRi5zjaIgfBRdEPAY0Pawsg5XmEXOt4lAXzEsE7tnGMulBHKbx95qni9NQ5uwB7DBJpqEH-N6HN48aMCCd9gaBG3-z8XbReoo2M4oBNFNYQaHD6a9PZbJ9VZfsaZMYtlBuhBSm8ZmlKXSWYbkXTu84cHYcKWTqdZacz74EoiZOK--Pmx33bLnfawydUugTTeMJz7omdU3T4Iw94lJ7LN5kH9jpS4FmULWMOperABoyTFaKc5fwoBcXlip8K35hRdD0OPf1x3Rde-OZqYVyS32BKsH4XfjgsymwX0HKNjHlSk1MLMl-1GvYwoaDFajMeEbHtcHCGax3Kc8dEtN9ybU-pjmMy_4ghIU7Vp4blS6Bg2KJLdRrdULTRvHhDrlynXMNkI2nLbkVgE7CZQ9P9tSNSB6T7HtC4abo2_bf_zyR92N7bvInudBZ22de__yj1HoT9u0_bzUGBSptvizwC72PjTswDno-S3b9dL5dWQwNgU-0AW9XSrjqvsYs2UyymN50IoUx; __RequestVerificationToken=oO2f_bCWNty_cCJ3RIUwV3JUb1ULZ9a8P6XbRGcH4j0X_KQzQrjUMsglSXKQZplcElakGHSvo73PfzR2WWKc2yvbBDXSPfVLRCztULTR6a81&#xD;&#xA;HTTP_HOST:localhost:50614&#xD;&#xA;HTTP_REFERER:http://localhost:50614/Sms/SendTextMessage/52?number=%28734%29%20329-7044&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Cache-Control: no-cache&#xD;&#xA;Connection: Keep-Alive&#xD;&#xA;Content-Length: 487&#xD;&#xA;Content-Type: application/x-www-form-urlencoded&#xD;&#xA;Accept: text/html, application/xhtml+xml, image/jxr, */*&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-US&#xD;&#xA;Cookie: _ga=GA1.1.880167566.1528047836; .AspNet.ApplicationCookie=o3J1xS11CL_GGp9NrF5F2jAeXitKmF-2TVx0xADLF7h4srFM6xnKDRZrWeuRi5zjaIgfBRdEPAY0Pawsg5XmEXOt4lAXzEsE7tnGMulBHKbx95qni9NQ5uwB7DBJpqEH-N6HN48aMCCd9gaBG3-z8XbReoo2M4oBNFNYQaHD6a9PZbJ9VZfsaZMYtlBuhBSm8ZmlKXSWYbkXTu84cHYcKWTqdZacz74EoiZOK--Pmx33bLnfawydUugTTeMJz7omdU3T4Iw94lJ7LN5kH9jpS4FmULWMOperABoyTFaKc5fwoBcXlip8K35hRdD0OPf1x3Rde-OZqYVyS32BKsH4XfjgsymwX0HKNjHlSk1MLMl-1GvYwoaDFajMeEbHtcHCGax3Kc8dEtN9ybU-pjmMy_4ghIU7Vp4blS6Bg2KJLdRrdULTRvHhDrlynXMNkI2nLbkVgE7CZQ9P9tSNSB6T7HtC4abo2_bf_zyR92N7bvInudBZ22de__yj1HoT9u0_bzUGBSptvizwC72PjTswDno-S3b9dL5dWQwNgU-0AW9XSrjqvsYs2UyymN50IoUx; __RequestVerificationToken=oO2f_bCWNty_cCJ3RIUwV3JUb1ULZ9a8P6XbRGcH4j0X_KQzQrjUMsglSXKQZplcElakGHSvo73PfzR2WWKc2yvbBDXSPfVLRCztULTR6a81&#xD;&#xA;Host: localhost:50614&#xD;&#xA;Referer: http://localhost:50614/Sms/SendTextMessage/52?number=%28734%29%20329-7044&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/2/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="ApplicationCookie" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="pbolden@zionmbc.org" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="487" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="2" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/2" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Sms/SendTextMessageAsync" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Users\Public\Documents\Hello World Projects\Deacon App\Deacon App Offline\DeaconCCGManagement\DeaconCCGManagement\Sms\SendTextMessageAsync" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="55179" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Sms/SendTextMessageAsync" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="50614" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/10.0" />
+    </item>
+    <item name="URL">
+      <value string="/Sms/SendTextMessageAsync" />
+    </item>
+    <item name="HTTP_CACHE_CONTROL">
+      <value string="no-cache" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="Keep-Alive" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="487" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html, application/xhtml+xml, image/jxr, */*" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="_ga=GA1.1.880167566.1528047836; .AspNet.ApplicationCookie=o3J1xS11CL_GGp9NrF5F2jAeXitKmF-2TVx0xADLF7h4srFM6xnKDRZrWeuRi5zjaIgfBRdEPAY0Pawsg5XmEXOt4lAXzEsE7tnGMulBHKbx95qni9NQ5uwB7DBJpqEH-N6HN48aMCCd9gaBG3-z8XbReoo2M4oBNFNYQaHD6a9PZbJ9VZfsaZMYtlBuhBSm8ZmlKXSWYbkXTu84cHYcKWTqdZacz74EoiZOK--Pmx33bLnfawydUugTTeMJz7omdU3T4Iw94lJ7LN5kH9jpS4FmULWMOperABoyTFaKc5fwoBcXlip8K35hRdD0OPf1x3Rde-OZqYVyS32BKsH4XfjgsymwX0HKNjHlSk1MLMl-1GvYwoaDFajMeEbHtcHCGax3Kc8dEtN9ybU-pjmMy_4ghIU7Vp4blS6Bg2KJLdRrdULTRvHhDrlynXMNkI2nLbkVgE7CZQ9P9tSNSB6T7HtC4abo2_bf_zyR92N7bvInudBZ22de__yj1HoT9u0_bzUGBSptvizwC72PjTswDno-S3b9dL5dWQwNgU-0AW9XSrjqvsYs2UyymN50IoUx; __RequestVerificationToken=oO2f_bCWNty_cCJ3RIUwV3JUb1ULZ9a8P6XbRGcH4j0X_KQzQrjUMsglSXKQZplcElakGHSvo73PfzR2WWKc2yvbBDXSPfVLRCztULTR6a81" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:50614" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:50614/Sms/SendTextMessage/52?number=%28734%29%20329-7044" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299" />
+    </item>
+    <item name="HTTP_APPLICATIONINSIGHTS_REQUESTTRACKINGTELEMETRYMODULE_ROOTREQUEST_ID">
+      <value string="c8b1ee35-00c6-4d1e-bf01-ec5be04824cd" />
+    </item>
+  </serverVariables>
+  <form>
+    <item name="__RequestVerificationToken">
+      <value string="STCT_0oPOXtqdTgL7DeoIACGGyQOgsbGebGZa4xtS3XomDQ2Qq-4SyqOtiFUhucMY1W0jfdnPaoeRf6Ol6UEy7XUfVPqVAQzDlGQzfsSDBvSCBJjmFt1YhNo7UTJBfXPhPF8fMlxWiB_RHkp5fafmQ2" />
+    </item>
+    <item name="TextMessageContact.MemberId">
+      <value string="52" />
+    </item>
+    <item name="TextMessageContact.MemberFullName">
+      <value string="Shane Hinkson" />
+    </item>
+    <item name="TextMessageContact.ToPhoneNumber">
+      <value string="(734) 329-7044" />
+    </item>
+    <item name="TextMessageContact.DateSent">
+      <value string="1/1/0001 12:00:00 AM" />
+    </item>
+    <item name="Bulk">
+      <value string="False" />
+    </item>
+    <item name="TestFromNumber">
+      <value string="(470) 216-5427" />
+    </item>
+    <item name="TestToNumber">
+      <value string="(272) 200-1392" />
+    </item>
+    <item name="TextMessageContact.Message">
+      <value string="hi there Dave!" />
+    </item>
+  </form>
+  <cookies>
+    <item name="_ga">
+      <value string="GA1.1.880167566.1528047836" />
+    </item>
+    <item name=".AspNet.ApplicationCookie">
+      <value string="o3J1xS11CL_GGp9NrF5F2jAeXitKmF-2TVx0xADLF7h4srFM6xnKDRZrWeuRi5zjaIgfBRdEPAY0Pawsg5XmEXOt4lAXzEsE7tnGMulBHKbx95qni9NQ5uwB7DBJpqEH-N6HN48aMCCd9gaBG3-z8XbReoo2M4oBNFNYQaHD6a9PZbJ9VZfsaZMYtlBuhBSm8ZmlKXSWYbkXTu84cHYcKWTqdZacz74EoiZOK--Pmx33bLnfawydUugTTeMJz7omdU3T4Iw94lJ7LN5kH9jpS4FmULWMOperABoyTFaKc5fwoBcXlip8K35hRdD0OPf1x3Rde-OZqYVyS32BKsH4XfjgsymwX0HKNjHlSk1MLMl-1GvYwoaDFajMeEbHtcHCGax3Kc8dEtN9ybU-pjmMy_4ghIU7Vp4blS6Bg2KJLdRrdULTRvHhDrlynXMNkI2nLbkVgE7CZQ9P9tSNSB6T7HtC4abo2_bf_zyR92N7bvInudBZ22de__yj1HoT9u0_bzUGBSptvizwC72PjTswDno-S3b9dL5dWQwNgU-0AW9XSrjqvsYs2UyymN50IoUx" />
+    </item>
+    <item name="__RequestVerificationToken">
+      <value string="oO2f_bCWNty_cCJ3RIUwV3JUb1ULZ9a8P6XbRGcH4j0X_KQzQrjUMsglSXKQZplcElakGHSvo73PfzR2WWKc2yvbBDXSPfVLRCztULTR6a81" />
+    </item>
+  </cookies>
+</error>

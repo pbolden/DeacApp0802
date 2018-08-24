@@ -1,0 +1,31 @@
+﻿@using DeaconCCGManagement.ViewModels
+@model PrayerRequestPartialViewModel
+
+
+@{
+    var filterRecordsGroup = new FilterRecordsGroup
+    {
+        DateRangeFilter = Model.Params.DateRangeFilter,
+        FilterCCGs = Model.Params.GetAll,
+        CCGs = Model.CCGs
+    };
+}
+
+@*Filter form*@
+@if (Model != null || Model?.PrayerRequestsCount == 0)
+{
+
+    using (Html.BeginForm(Model.ActionName, Model.ControllerName, FormMethod.Get))
+    {
+        @Html.Hidden("memberId", Model.Params.MemberId)
+        @Html.Hidden("getAll", Model.Params.GetAll)
+        @Html.Hidden("itemsPerPage", Model.Params.ItemsPerPage)
+
+        <div class="input-group">
+            <p>
+                @Html.Partial("_FilterRecordsGroup", filterRecordsGroup)
+            </p>
+        </div>
+
+    }
+ }

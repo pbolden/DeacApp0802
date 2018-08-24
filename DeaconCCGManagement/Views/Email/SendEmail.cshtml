@@ -1,0 +1,188 @@
+﻿
+@using DeaconCCGManagement.ViewModels
+@model EmailViewModel
+
+@{
+    ViewBag.Title = "Send Email";
+    if (Model.IsTesting)
+    {
+        // To get pass validation for testing
+        Model.EmailContact.ReceiverName = "testing";    
+        Model.EmailContact.ToEmailAddress = "test@testing.com"; 
+    }
+}
+
+@section styles{
+    @Styles.Render("~/Scripts/ckeditor/contents.css")
+}
+
+
+@Html.Partial("_Breadcrumbs", "Send Email")
+
+
+
+@Html.ValidationSummary("", new { @class = "text-danger" })
+
+
+@if (Model.Bulk)
+{
+    <h2>Send A Bulk Email</h2>
+}
+else
+{
+    <h2>Send an Email to @Model.EmailContact.ReceiverName</h2>
+}
+
+@if (Model.Bulk)
+{
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse"
+                data-target="#listMembers" id="btnShowHideMembers">
+            <span id="btnIcon" class="glyphicon glyphicon-eye-open"></span>
+            <span id="spanShowHideMembers">Show Selected Members</span>
+        </button>
+    </p>
+
+    <!--List selected members.-->
+    <div class="collapse" id="listMembers">
+        <div class="well">
+            <p>
+                @{
+                    int num = 1;
+                    foreach (var item in Model.Members)
+                    {
+                        <label>@num. @item.MemberFullName</label>
+                        <br />
+                        num++;
+                    }
+                }
+            </p>
+        </div>
+    </div>
+
+    <br />
+}
+
+
+@using (Html.BeginForm("SendEmail", "Email", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(e => e.EmailContact.MemberId)
+    @Html.HiddenFor(e => e.EmailContact.SenderName)
+    @Html.HiddenFor(e => e.EmailContact.ReceiverName)
+    @Html.HiddenFor(e => e.EmailContact.DateSent)
+    @Html.HiddenFor(e => e.EmailContact.ToEmailAddress)
+    @Html.HiddenFor(e => e.Bulk)
+    @Html.HiddenFor(e => e.IsTesting)
+    
+    
+
+    // for bulk email only
+    if (Model.Bulk)
+    {
+        for (int i = 0; i < Model.Members.Count; i++)
+        {
+            @Html.HiddenFor(modelItem => modelItem.Members[i].MemberId)
+            @Html.HiddenFor(modelItem => modelItem.Members[i].MemberFullName)
+        }
+        @Html.HiddenFor(e => e.EmailContact.ToEmailAddress)
+    }
+
+
+    <h4>Send an Email</h4>
+    <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmailContact.FromEmailAddress, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.EmailContact.FromEmailAddress, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+       if (Model.IsTesting && !Model.Bulk)
+        {
+            <p class="alert alert-warning">
+                This is for testing only. All emails will be
+                sent to this email. If left blank, emails will
+                be sent the members's stored email addresses.
+            </p>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.TestToEmail, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.TestToEmail, new { @class = "form-control" })
+                </div>
+            </div>
+    }
+    else if (!Model.Bulk) // Production
+    {
+          <div class="form-group">
+            @Html.LabelFor(m => m.EmailContact.ToEmailAddress, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.EmailContact.ToEmailAddress, new { @class = "form-control" })
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmailContact.Subject, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.EmailContact.Subject, new { @class = "form-control", autofocus = "autofocus" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmailContact.HtmlBody, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.EmailContact.HtmlBody, new { @class = "ckeditor", id = "editor1" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Send" />
+        </div>
+    </div>
+}
+
+
+
+
+@Html.Partial("_BackToListLink")
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/App/GetBackToListUrl.js")
+    @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")
+    <script type="text/javascript">
+        CKEDITOR.replace("editor1", {
+            language: "en",
+            //uiColor: "#9AB8F3",
+            height: 300,
+            width: "auto",
+            toolbarCanCollapse: true,
+
+
+
+            // Define the toolbar.
+            toolbar: [
+                { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+                { name: 'editing', items: ['SpellChecker'] },
+                { name: 'links', items: ['Link', 'Unlink'] },
+                { name: 'insert', items: ['Table', 'HorizontalRule', 'SpecialChar'] },
+                { name: 'tools', items: ['Maximize'] },
+                { name: 'document', items: ['Source'] },
+                '/',
+                { name: 'basicstyles', items: ['Bold', 'Italic', 'Strike', 'Superscript', 'Subscript', '-', 'RemoveFormat'] },
+                { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+                { name: 'styles', items: ['Styles', 'Format'] },
+                { name: 'colors', items: ["TextColor", "BGColor"] },
+                { name: 'about', items: ['About'] }
+            ],
+            // Remove the redundant buttons from toolbar items defined above.
+            removeButtons: "Underline,Strike,Subscript,Superscript,Anchor,Styles,Specialchar,Image"
+        });
+    </script>
+}

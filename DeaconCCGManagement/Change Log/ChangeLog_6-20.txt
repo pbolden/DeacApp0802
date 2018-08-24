@@ -1,0 +1,2 @@
+﻿*installed the nuget package WindowsAzure.Storage
+*added property to AppUser and CCGMember model for blob storage file name
